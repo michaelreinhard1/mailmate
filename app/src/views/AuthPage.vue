@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-  <section class="dark:bg-dark-800 bg-primary-700">
+  <section class="dark:bg-dark-800 bg-primary-900">
     <!-- <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div class="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-dark-800 border-dark-700">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -107,7 +107,7 @@ export default {
         v-ripple="{ center: true }"
         @click="login"
         type="button"
-        class="text-primary-900 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-600/90 inline-flex items-center drop-shadow-blue transition-colors"
+        class="text-primary-900 bg-blue-700 hover:bg-blue-700/90 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-600/90 inline-flex items-center drop-shadow-blue transition-colors"
       >
         <svg
           aria-hidden="true"
@@ -127,7 +127,7 @@ export default {
             fill="currentColor"
           />
         </svg>
-        Login Using Google
+        {{ $t("auth.loginUsingGoogle") }}
       </button>
     </div>
   </section>

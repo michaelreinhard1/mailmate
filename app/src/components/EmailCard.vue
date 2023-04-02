@@ -60,27 +60,10 @@ export default {
       this.localEmail.flags.push("\\Seen");
     },
     setFlag(flag) {
-      // Remove the flag
-      switch (flag) {
-        case "Seen":
-          flag = "\\Seen";
-          break;
-        case "Deleted":
-          flag = "\\Deleted";
-          break;
-        default:
-          break;
-      }
-      if (this.localEmail.flags.includes(flag)) {
-        this.localEmail.flags = this.localEmail.flags.filter((f) => f !== flag);
-      } else {
-        this.localEmail.flags.push(flag);
-      }
       this.emailStore.setFlag({
         uid: this.email.uid,
         flag: flag,
       });
-      console.log(this.localEmail.flags);
     },
   },
 };
@@ -90,11 +73,11 @@ export default {
     :to="{ name: 'Email', params: { uid: email.uid } }"
     @click="markAsRead"
     :key="email.uid"
-    class="email-card p-4 dark:text-primary-900 text-sm hover:bg-primary-900/50 transition duration-150 ease-in-out"
+    class="email-card p-4 dark:text-primary-900 text-sm dark:hover:bg-dark-400/50 hover:bg-primary-900/75 transition duration-150 ease-in-out"
     :class="
       markedAsRead
-        ? ' bg-primary-900 dark:bg-dark-500 border-b border-primary-800 dark:border-dark-400'
-        : ' bg-primary-800 dark:bg-dark-400 font-extrabold border-b border-primary-700 dark:border-dark-300'
+        ? ' bg-primary-900/50 dark:bg-dark-500 border-b border-primary-800 dark:border-dark-400'
+        : ' bg-primary-900 dark:bg-dark-400 font-extrabold border-b border-primary-700 dark:border-dark-300'
     "
   >
     <!-- Blue dot indicator -->

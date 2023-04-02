@@ -1,4 +1,7 @@
 {
+  "auth": {
+    "loginUsingGoogle": "Inloggen met Google"
+  },
   "setup": {
     "previous": "Vorige",
     "next": "Volgende",

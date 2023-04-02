@@ -15,7 +15,6 @@ import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useComponentUtilsStore } from "@/stores/ComponentUtilsStore";
 import GoogleIcon from "@/assets/icons/Google__G__Logo.svg?url";
-import Setup from "@/components/Setup.vue";
 
 const router = useRouter();
 
@@ -49,9 +48,6 @@ const props = defineProps({
 const isOpen = storeToRefs(componentUtilsStore).clickedSettings;
 
 function closeModal() {
-  setTimeout(() => {
-    openTab.value = 0;
-  }, 300);
   componentUtilsStore.clickedSettings = false;
 }
 function openModal() {
@@ -90,8 +86,10 @@ const toggleAItool = (id) => {
 
 const signOut = async () => {
   try {
-    loginStore.signOut();
-    router.push({ name: "Login" });
+    await loginStore.signOut().then(() => {
+      componentUtilsStore.clickedSettings = false;
+      router.push({ name: "Login" });
+    });
   } catch (error) {
     console.log(error);
   }
@@ -138,18 +136,12 @@ const saveAll = () => {
     }
   }
 };
-
-const showSetup = ref(false);
-
-const toggleSetup = () => {
-  showSetup.value = !showSetup.value;
-};
 </script>
 
 <template>
   <button
     type="button"
-    @click="openModal"
+    @click="componentUtilsStore.toggleSettings(0)"
     class="menu-item px-3 py-2 mt-2 max-h-10 rounded-md"
     :class="collapsed ? '' : 'open'"
   >
@@ -337,12 +329,20 @@ const toggleSetup = () => {
                           {{ $t("settings.profile.appPassword") }}
                         </label>
                         <v-tooltip
-                          close-delay="1000"
+                          text="support.google.com"
+                          close-delay="100"
                           open-delay="100"
                           location="bottom"
                         >
                           <template v-slot:activator="{ props }">
-                            <IconHelp v-bind="props" class="w-4 h-4" />
+                            <a
+                              href="https://support.google.com/accounts/answer/185833"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="outline-none"
+                            >
+                              <IconHelp v-bind="props" class="w-4 h-4" />
+                            </a>
                           </template>
                           <template v-slot:text>
                             <div>

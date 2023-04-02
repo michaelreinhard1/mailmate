@@ -11,7 +11,7 @@ const showCompose = ref(false);
 
 <template>
   <div class="flex">
-    <Navbar @compose="showCompose = true" />
+    <Navbar @compose="showCompose = true" @close="showCompose = false" />
     <div class="w-full relative">
       <Transition name="fade">
         <Compose

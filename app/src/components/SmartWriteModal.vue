@@ -31,7 +31,6 @@
             >
               <DialogTitle class="text-2xl font-bold">
                 {{ $t("tool.smartWrite.title") }}
-                {{ loading ? "Loading..." : "" }}
               </DialogTitle>
 
               <div id="options" class="my-7">
@@ -96,16 +95,21 @@
                 </RadioGroup>
               </div>
 
-              <textarea
-                id="emailTextarea"
-                name="email"
-                rows="10"
-                cols="50"
-                v-model="emailBody"
-                placeholder="Write an email about "
-                class="w-full h-96 border border-gray-300 dark:border-dark-500 rounded-md p-4 resize-none bg-gray-100 dark:bg-dark-700 outline-none"
-                spellcheck="false"
-              ></textarea>
+              <div
+                class="border-2 border-gray-300 dark:border-dark-500 rounded-md"
+              >
+                <textarea
+                  id="emailTextarea"
+                  name="email"
+                  rows="10"
+                  cols="50"
+                  v-model="emailBody"
+                  placeholder="Write an email about "
+                  class="w-full h-96 rounded-md p-4 resize-none bg-gray-100 outline-none bg-transparent"
+                  spellcheck="false"
+                  @keydown.ctrl.enter="generateEmailBody"
+                ></textarea>
+              </div>
 
               <div class="mt-4 gap-2 flex justify-end">
                 <BaseButton
@@ -220,19 +224,16 @@ const emits = defineEmits(["close"]);
 async function generateEmailBody() {
   try {
     loading.value = true;
-    await toolStore
-      .generate({
-        type: "generateBody",
-        content: emailBody.value,
-        tonality: selected.value.type,
-      })
-      .then(() => {
-        loading.value = false;
-        closeModal();
-      });
+    await toolStore.generate({
+      type: "generateBody",
+      content: emailBody.value,
+      tonality: selected.value.type,
+    });
+    console.log("Email generated");
+    loading.value = false;
+    closeModal();
   } catch (error) {
     loading.value = false;
-    console.log(error);
   }
 }
 

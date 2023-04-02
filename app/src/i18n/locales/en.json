@@ -1,4 +1,7 @@
 {
+  "auth": {
+    "loginUsingGoogle": "Login using Google"
+  },
   "setup": {
     "step1": {
       "title": "Google Security",

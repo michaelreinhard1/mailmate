@@ -17,6 +17,7 @@ import { useLoginStore } from "@/stores/LoginStore";
 import { useEmailStore } from "@/stores/EmailStore";
 import { storeToRefs } from "pinia";
 import { usePreferencesStore } from "@/stores/PreferencesStore";
+import { useComponentUtilsStore } from "@/stores/ComponentUtilsStore";
 import { mapState, mapActions } from "pinia";
 import BaseButton from "./BaseButton.vue";
 import LanguageSwitcher from "./LanguageSwitcher.vue";
@@ -25,9 +26,11 @@ export default {
   setup() {
     const emailStore = useEmailStore();
     const loginStore = useLoginStore();
+    const componentUtilsStore = useComponentUtilsStore();
     return {
       emailStore,
       loginStore,
+      componentUtilsStore,
     };
   },
   components: {
@@ -50,9 +53,11 @@ export default {
   data() {
     return {
       unreadEmails: storeToRefs(this.emailStore).unreadEmails,
+      isComposeMinimized: storeToRefs(this.componentUtilsStore)
+        .isComposeMinimized,
     };
   },
-  emits: ["compose"],
+  emits: ["compose", "close"],
   computed: {
     nav() {
       return [
@@ -60,38 +65,32 @@ export default {
           name: this.$t("nav.inbox"),
           icon: IconInbox,
           to: { name: "Inbox" },
-          onClick: () => this.getEmails(1, "INBOX"),
         },
         {
           name: this.$t("nav.starred"),
           icon: IconStar,
           to: { name: "Starred" },
-          onClick: () => this.getEmails(1, "STARRED"),
         },
         {
           name: this.$t("nav.sent"),
           icon: IconSend,
           to: { name: "Sent" },
-          onClick: () => this.getEmails(1, "SENT"),
         },
         {
           name: this.$t("nav.drafts"),
           icon: IconFile,
           to: { name: "Drafts" },
-          onClick: () => this.getEmails(1, "DRAFTS"),
         },
         {
           name: this.$t("nav.trash"),
           icon: IconTrash,
           to: { name: "Trash" },
-          onClick: () => this.getEmails(1, "TRASH"),
         },
         // spam
         {
           name: this.$t("nav.spam"),
           icon: IconAlertOctagon,
           to: { name: "Spam" },
-          onClick: () => this.getEmails(1, "SPAM"),
         },
       ];
     },
@@ -107,11 +106,6 @@ export default {
     ...mapActions(usePreferencesStore, {
       toggleSideBar: "toggleSideBar",
     }),
-    async getEmails(page, box) {
-      console.log(page, box);
-      this.loading = true;
-      // await this.emailStore.getEmails({ page, box });
-    },
   },
 };
 </script>
@@ -175,9 +169,17 @@ export default {
             >
               <span
                 v-if="emailStore.unreadEmails > 0 && !collapsed"
-                class="text-accent-900 bg-primary-700 px-3 py-1 rounded-lg ml-auto dark:bg-accent-900 dark:text-primary-900"
+                class="unread-emails"
               >
                 {{ emailStore.unreadEmails }}
+              </span>
+              <span
+                v-else-if="emailStore.unreadEmails > 0 && collapsed"
+                class="unread-emails collapsed"
+              >
+                {{
+                  emailStore.unreadEmails > 99 ? "99+" : emailStore.unreadEmails
+                }}
               </span>
             </Transition>
           </router-link>
@@ -266,6 +268,18 @@ export default {
   left: 0;
   transform: translateX(0);
   transition-delay: 0s;
+}
+
+.unread-emails {
+  @apply text-primary-900 rounded-lg ml-auto text-sm font-bold p-3 py-1;
+}
+
+.unread-emails.collapsed {
+  @apply absolute right-2 top-2 transform translate-x-1/2 -translate-y-1/2   bg-primary-700 dark:bg-accent-700 dark:text-primary-900 overflow-hidden px-2  flex items-center justify-center;
+}
+
+.active-link .unread-emails {
+  @apply text-accent-900 bg-primary-700 dark:bg-accent-900 dark:text-primary-900;
 }
 
 .fade-enter-active,

@@ -119,18 +119,19 @@ export const useToolStore = defineStore("ToolStore", {
         }
         this.AIgenerated = true;
       } catch (error) {
+        console.log("There was an error");
         if (error.response.data.success === false) {
           toast.error($t("tool.error"), {
             icon: IconAlertTriangle,
           });
-          return;
+          throw error;
         }
         if (error.response.data.safeContent === false) {
           console.log("unsafe content detected");
           toast.error($t("tool.unsafeContentDetected"), {
             icon: IconAlertTriangle,
           });
-          return;
+          throw error;
         }
       }
     },

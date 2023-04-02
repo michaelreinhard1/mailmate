@@ -164,7 +164,6 @@ export default {
     body() {
       let html;
       let text;
-      console.log(this.email);
       if (this.email.html) {
         const $ = cheerio.load(this.email.html);
         // Check if the HTML contains any script tags
@@ -179,7 +178,6 @@ export default {
         const hasDoctype = this.email.html.includes("!DOCTYPE");
 
         if (hasDoctype || hasScriptTags || hasFormTags || hasIframeTags) {
-          console.log("hasScriptTags || hasFormTags || hasIframeTags");
           html = this.email.html;
           text = null;
         } else {

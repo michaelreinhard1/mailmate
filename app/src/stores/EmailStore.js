@@ -16,7 +16,7 @@ export const useEmailStore = defineStore("EmailStore", {
     currentPage: useStorage("currentPage", 1),
     emails: [],
     totalEmails: 0,
-    unreadEmails: 0,
+    unreadEmails: useStorage("unreadEmails", 0),
     message: "",
     email: {},
     box: "",
@@ -44,7 +44,10 @@ export const useEmailStore = defineStore("EmailStore", {
           icon: IconSend,
         });
       } catch (error) {
-        console.log(error);
+        toast.error($t("tool.error"), {
+          icon: IconAlertTriangle,
+        });
+        throw error;
       }
     },
     async saveAppPassword({ password }) {
@@ -56,7 +59,6 @@ export const useEmailStore = defineStore("EmailStore", {
         this.status = "connected";
         await this.getEmails({ page: 1, box: "INBOX" });
         loginStore.setup = false;
-        return true;
       } catch (error) {
         toast.error($t("settings.profile.couldNotConnect"), {
           icon: IconAlertTriangle,
@@ -66,7 +68,7 @@ export const useEmailStore = defineStore("EmailStore", {
         this.emails = [];
         this.totalEmails = 0;
         this.unreadEmails = 0;
-        return false;
+        throw error;
       }
     },
     async getEmails({ page, box }) {
@@ -80,7 +82,9 @@ export const useEmailStore = defineStore("EmailStore", {
         this.status = "connected";
         this.emails = response.data.emails;
         this.totalEmails = response.data.totalEmails;
-        this.unreadEmails = response.data.unreadEmails;
+        if (box === "INBOX") {
+          this.unreadEmails = response.data.unreadEmails;
+        }
         this.message = "Emails fetched successfully";
         this.currentPage = page;
       } catch (error) {

@@ -25,7 +25,7 @@ const handleClick = (action) => {
       leave-to-class="transform opacity-0 scale-95"
     >
       <MenuItems
-        class="absolute z-50 mt-2 min-w-[188px] grid origin-bottom-center divide-y divide-red-500 rounded-md bg-primary-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none top-11 dark:bg-dark-500 dark:divide-gray-500 border-solid"
+        class="absolute z-50 min-w-[188px] grid origin-bottom-center divide-y divide-red-500 rounded-md bg-primary-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none top-11 dark:bg-dark-500 dark:divide-gray-500 border-solid"
       >
         <div class="py-1">
           <MenuItem
@@ -54,7 +54,7 @@ const handleClick = (action) => {
     </transition>
 
     <MenuButton
-      class="rounded-md px-3 py-2 mt-2 max-h-10 bg-primary-800 font-bold hover:bg-primary-700 transition-all text-left dark:bg-dark-500 dark:hover:bg-dark-500/50"
+      class="rounded-md px-3 py-2 max-h-10 bg-primary-800 font-bold hover:bg-primary-700 transition-all text-left dark:bg-dark-500 dark:hover:bg-dark-500/50"
     >
       <slot></slot>
     </MenuButton>

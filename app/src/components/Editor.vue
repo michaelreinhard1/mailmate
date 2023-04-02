@@ -2,7 +2,7 @@
   <div
     v-if="editor"
     id="editor-toolbar"
-    class="bg-primary-800 dark:bg-dark-800 dark:text-primary-500 font-bold py-2 px-4 flex items-center text-sm w-full outline-0 border-t border-b dark:border-dark-500 gap-2 border-primary-900 justify-between"
+    class="bg-primary-900 dark:bg-dark-800 dark:text-primary-500 font-bold py-2 px-4 flex items-center text-sm w-full outline-0 border-b dark:border-dark-500 gap-2 border-gray-200 justify-between"
   >
     <div class="flex items-center">
       <button
@@ -64,13 +64,13 @@
       >
         <s>S</s>
       </button>
-      <button
+      <!-- <button
         @click="editor.chain().focus().toggleCode().run()"
         class=""
         :class="{ 'dark:bg-dark-500 bg-primary-500 ': editor.isActive('code') }"
       >
         <code>Code</code>
-      </button>
+      </button> -->
       <button
         @click="editor.chain().focus().toggleBulletList().run()"
         class=""
@@ -329,14 +329,14 @@ export default {
 <style lang="scss">
 #editor-toolbar {
   button {
-    @apply p-2 rounded-md hover:bg-primary-500 dark:hover:bg-dark-700 transition-colors duration-200 ease-in-out;
+    @apply p-2 rounded-md hover:bg-primary-800 dark:hover:bg-dark-700 transition-colors duration-200 ease-in-out;
     &[disabled] {
       @apply opacity-50 cursor-default hover:bg-transparent;
     }
   }
 }
 .is-active {
-  @apply bg-primary-500 dark:bg-dark-500;
+  @apply bg-primary-800 dark:bg-dark-500;
 }
 .ProseMirror {
   @apply text-left outline-none p-4 text-base overflow-y-auto grow;

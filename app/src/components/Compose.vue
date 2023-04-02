@@ -4,6 +4,7 @@ import UploadFile from "@/components/UploadFile.vue";
 import ToolButton from "@/components/ToolButton.vue";
 import { useEmailStore } from "@/stores/EmailStore";
 import { useToolStore } from "@/stores/ToolStore";
+import { useComponentUtilsStore } from "@/stores/ComponentUtilsStore";
 import { storeToRefs } from "pinia";
 import cheerio from "cheerio";
 import fileSVG from "../assets/drop-files.svg?url";
@@ -38,6 +39,7 @@ export default {
   setup() {
     const emailStore = useEmailStore();
     const toolStore = useToolStore();
+    const componentUtilsStore = useComponentUtilsStore();
     const toast = useToast();
     const el = ref(null);
     const { width, height } = useElementSize(el);
@@ -51,6 +53,7 @@ export default {
     return {
       emailStore,
       toolStore,
+      componentUtilsStore,
       el,
       width,
       height,
@@ -104,7 +107,7 @@ export default {
       subject: storeToRefs(this.toolStore).subject,
       body: storeToRefs(this.toolStore).body,
       AIgenerated: storeToRefs(this.toolStore).AIgenerated,
-      minimized: false,
+      minimized: storeToRefs(this.componentUtilsStore).isComposeMinimized,
       attachments: [],
       dropZoneRef: null,
       isOverDropZone: false,
@@ -349,16 +352,16 @@ export default {
             <IconPencil class="w-4 h-4" />
             {{ $t("tool.smartWrite.title") }}
           </BaseButton>
-          <BaseButton
+          <!-- <BaseButton
             class="w-fit flex items-center gap-2 py-2 px-4"
             @click="chat"
           >
             CONTACTS
-          </BaseButton>
+          </BaseButton> -->
         </div>
-        <div class="text-sm dark:text-primary-400 px-6 pb-4">
+        <!-- <div class="text-sm dark:text-primary-400 px-6 pb-4">
           {{ $t("tool.CharMinReqForAI", { number: 30 }) }}
-        </div>
+        </div> -->
       </div>
       <div
         class="bg-primary-400 dark:bg-dark-900 dark:text-primary-500 font-bold py-2 px-4 flex items-center text-sm w-full outline-none"
@@ -384,9 +387,9 @@ export default {
       </div>
     </div>
 
-    <div ref="el" class="w-full dark:bg-dark-900">
+    <div ref="el" class="w-full dark:bg-dark-800">
       <div
-        class="dark:bg-dark-800/30 border-b p-5 overflow-hidden dark:border-dark-500 bg-primary-800"
+        class="dark:bg-dark-800 border-t p-5 overflow-hidden dark:border-dark-500 bg-primary-800"
         v-if="attachments?.length > 0"
       >
         <div class="flex justify-between">
@@ -408,9 +411,14 @@ export default {
           <div v-for="attachment in attachments" :key="attachment.id">
             <div>
               <div
-                class="flex items-center gap-3 bg-gray-200 dark:bg-dark-500 p-3 rounded-2xl min-w-max hover:bg-gray-200 dark:hover:bg-dark-400 transition-colors"
+                class="flex items-center gap-3 bg-gray-200 dark:bg-dark-500 p-3 rounded-md min-w-max transition-colors"
               >
-                <img :src="$fileIcon(attachment.type)" alt="file-icon" />
+                <img
+                  :src="$fileIcon(attachment.type)"
+                  alt="file-icon"
+                  v-if="!minimized"
+                  class="w-5 h-5"
+                />
                 <div class="text-sm">
                   {{ attachment.name.substring(0, 15) }}
                   {{ attachment.name.length > 15 ? "..." : "" }}
@@ -424,7 +432,7 @@ export default {
                   }}
                 </div>
                 <button
-                  class="ml-auto mr-5"
+                  class="ml-auto"
                   @click="removeAttachment(attachment.id)"
                 >
                   <IconX class="w-4 h-5" />
@@ -435,7 +443,7 @@ export default {
         </div>
       </div>
       <div
-        class="flex justify-between items-center gap-4 p-4 bg-primary-900 dark:bg-dark-900"
+        class="flex justify-between items-center gap-4 p-4 bg-primary-900 dark:bg-dark-800 border-t dark:border-dark-500"
       >
         <div class="attachments">
           <div class="flex items-center gap-2">
@@ -450,7 +458,7 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #compose {
   transition-property: width, height, top, left, transform;
   transition-duration: 0.3s;

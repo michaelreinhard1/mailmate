@@ -13,7 +13,7 @@ export const useLoginStore = defineStore("LoginStore", {
     isLoggedIn: useStorage("isLoggedIn", false),
     profile: useStorage("profile", {}),
     token: useStorage("token", ""),
-    setup: useStorage("setup", true),
+    setup: useStorage("setup", false),
     loading: false,
   }),
   getters: {
@@ -58,7 +58,12 @@ export const useLoginStore = defineStore("LoginStore", {
           })
           .then((response) => {
             this.setup = true;
-            if (response.data.profile.appPassword !== "") this.setup = false;
+            console.log(response.data.profile);
+            if (response.data.profile.setup === false) {
+              console.log("setup false");
+              this.setup = false;
+            }
+            delete response.data.profile.setup;
             this.profile = response.data.profile;
             this.token = response.data.token;
             this.isLoggedIn = true;
