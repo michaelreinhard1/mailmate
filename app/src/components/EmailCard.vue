@@ -73,7 +73,7 @@ export default {
     :to="{ name: 'Email', params: { uid: email.uid } }"
     @click="markAsRead"
     :key="email.uid"
-    class="email-card p-4 dark:text-primary-900 text-sm dark:hover:bg-dark-400/50 hover:bg-primary-900/75 transition duration-150 ease-in-out"
+    class="email-card"
     :class="
       markedAsRead
         ? ' bg-primary-900/50 dark:bg-dark-500 border-b border-primary-800 dark:border-dark-400'
@@ -132,6 +132,10 @@ export default {
 
 <style lang="scss" scoped>
 .email-card {
+  @apply p-4 dark:text-primary-900 text-sm dark:hover:bg-dark-400/50 hover:bg-primary-900/75 transition duration-150 ease-in-out;
+  &.active-link {
+    @apply hover:bg-primary-800 dark:hover:bg-accent-700 dark:text-primary-900 text-dark-900;
+  }
   .flags {
     @apply opacity-0 transition-opacity duration-150 ease-in-out;
     button {
