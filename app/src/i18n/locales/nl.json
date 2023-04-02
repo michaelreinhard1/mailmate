@@ -1,0 +1,219 @@
+{
+  "setup": {
+    "previous": "Vorige",
+    "next": "Volgende",
+    "step1": {
+      "title": "Google Beveiliging",
+      "subSteps": [
+        {
+          "title": "Zorg ervoor dat je <strong>Verificatie in 2 stappen</strong> hebt ingeschakeld"
+        },
+        {
+          "link": "<a href=\"https://myaccount.google.com/security\" target=\"_blank\" class=\"text-blue-500 underline\">myaccount.google.com/security</a>",
+          "title": "Ga naar @:setup.step1.subSteps[1].link om twee-factor authenticatie in te schakelen"
+        },
+        {
+          "title": "Klik op <strong>Verificatie in 2 stappen</strong> en scroll naar beneden naar <strong>App-wachtwoorden</strong>"
+        }
+      ]
+    },
+    "step2": {
+      "title": "App-wachtwoorden",
+      "subSteps": [
+        {
+          "title": "Selecteer <strong>E-mail</strong> uit het select app veld",
+          "description": ""
+        },
+        {
+          "title": "Selecteer <strong>Anders (Aangepaste naam)</strong> in het veld Apparaat selecteren",
+          "description": ""
+        },
+        {
+          "title": "Vul <strong>MailMate</strong> in het veld Apparaatnaam",
+          "description": ""
+        },
+        {
+          "title": "Klik <strong>Genereren</strong>",
+          "description": ""
+        }
+      ]
+    },
+    "step3": {
+      "title": "Verbind uw account",
+      "subSteps": []
+    }
+  },
+  "common": {
+    "cancel": "Annuleren",
+    "sendAnyway": "Toch verzenden",
+    "enable": "Inschakelen",
+    "disable": "Uitschakelen"
+  },
+  "dialog": {
+    "forgotAttachmentHeader": "Oeps, ben je vergeten iets bij te voegen?",
+    "forgotAttachmentBody": "Het lijkt erop dat je vergeten bent een bestand bij je e-mail te voegen. Weet je zeker dat je het zonder bijlage wilt versturen?"
+  },
+  "nav": {
+    "home": "Home",
+    "inbox": "Postvak IN",
+    "sent": "Verzonden",
+    "trash": "Prullenbak",
+    "starred": "Met ster",
+    "spam": "Spam",
+    "draft": "Concept",
+    "drafts": "Concepten",
+    "compose": "Nieuw bericht",
+    "profile": "Profiel",
+    "about": "Over",
+    "contact": "Contact",
+    "settings": "Instellingen",
+    "collapse": "Inklappen",
+    "expand": "Uitklappen",
+    "logout": "Uitloggen"
+  },
+  "email": {
+    "me": "Ik",
+    "inbox": "Postvak IN",
+    "sent": "Verzonden",
+    "trash": "Prullenbak",
+    "compose": "Nieuw",
+    "draft": "Concept",
+    "recipients": "Ontvangers",
+    "subject": "Onderwerp",
+    "noSubject": "Geen onderwerp",
+    "message": "Bericht",
+    "send": "Verzenden",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "reply": "Beantwoorden",
+    "forward": "Doorsturen",
+    "from": "Van",
+    "to": "Aan",
+    "date": "Datum",
+    "noEmails": "Geen emails",
+    "attachments": "Bijlagen",
+    "sendTo": "Verstuur naar",
+    "downloadAll": "Alles downloaden",
+    "totalWords": "Totaal aantal woorden",
+    "totalCharacters": "Totaal aantal karakters",
+    "download": "Downloaden",
+    "sentSuccesfully": "Email succesvol verzonden",
+    "errorFetchingEmails": "Er is een fout opgetreden bij het ophalen van de emails.",
+    "dropFilesHere": "Bestanden hier neerzetten"
+  },
+  "inbox": {
+    "title": "Postvak IN",
+    "of": "van",
+    "me": "Ik",
+    "emails": "Emails",
+    "unread": "Ongelezen",
+    "allEmails": "Alle emails",
+    "noEmails": "Geen emails",
+    "noSubject": "Geen onderwerp",
+    "unreadEmails": "Ongelezen email | Ongelezen emails ",
+    "email": "Email | Emails ",
+    "page": "Pagina"
+  },
+  "tool": {
+    "AIresponseAlert": "AI-antwoorden kunnen onnauwkeurig of misleidend zijn.",
+    "CharMinReqForAI": "Minimaal {number} karakters vereist voor AI tools.",
+    "unsafeContentDetected": "Onveilige inhoud gedetecteerd. Probeer het opnieuw.",
+    "error": "Er is een fout opgetreden. Probeer het opnieuw.",
+    "alpha": "Alfa",
+    "generateSubject": {
+      "title": "Onderwerp genereren",
+      "description": "Genereer een pakkend onderwerp voor uw e-mail."
+    },
+    "autocomplete": {
+      "title": "Automatisch aanvullen",
+      "description": "Vereenvoudig het schrijven van e-mails met onze automatische aanvulling functie."
+    },
+    "checkGrammar": {
+      "title": "Grammatica controleren",
+      "description": "Zorg voor foutloze grammatica met onze grammaticacontrole tool."
+    },
+    "attachmentDetection": {
+      "title": "Bijlage detectie",
+      "description": "Vergeet nooit meer een bestand bij te voegen met de bijlage-detectiefunctie."
+    },
+    "smartWrite": {
+      "title": "Slim schrijven",
+      "description": "Schrijf een nieuwe e-mail met onze eenvoudige en intuïtieve interface.",
+      "placeholder": "Schrijf een e-mail over",
+      "button": "E-mail schrijven",
+      "tonality": {
+        "title": "Kies een toonzetting",
+        "neutral": "Neutraal",
+        "professional": "Professioneel",
+        "apologetic": "Verontschuldigend",
+        "thankful": "Dankbaar",
+        "urgent": "Dringend",
+        "friendly": "Vriendelijk",
+        "humorous": "Grappig",
+        "informative": "Informatief",
+        "persuasive": "Overtuigend",
+        "formal": "Formeel",
+        "sincere": "Oprecht"
+      }
+    }
+  },
+  "settings": {
+    "savedSuccessfully": "Instellingen succesvol opgeslagen",
+    "general": {
+      "title": "Algemeen",
+      "language": "Taal",
+      "theme": "Thema",
+      "light": "Licht",
+      "dark": "Donker",
+      "saved": "Instellingen opgeslagen"
+    },
+    "security": {
+      "title": "Beveiliging"
+    },
+    "notifications": {
+      "title": "Notificaties",
+      "email": "Email",
+      "desktop": "Desktop",
+      "mobile": "Mobiel"
+    },
+    "profile": {
+      "title": "Profiel",
+      "name": "Naam",
+      "fullName": "Naam",
+      "email": "Email",
+      "password": "Wachtwoord",
+      "appPassword": "App wachtwoord",
+      "save": "Opslaan",
+      "cancel": "Annuleren",
+      "connected": "Verbonden",
+      "disconnected": "Niet verbonden",
+      "connecting": "Aan het verbinden",
+      "status": "Status",
+      "couldNotConnect": "Kon niet verbinden",
+      "passwordMinChars": "Wachtwoord moet minimaal {number} karakters bevatten"
+    },
+    "AItools": {
+      "title": "AI Tools",
+      "autocomplete": "Autocomplete",
+      "checkGrammar": "Check grammar",
+      "generateSubject": "Generate subject"
+    },
+    "signOut": "Afmelden"
+  },
+  "noResult": {
+    "disconnected": {
+      "title": "Niet verbonden",
+      "description": "De verbinding met de server is momenteel verbroken. Controleer uw app wachtwoord.",
+      "button": "Instellingen openen"
+    },
+    "connected": {
+      "title": "Geen resultaten",
+      "description": "Er zijn geen resultaten gevonden voor deze zoekopdracht.",
+      "button": "Probeer opnieuw"
+    }
+  },
+  "locale": {
+    "en": "Engels",
+    "nl": "Nederlands"
+  }
+}

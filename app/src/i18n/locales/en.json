@@ -1,0 +1,217 @@
+{
+  "setup": {
+    "step1": {
+      "title": "Google Security",
+      "description": "Google Security",
+      "subSteps": [
+        {
+          "title": "Make sure you have Two-Factor Authentication enabled"
+        },
+        {
+          "title": "Go to myaccount.google.com to enable Two-Factor Authentication"
+        },
+        {
+          "title": "Scroll down to App passwords"
+        }
+      ]
+    },
+    "step2": {
+      "title": "App passwords",
+      "description": "App passwords",
+      "subSteps": [
+        {
+          "title": "Select Mail from the select app field",
+          "description": ""
+        },
+        {
+          "title": "Select Other (Custom name) from the select device field",
+          "description": ""
+        },
+        {
+          "title": "Enter <strong>MailMate</strong>",
+          "description": ""
+        },
+        {
+          "title": "Click Generate",
+          "description": ""
+        }
+      ]
+    },
+    "step3": {
+      "title": "Connect your account",
+      "subSteps": []
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "sendAnyway": "Send anyway",
+    "enable": "Enable",
+    "disable": "Disable"
+  },
+  "dialog": {
+    "forgotAttachmentHeader": "Oops, did you forget to attach something?",
+    "forgotAttachmentBody": "It looks like you forgot to attach a file to your email. Are you sure you want to send it without the attachment?"
+  },
+  "nav": {
+    "inbox": "Inbox",
+    "sent": "Sent",
+    "trash": "Trash",
+    "starred": "Starred",
+    "draft": "Draft",
+    "drafts": "Drafts",
+    "spam": "Spam",
+    "compose": "New message",
+    "profile": "Profile",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "settings": "Settings",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "logout": "Logout"
+  },
+  "email": {
+    "me": "Me",
+    "inbox": "Inbox",
+    "sent": "Sent",
+    "trash": "Trash",
+    "compose": "Compose",
+    "draft": "Draft",
+    "recipients": "Recipients",
+    "subject": "Subject",
+    "noSubject": "No subject",
+    "message": "Message",
+    "send": "Send",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "reply": "Reply",
+    "forward": "Forward",
+    "from": "From",
+    "to": "To",
+    "date": "Date",
+    "noEmails": "No emails",
+    "attachments": "Attachments | Attachment",
+    "sendEmail": "Send email",
+    "downloadAll": "Download all",
+    "totalWords": "Total words",
+    "totalCharacters": "Total characters",
+    "download": "Download",
+    "sentSuccesfully": "Email sent successfully",
+    "errorFetchingEmails": "Error fetching emails.",
+    "dropFilesHere": "Drop files here"
+  },
+  "inbox": {
+    "title": "Inbox",
+    "of": "of",
+    "me": "Me",
+    "emails": "Emails",
+    "unread": "Unread",
+    "allEmails": "All emails",
+    "noEmails": "No emails",
+    "noSubject": "No subject",
+    "unreadEmails": "Unread email | Unread emails ",
+    "email": "Email | Emails ",
+    "page": "Page"
+  },
+  "tool": {
+    "minimumInputLength": "Minimum input length is {number} characters",
+    "AIresponseAlert": "AI responses can be inaccurate or misleading.",
+    "CharMinReqForAI": "{number} Character Minimum Required for AI Tools",
+    "unsafeContentDetected": "Unsafe content detected. Please try again.",
+    "error": "There was an error. Please try again.",
+    "alpha": "Alpha",
+    "generateSubject": {
+      "title": "Generate subject",
+      "description": "Generate a catchy subject for your email."
+    },
+    "autocomplete": {
+      "title": "Autocomplete",
+      "description": "Streamline your email writing process with our automatic completion feature."
+    },
+    "checkGrammar": {
+      "title": "Check grammar",
+      "description": "Ensure flawless grammar with our grammar-checking tool."
+    },
+    "attachmentDetection": {
+      "title": "Attachment detection",
+      "description": "Never forget to attach a file again with our email editor's attachment detection feature."
+    },
+    "smartWrite": {
+      "title": "smartWrite",
+      "description": "Write a new email with our simple and intuitive interface.",
+      "placeholder": "Write an email about",
+      "button": "Write email",
+      "tonality": {
+        "title": "Choose a tonality",
+        "neutral": "Neutral",
+        "professional": "Professional",
+        "apologetic": "Apologetic",
+        "thankful": "Thankful",
+        "urgent": "Urgent",
+        "friendly": "Friendly",
+        "humorous": "Humorous",
+        "informative": "Informative",
+        "persuasive": "Persuasive",
+        "formal": "Formal",
+        "sincere": "Sincere"
+      }
+    }
+  },
+  "settings": {
+    "savedSuccessfully": "Settings saved successfully",
+    "general": {
+      "title": "General",
+      "language": "Language",
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "security": {
+      "title": "Security"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "email": "Email",
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    },
+    "profile": {
+      "title": "Profile",
+      "name": "Name",
+      "fullName": "Full name",
+      "email": "Email",
+      "appPassword": "App password",
+      "save": "Save",
+      "cancel": "Cancel",
+      "connected": "Connected",
+      "disconnected": "Not connected",
+      "connecting": "Connecting",
+      "status": "Status",
+      "couldNotConnect": "Could not connect",
+      "passwordMinChars": "Wachtwoord moet minstens {number} tekens lang zijn"
+    },
+    "AItools": {
+      "title": "AI Tools",
+      "autocomplete": "Autocomplete",
+      "checkGrammar": "Check grammar",
+      "generateSubject": "Generate subject"
+    },
+    "signOut": "Sign out"
+  },
+  "noResult": {
+    "disconnected": {
+      "title": "Not connected",
+      "description": "You are currently disconnected from the server. Please check your app password.",
+      "button": "Open settings"
+    },
+    "connected": {
+      "title": "No results",
+      "description": "No results were found for this search.",
+      "button": "try again"
+    }
+  },
+  "locale": {
+    "en": "English",
+    "nl": "Dutch"
+  }
+}
