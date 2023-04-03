@@ -3,7 +3,7 @@ import { api } from "./index";
 import { useStorage } from "@vueuse/core";
 import { useToast } from "vue-toastification";
 import i18n from "../i18n";
-import { IconCircleCheck } from "@tabler/icons-vue";
+import { IconCircleCheck, IconAlertTriangle } from "@tabler/icons-vue";
 
 const toast = useToast();
 const $t = i18n.global.t;
@@ -68,7 +68,37 @@ export const useLoginStore = defineStore("LoginStore", {
             this.token = response.data.token;
             this.isLoggedIn = true;
           });
-      } catch (error) {}
+      } catch (error) {
+        toast.error($t("tool.error"), {
+          icon: IconAlertTriangle,
+        });
+        throw error;
+      }
+    },
+    async googleSignIn({ code }) {
+      try {
+        await api
+          .post(`/auth/signin/google`, {
+            code,
+          })
+          .then((response) => {
+            this.setup = true;
+            console.log(response.data.profile);
+            if (response.data.profile.setup === false) {
+              console.log("setup false");
+              this.setup = false;
+            }
+            delete response.data.profile.setup;
+            this.profile = response.data.profile;
+            this.token = response.data.token;
+            this.isLoggedIn = true;
+          });
+      } catch (error) {
+        toast.error($t("tool.error"), {
+          icon: IconAlertTriangle,
+        });
+        throw error;
+      }
     },
     async saveFullName({ fname, lname }) {
       try {

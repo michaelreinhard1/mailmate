@@ -24,14 +24,16 @@ export default {
     },
   },
   methods: {
-    login() {
-      googleAuthCodeLogin().then((response) => {
-        this.loading = true;
+    async login() {
+      this.loading = true;
+      await googleAuthCodeLogin().then(async (response) => {
         try {
-          this.loginStore.googleSignIn({ code: response.code }).then(() => {
-            this.loading = false;
-            this.$router.push({ name: "Inbox" });
-          });
+          await this.loginStore
+            .googleSignIn({ code: response.code })
+            .then(() => {
+              this.loading = false;
+              this.$router.push({ name: "Inbox" });
+            });
         } catch (error) {
           this.loading = false;
           console.log(error);

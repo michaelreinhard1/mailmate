@@ -11,9 +11,8 @@ const Authroutes = [
     component: () => import("@/views/AuthPage.vue"),
   },
   {
-    path: "/register",
-    name: "Register",
-    component: () => import("@/views/AuthPage.vue"),
+    path: "/auht/google",
+    name: "GoogleAuth",
   },
   {
     path: "/setup",
