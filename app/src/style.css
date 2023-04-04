@@ -1275,6 +1275,10 @@ video {
   height: 500px;
 }
 
+.h-8{
+  height: 2rem;
+}
+
 .max-h-32{
   max-height: 8rem;
 }
@@ -1355,6 +1359,10 @@ video {
 
 .w-3\/4{
   width: 75%;
+}
+
+.w-8{
+  width: 2rem;
 }
 
 .min-w-max{

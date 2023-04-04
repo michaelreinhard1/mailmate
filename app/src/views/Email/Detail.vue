@@ -164,40 +164,37 @@ export default {
     body() {
       let html;
       let text;
+      console.log(this.email);
       if (this.email.html) {
         const $ = cheerio.load(this.email.html);
-        // Check if the HTML contains any script tags
         const hasScriptTags = $("script").length > 0;
 
-        // Check if the HTML contains any form tags
         const hasFormTags = $("form").length > 0;
 
-        // Check if the HTML contains any iframe tags
         const hasIframeTags = $("iframe").length > 0;
-        // if it has !DOCTYPE, it's probably an email template
+
+        const hasHtmlTags = $("html").length > 0;
+
+        console.log($("html"));
+
         const hasDoctype = this.email.html.includes("!DOCTYPE");
 
-        if (hasDoctype || hasScriptTags || hasFormTags || hasIframeTags) {
+        if (
+          hasDoctype ||
+          hasScriptTags ||
+          hasFormTags ||
+          hasIframeTags ||
+          hasHtmlTags
+        ) {
           html = this.email.html;
           text = null;
         } else {
-          // sanitize this.email.html with cheerio
-          const $ = cheerio.load(this.email.html);
-          // remove all script and style tags
-          $("script").remove();
-          $("style").remove();
-          // Remove any email tracker images. These are usually 1x1 pixel images
-          // that are used to track if an email has been opened.
-          $("img").each((i, el) => {
-            if (
-              $(el).attr("style") === "width:0px;max-height:0px;overflow:hidden"
-            ) {
-              $(el).remove();
-            }
-          });
-
-          text = $.html();
+          text = this.email.html;
+          html = null;
         }
+      } else {
+        html = null;
+        text = this.email.text;
       }
       return { html, text };
     },

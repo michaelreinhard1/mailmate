@@ -10,29 +10,18 @@ const $t = i18n.global.t;
 
 export const useLoginStore = defineStore("LoginStore", {
   state: () => ({
-    isLoggedIn: useStorage("isLoggedIn", false),
     profile: useStorage("profile", {}),
     token: useStorage("token", ""),
     setup: useStorage("setup", false),
     loading: false,
   }),
-  getters: {
-    getProfile() {
-      return this.profile;
-    },
-  },
   actions: {
     async verifyToken() {
-      if (!this.isLoggedIn) {
-        throw new Error("Not logged in");
-      }
       if (!this.token) {
-        this.isLoggedIn = false;
         throw new Error("No token");
       }
       try {
         await api.post(`/auth/verify`);
-        this.isLoggedIn = true;
         return true;
       } catch (error) {
         this.signOut();
@@ -58,15 +47,12 @@ export const useLoginStore = defineStore("LoginStore", {
           })
           .then((response) => {
             this.setup = true;
-            console.log(response.data.profile);
             if (response.data.profile.setup === false) {
-              console.log("setup false");
               this.setup = false;
             }
             delete response.data.profile.setup;
             this.profile = response.data.profile;
             this.token = response.data.token;
-            this.isLoggedIn = true;
           });
       } catch (error) {
         toast.error($t("tool.error"), {
@@ -83,15 +69,12 @@ export const useLoginStore = defineStore("LoginStore", {
           })
           .then((response) => {
             this.setup = true;
-            console.log(response.data.profile);
             if (response.data.profile.setup === false) {
-              console.log("setup false");
               this.setup = false;
             }
             delete response.data.profile.setup;
             this.profile = response.data.profile;
             this.token = response.data.token;
-            this.isLoggedIn = true;
           });
       } catch (error) {
         toast.error($t("tool.error"), {
@@ -118,7 +101,6 @@ export const useLoginStore = defineStore("LoginStore", {
       } catch (error) {}
     },
     async signOut() {
-      this.isLoggedIn = false;
       this.profile = {};
       this.token = "";
       this.setup = true;

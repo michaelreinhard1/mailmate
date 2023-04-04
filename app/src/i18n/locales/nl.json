@@ -92,6 +92,7 @@
     "forward": "Doorsturen",
     "from": "Van",
     "to": "Aan",
+    "toMe": "Mij",
     "date": "Datum",
     "noEmails": "Geen emails",
     "attachments": "Bijlagen",
@@ -182,7 +183,8 @@
     "profile": {
       "title": "Profiel",
       "name": "Naam",
-      "fullName": "Naam",
+      "fullName": "Volledige naam",
+      "thisNameIsUsedAsTheSenderName": "Deze naam wordt gebruikt als de afzender van de email",
       "email": "Email",
       "password": "Wachtwoord",
       "appPassword": "App wachtwoord",

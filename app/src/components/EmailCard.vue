@@ -28,6 +28,9 @@ export default {
       localEmail: this.email,
     };
   },
+  mounted() {
+    console.log(this.email.to);
+  },
   computed: {
     formattedDate() {
       const date = new Date(this.email.date);
@@ -90,16 +93,26 @@ export default {
         <div class="flex items-center justify-between min-w-[200px]">
           <span
             v-if="
-              loginStore.getProfile.email === email.from &&
+              loginStore.profile.email === email.from.address &&
               !email.flags.includes('\\Sent')
             "
           >
             {{ $t("email.me") }}</span
           >
           <span v-else-if="email.flags.includes('\\Sent')">
-            {{ $t("email.to") }}: {{ email.to }}
+            {{ $t("email.to") }}:
+            <span
+              class="lowercase"
+              v-if="email.to.address === loginStore.profile.email"
+              >{{ $t("email.toMe") }}</span
+            >
+            <!-- if name is not empty -->
+            <span v-else>{{
+              email.to.name === "" ? email.to.address : email.to.name
+            }}</span>
           </span>
-          <span class="" v-else> {{ email.from }}</span>
+
+          <span class="" v-else> {{ email.from.name }}</span>
           <span class="text-gray-500 dark:text-primary-600">
             {{ email.date }}
           </span>

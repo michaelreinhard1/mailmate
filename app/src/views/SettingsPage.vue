@@ -102,7 +102,7 @@ const toggleTabs = (tab) => {
 };
 
 const fullName = ref(
-  `${loginStore.getProfile?.fname} ${loginStore.getProfile?.lname}`
+  `${loginStore.profile?.fname} ${loginStore.profile?.lname}`
 );
 const appPassword = ref("");
 
@@ -300,26 +300,34 @@ const saveAll = () => {
                               :src="GoogleIcon"
                               class="w-4 h-4 object-cover"
                             />
-                            {{ loginStore.getProfile?.email }}
+                            {{ loginStore.profile?.email }}
                           </span>
                         </div>
                       </div>
-                      <label
-                        for="full-name"
-                        class="mb-2 text-sm font-medium text-gray-900 dark:text-primary-600 inline-block"
-                      >
-                        {{ $t("settings.profile.fullName") }}
-                      </label>
+                      <div class="flex justify-between">
+                        <label
+                          for="full-name"
+                          class="mb-2 text-sm font-medium text-gray-900 dark:text-primary-600 inline-block"
+                        >
+                          {{ $t("settings.profile.fullName") }}
+                        </label>
+                      </div>
                       <div class="mb-5">
                         <input
                           type="text"
                           id="full-name"
                           class="rounded-md border dark:border-dark-100 border-solid w-full p-2 outline-none"
-                          :placeholder="`${loginStore.getProfile?.fname} ${loginStore.getProfile?.lname}`"
                           spellcheck="false"
                           v-model="fullName"
                           @input="handleFullName"
                         />
+                        <div
+                          class="mt-2 text-xs text-gray-500 dark:text-primary-600"
+                        >
+                          {{
+                            $t("settings.profile.thisNameIsUsedAsTheSenderName")
+                          }}
+                        </div>
                       </div>
                       <div class="flex justify-between">
                         <label
@@ -343,29 +351,6 @@ const saveAll = () => {
                             >
                               <IconHelp v-bind="props" class="w-4 h-4" />
                             </a>
-                          </template>
-                          <template v-slot:text>
-                            <div>
-                              <p>
-                                Enable two-factor authentication for your Google
-                                account by going to
-                              </p>
-                              <a href="https://myaccount.google.com/security"
-                                >myaccount.google.com/security</a
-                              >
-                              <p>
-                                Then, select "Verification in 2 steps" and
-                                scroll down to "App passwords".
-                              </p>
-                              <p>
-                                Choose "Email" as the app and "Custom name" as
-                                the device, and enter "Flow" as the device name.
-                              </p>
-                              <p>
-                                Finally, click "Generate" to complete the
-                                process."
-                              </p>
-                            </div>
                           </template>
                         </v-tooltip>
                       </div>

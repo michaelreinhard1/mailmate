@@ -103,9 +103,9 @@ export default {
     setHeader() {
       let headTitle;
       if (this.unreadEmails > 0) {
-        headTitle = `${this.title} (${this.unreadEmails}) - ${this.loginStore.getProfile.email}`;
+        headTitle = `${this.title} (${this.unreadEmails}) - ${this.loginStore.profile.email}`;
       } else {
-        headTitle = `${this.title} - ${this.loginStore.getProfile.email}`;
+        headTitle = `${this.title} - ${this.loginStore.profile.email}`;
       }
       useHead({
         title: headTitle,
