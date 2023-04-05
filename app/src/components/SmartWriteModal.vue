@@ -35,7 +35,7 @@
 
               <div
                 v-if="loading"
-                class="absolute inset-1/2 bg-black/30 w-full h-full transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-[51]"
+                class="absolute inset-1/2 bg-black/20 w-full h-full transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-[51]"
               >
                 <LoadingIndicator />
               </div>
@@ -116,12 +116,12 @@
                   cols="50"
                   required
                   v-model="emailBody"
-                  placeholder="Write an email about "
+                  :placeholder="$t('tool.smartWrite.placeholder')"
                   class="w-full h-96 rounded-md p-4 resize-none bg-gray-100 outline-none bg-transparent transition-colors"
                   spellcheck="false"
                   :class="{
-                    'text-primary-900': !loading,
-                    'text-primary-300': loading,
+                    'dark:text-primary-900 text-black': !loading,
+                    'dark:text-primary-300': loading,
                   }"
                   @keydown.ctrl.enter="generateEmailBody"
                   :readonly="loading"
@@ -138,7 +138,10 @@
                 </div>
                 <div class="w-1/2 justify-end flex">
                   <!-- Display the characters -->
-                  <span class="text-sm text-white font-bold">
+                  <span
+                    class="text-sm dark:text-white font-bold"
+                    :class="emailBody.length > 1500 ? 'text-red-500' : ''"
+                  >
                     {{ emailBody.length }} / 1500
                   </span>
                 </div>
@@ -173,7 +176,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect } from "vue";
+import { ref, computed } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LoadingIndicator from "@/components/LoadingIndicator.vue";
 import {

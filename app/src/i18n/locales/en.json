@@ -143,7 +143,7 @@
     "smartWrite": {
       "title": "smartWrite",
       "description": "Write a new email with our simple and intuitive interface.",
-      "placeholder": "Write an email about",
+      "placeholder": "eg. An email requesting a meeting with the potential client to discuss the features and benefits of your software.",
       "button": "Write email",
       "shortInput": "Please provide more details to improve results.",
       "tonality": {

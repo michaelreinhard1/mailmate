@@ -118,11 +118,12 @@ const handleAppPassword = (event) => {
 
 const appPasswordRequirements = ref(true);
 
+const loading = ref(false);
+
 const saveAll = () => {
-  const [fname, lname] = fullName.value.split(" ");
+  loading.value = true;
   loginStore.saveFullName({
-    fname,
-    lname,
+    name: fullName.value,
   });
   if (appPassword.value !== "") {
     if (appPassword.value.length === 16) {

@@ -371,7 +371,7 @@ export default {
         </div> -->
       </div>
       <div
-        class="bg-primary-400 dark:bg-dark-900 dark:text-primary-500 font-bold py-2 px-4 flex items-center text-sm w-full outline-none"
+        class="bg-primary-800 dark:bg-dark-900 dark:text-primary-500 font-bold py-2 px-4 flex items-center text-sm w-full outline-none"
         v-if="AIgenerated"
       >
         <IconAlertTriangle class="w-4 h-4 mr-2" />

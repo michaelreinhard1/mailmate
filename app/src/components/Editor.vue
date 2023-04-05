@@ -217,6 +217,7 @@ export default {
       }, 2000);
     },
     generatedBody() {
+      console.log("body changed");
       const paragraphs = this.generatedBody.split(/\n\s*\n/);
       const html = paragraphs.map((p) => `<p>${p.trim()}</p>`).join("");
       this.editor.commands.setContent(html, false);

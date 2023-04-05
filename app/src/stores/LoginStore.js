@@ -4,6 +4,7 @@ import { useStorage } from "@vueuse/core";
 import { useToast } from "vue-toastification";
 import i18n from "../i18n";
 import { IconCircleCheck, IconAlertTriangle } from "@tabler/icons-vue";
+import { useRoute, useRouter } from "vue-router";
 
 const toast = useToast();
 const $t = i18n.global.t;
@@ -83,27 +84,31 @@ export const useLoginStore = defineStore("LoginStore", {
         throw error;
       }
     },
-    async saveFullName({ fname, lname }) {
+    async saveFullName({ name }) {
       try {
         await api
           .post(`/email/save-full-name`, {
-            fname,
-            lname,
+            name,
           })
           .then(() => {
-            this.profile.fname = fname;
-            this.profile.lname = lname;
+            this.profile.name = name;
+            toast.success($t("settings.savedSuccessfully"), {
+              icon: IconCircleCheck,
+            });
           });
-
-        toast.success($t("settings.savedSuccessfully"), {
-          icon: IconCircleCheck,
+      } catch (error) {
+        toast.error($t("tool.error"), {
+          icon: IconAlertTriangle,
         });
-      } catch (error) {}
+        throw error;
+      }
     },
     async signOut() {
       this.profile = {};
       this.token = "";
       this.setup = true;
+      const router = useRouter();
+      await router.push({ name: "Login" });
     },
   },
 });

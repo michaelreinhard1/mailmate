@@ -89,13 +89,11 @@ export const useToolStore = defineStore("ToolStore", {
           APIurl = "attachment-detection";
           break;
         case "autocomplete":
+          this.autocomplete = "";
           APIurl = "autocomplete";
           break;
         case "generateBody":
           APIurl = "body";
-          break;
-        case "chat":
-          APIurl = "chat";
           break;
         default:
           break;

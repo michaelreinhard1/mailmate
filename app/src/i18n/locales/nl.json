@@ -143,7 +143,7 @@
     "smartWrite": {
       "title": "Slim schrijven",
       "description": "Schrijf een nieuwe e-mail met onze eenvoudige en intuïtieve interface.",
-      "placeholder": "Schrijf een e-mail over",
+      "placeholder": "bijv. Een e-mail met het verzoek om een ontmoeting met de potentiële klant om de kenmerken en voordelen van uw software te bespreken.",
       "button": "E-mail schrijven",
       "shortInput": "Geef meer details om de resultaten te verbeteren.",
       "tonality": {

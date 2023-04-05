@@ -25,20 +25,25 @@ export default {
   },
   methods: {
     async login() {
-      this.loading = true;
-      await googleAuthCodeLogin().then(async (response) => {
-        try {
-          await this.loginStore
-            .googleSignIn({ code: response.code })
-            .then(() => {
-              this.loading = false;
-              this.$router.push({ name: "Inbox" });
-            });
-        } catch (error) {
+      await googleAuthCodeLogin()
+        .then(async (response) => {
+          this.loading = true;
+          try {
+            await this.loginStore
+              .googleSignIn({ code: response.code })
+              .then(() => {
+                this.loading = false;
+                this.$router.push({ name: "Inbox" });
+              });
+          } catch (error) {
+            this.loading = false;
+            console.log(error);
+          }
+        })
+        .catch((error) => {
           this.loading = false;
           console.log(error);
-        }
-      });
+        });
     },
   },
 };

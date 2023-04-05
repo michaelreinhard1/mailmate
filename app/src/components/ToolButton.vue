@@ -66,7 +66,7 @@ export default {
     <slot name="icon"></slot>
     <div
       :class="{
-        'dark:text-transparent': loading,
+        'text-transparent': loading,
         'dark:text-primary-900':
           input !== '' && input.length >= minimumInputLength,
       }"
