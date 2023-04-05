@@ -31,7 +31,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .primary-button {
-  @apply bg-accent-900 text-sm text-white rounded-lg hover:bg-accent-900/90 transition-colors px-3 py-2 flex items-center;
+  @apply bg-accent-900 text-sm text-white rounded-lg hover:bg-accent-900/90 transition-colors px-3 py-2 flex items-center disabled:opacity-50 disabled:cursor-default disabled:bg-accent-900 disabled:hover:bg-accent-900;
 }
 .secondary-button {
   @apply bg-primary-700 hover:bg-primary-700/80 text-sm text-dark-900 rounded-lg  transition-colors px-3 py-2 dark:bg-dark-500 dark:text-white flex items-center disabled:opacity-50 disabled:cursor-default disabled:bg-primary-700 disabled:hover:bg-primary-700 disabled:dark:hover:bg-dark-500;

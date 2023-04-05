@@ -38,8 +38,12 @@ export const useToolStore = defineStore("ToolStore", {
       },
       {
         name: "attachmentDetection",
-        minimumInputLength: 30,
         enabled: useStorage("attachmentDetection", true),
+        visible: false,
+      },
+      {
+        name: "smartWrite",
+        enabled: useStorage("smartWrite", true),
         visible: false,
       },
     ],

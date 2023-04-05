@@ -52,7 +52,7 @@
     "disable": "Disable"
   },
   "dialog": {
-    "forgotAttachmentHeader": "Oops, did you forget to attach something?",
+    "forgotAttachmentHeader": "Oops, forgot to add attachment?",
     "forgotAttachmentBody": "It looks like you forgot to attach a file to your email. Are you sure you want to send it without the attachment?"
   },
   "nav": {
@@ -145,6 +145,7 @@
       "description": "Write a new email with our simple and intuitive interface.",
       "placeholder": "Write an email about",
       "button": "Write email",
+      "shortInput": "Please provide more details to improve results.",
       "tonality": {
         "title": "Choose a tonality",
         "neutral": "Neutral",

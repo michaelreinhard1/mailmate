@@ -7,7 +7,7 @@ export const useComponentUtilsStore = defineStore({
     clickedSettings: false,
     settingsOpenTab: 0,
     isComposeMinimized: useStorage("isComposeMinimized", false),
-    isComposeClosed: true,
+    showCompose: false,
   }),
   actions: {
     toggleSettings(tab) {
@@ -15,7 +15,7 @@ export const useComponentUtilsStore = defineStore({
       this.settingsOpenTab = tab;
     },
     toggleCompose() {
-      this.isComposeMinimized = !this.isComposeMinimized;
+      this.showCompose = !this.showCompose;
     },
   },
 });

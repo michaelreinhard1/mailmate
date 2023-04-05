@@ -33,6 +33,13 @@
                 {{ $t("tool.smartWrite.title") }}
               </DialogTitle>
 
+              <div
+                v-if="loading"
+                class="absolute inset-1/2 bg-black/30 w-full h-full transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-[51]"
+              >
+                <LoadingIndicator />
+              </div>
+
               <div id="options" class="my-7">
                 <label
                   for="emailSubject"
@@ -96,19 +103,45 @@
               </div>
 
               <div
-                class="border-2 border-gray-300 dark:border-dark-500 rounded-md"
+                class="border rounded-md relative"
+                :class="{
+                  'border-orange-500': !emailBodyRequirements,
+                  'border-gray-300 dark:border-dark-500': emailBodyRequirements,
+                }"
               >
                 <textarea
                   id="emailTextarea"
                   name="email"
                   rows="10"
                   cols="50"
+                  required
                   v-model="emailBody"
                   placeholder="Write an email about "
-                  class="w-full h-96 rounded-md p-4 resize-none bg-gray-100 outline-none bg-transparent"
+                  class="w-full h-96 rounded-md p-4 resize-none bg-gray-100 outline-none bg-transparent transition-colors"
                   spellcheck="false"
+                  :class="{
+                    'text-primary-900': !loading,
+                    'text-primary-300': loading,
+                  }"
                   @keydown.ctrl.enter="generateEmailBody"
+                  :readonly="loading"
                 ></textarea>
+              </div>
+              <div class="h-5 my-2 flex justify-between">
+                <div class="w-1/2">
+                  <span
+                    v-if="!emailBodyRequirements"
+                    class="text-sm text-orange-500"
+                  >
+                    {{ $t("tool.smartWrite.shortInput") }}
+                  </span>
+                </div>
+                <div class="w-1/2 justify-end flex">
+                  <!-- Display the characters -->
+                  <span class="text-sm text-white font-bold">
+                    {{ emailBody.length }} / 1500
+                  </span>
+                </div>
               </div>
 
               <div class="mt-4 gap-2 flex justify-end">
@@ -122,9 +155,11 @@
                 </BaseButton>
 
                 <BaseButton
-                  :type="loading ? 'secondary' : 'primary'"
+                  type="primary"
                   @click="generateEmailBody"
-                  :disabled="loading"
+                  :disabled="
+                    loading || !emailBodyRequirements || emailBody.length === 0
+                  "
                 >
                   {{ $t("tool.smartWrite.button") }}
                 </BaseButton>
@@ -140,6 +175,7 @@
 <script setup>
 import { ref, computed, watchEffect } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
+import LoadingIndicator from "@/components/LoadingIndicator.vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -169,6 +205,11 @@ const props = defineProps({
 const loading = ref(false);
 
 const emailBody = ref("");
+
+const emailBodyRequirements = computed(() => {
+  // If emailBody is empty or more than 40 characters return true
+  return emailBody.value.length === 0 || emailBody.value.length >= 40;
+});
 
 const tonalities = computed(() => [
   {

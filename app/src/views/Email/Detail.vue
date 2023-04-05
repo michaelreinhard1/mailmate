@@ -47,7 +47,6 @@ export default {
   data() {
     return {
       loading: false,
-      uid: "",
       email: storeToRefs(this.emailStore).email,
       fromEmail: "",
       toEmail: "",
@@ -58,7 +57,6 @@ export default {
     };
   },
   created() {
-    this.uid = this.$router.currentRoute.value.params.uid;
     this.getOneEmail();
   },
   updated() {
@@ -72,12 +70,13 @@ export default {
   emits: ["compose"],
   methods: {
     async getOneEmail() {
+      console.log(this.uid, this.box);
       this.loading = true;
-      await this.emailStore.getOneEmail({ uid: this.uid });
+      await this.emailStore.getOneEmail({ uid: this.uid, box: this.box });
       // this.email object is empty, fetch the email again
-      if (Object.keys(this.email).length === 0) {
-        await this.getOneEmail();
-      }
+      // if (Object.keys(this.email).length === 0) {
+      //   await this.getOneEmail();
+      // }
       this.loading = false;
       this.fromEmail =
         this.email.from.value.length > 0
@@ -112,9 +111,7 @@ export default {
       this.$emit("compose");
     },
     downloadAll() {
-      console.log("downloadAllLink");
       const zip = new JSZip();
-      console.log(this.email.attachments);
       let filenames = {}; // initialize object to store filenames and their counts
       this.email.attachments.forEach((attachment) => {
         const data = Uint8Array.from(attachment.content.data);
@@ -134,13 +131,18 @@ export default {
         zip.file(filename, content);
       });
       zip.generateAsync({ type: "blob" }).then((content) => {
-        const attachmentsName =
-          this.$t("email.attachments").toLowerCase() + ".zip";
+        const attachmentsName = this.email.subject + ".zip";
         saveAs(content, attachmentsName);
       });
     },
   },
   computed: {
+    box() {
+      return this.$route.meta.box;
+    },
+    uid() {
+      return this.$route.params.uid;
+    },
     attachments() {
       const attachmentsArray = [];
       if (this.email.attachments?.length > 0) {
@@ -164,7 +166,6 @@ export default {
     body() {
       let html;
       let text;
-      console.log(this.email);
       if (this.email.html) {
         const $ = cheerio.load(this.email.html);
         const hasScriptTags = $("script").length > 0;
@@ -174,8 +175,6 @@ export default {
         const hasIframeTags = $("iframe").length > 0;
 
         const hasHtmlTags = $("html").length > 0;
-
-        console.log($("html"));
 
         const hasDoctype = this.email.html.includes("!DOCTYPE");
 

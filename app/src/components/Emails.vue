@@ -92,14 +92,18 @@ export default {
                   month: "short",
                   day: "numeric",
                 }),
-          from: {
-            name: this.extractNames(email.from[0]),
-            address: this.exractAddress(email.from[0]),
-          },
-          to: {
-            name: this.extractNames(email.to[0]),
-            address: this.exractAddress(email.to[0]),
-          },
+          from: email.from
+            ? {
+                name: this.extractNames(email.from[0]),
+                address: this.exractAddress(email.from[0]),
+              }
+            : null,
+          to: email.to
+            ? {
+                name: this.extractNames(email.to[0]),
+                address: this.exractAddress(email.to[0]),
+              }
+            : null,
           subject:
             // If there is no email.subject, show "No subject"
             email.subject === undefined
@@ -110,18 +114,19 @@ export default {
       });
     },
     extractNames(emails) {
-      console.log(emails);
-      const regex = /(?:^|\s)[\w.]+@[^\s]+|(?:^|\s)([^<]+)(?=\s?<|$)/g;
+      let name = "";
+      const regex = /^"(.+?)"\s*(<[^\s>]+>)?$|^([^\s<]+)\s*(<[^\s>]+>)?$/;
       const matches = emails.match(regex);
       if (matches) {
-        return matches
-          .map((match) => {
-            const name = match.trim();
-            return name !== match ? name : "";
-          })
-          .join(", ");
+        if (matches[1]) {
+          name = matches[1];
+        } else if (matches[3]) {
+          name = matches[3];
+        }
+      } else {
+        name = emails.replace(/<(.+?)>/g, "").trim();
       }
-      return "";
+      return name;
     },
     exractAddress(email) {
       if (email.includes("<")) {

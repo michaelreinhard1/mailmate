@@ -25,24 +25,29 @@ export const useEmailStore = defineStore("EmailStore", {
   actions: {
     async sendEmail({ to, subject, body, attachments, replyTo, inReplyTo }) {
       try {
-        await api.post(`/email/send`, {
-          to,
-          subject,
-          body,
-          test: true,
-          attachments: [
-            ...attachments.map((attachment) => ({
-              filename: attachment.name,
-              content: attachment.content,
-              encoding: "base64",
-            })),
-          ],
-          ...(replyTo && { replyTo }),
-          ...(inReplyTo && { inReplyTo }),
-        });
-        toast($t("email.sentSuccesfully"), {
-          icon: IconSend,
-        });
+        await api
+          .post(`/email/send`, {
+            to,
+            subject,
+            body,
+            test: true,
+            attachments: [
+              ...attachments.map((attachment) => ({
+                filename: attachment.name,
+                content: attachment.content,
+                encoding: "base64",
+              })),
+            ],
+            ...(replyTo && { replyTo }),
+            ...(inReplyTo && { inReplyTo }),
+          })
+          .then((response) => {
+            if (response.status === 200) {
+              toast($t("email.sentSuccesfully"), {
+                icon: IconSend,
+              });
+            }
+          });
       } catch (error) {
         toast.error($t("tool.error"), {
           icon: IconAlertTriangle,
@@ -95,10 +100,11 @@ export const useEmailStore = defineStore("EmailStore", {
         console.log(error.message);
       }
     },
-    async getOneEmail({ uid }) {
+    async getOneEmail({ uid, box }) {
       try {
         const response = await api.post(`/email/get-one`, {
           uid,
+          box,
         });
         this.email = response.data.message;
       } catch (error) {

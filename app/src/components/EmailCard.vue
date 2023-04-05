@@ -18,6 +18,7 @@ export default {
   setup() {
     const loginStore = useLoginStore();
     const emailStore = useEmailStore();
+
     return {
       loginStore,
       emailStore,
@@ -28,9 +29,7 @@ export default {
       localEmail: this.email,
     };
   },
-  mounted() {
-    console.log(this.email.to);
-  },
+
   computed: {
     formattedDate() {
       const date = new Date(this.email.date);
@@ -57,6 +56,13 @@ export default {
         },
       ];
     },
+    emailDetailRouteName() {
+      // The email detail name is the same as the current route name with the suffix "Email"
+      // But make sure that when the user is on the detail page, the route name is not duplicated
+      return this.$route.name.includes("Email")
+        ? this.$route.name
+        : this.$route.name + "Email";
+    },
   },
   methods: {
     markAsRead() {
@@ -73,7 +79,7 @@ export default {
 </script>
 <template>
   <router-link
-    :to="{ name: 'Email', params: { uid: email.uid } }"
+    :to="{ name: emailDetailRouteName, params: { uid: email.uid } }"
     @click="markAsRead"
     :key="email.uid"
     class="email-card"
@@ -106,7 +112,6 @@ export default {
               v-if="email.to.address === loginStore.profile.email"
               >{{ $t("email.toMe") }}</span
             >
-            <!-- if name is not empty -->
             <span v-else>{{
               email.to.name === "" ? email.to.address : email.to.name
             }}</span>

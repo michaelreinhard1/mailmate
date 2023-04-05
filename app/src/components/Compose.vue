@@ -142,6 +142,12 @@ export default {
       });
       return tools;
     },
+    smartWriteEnabled() {
+      const smartWritePreference = this.tools.find(
+        (tool) => tool.name === "smartWrite"
+      );
+      return smartWritePreference.enabled;
+    },
   },
   methods: {
     async chat() {
@@ -157,7 +163,7 @@ export default {
       }
     },
     async sendAndClear() {
-      console.log(this.to);
+      this.$emit("close");
       if (this.type == "new") {
         if (this.to.length === 0) return;
       } else {
@@ -273,7 +279,7 @@ export default {
     "
     :style="
       minimized && type === 'new'
-        ? 'min-width: 600px; min-height: 400px; width:40%; height: 70%;  transform: translate(-100%, -100%); top: calc(100% - 2rem); left: calc(100% - 2rem);'
+        ? 'min-width: 600px; min-height: 850px; width:40%; height: 70%;  transform: translate(-100%, -100%); top: calc(100% - 2rem); left: calc(100% - 2rem);'
         : type === 'new'
         ? 'width: 100%; height: 100vh; top: 0; left: 0;'
         : ''
@@ -327,7 +333,7 @@ export default {
           />
         </div>
       </template>
-      <div id="ai-toolbar" v-if="AItools.length > 0">
+      <div id="ai-toolbar" v-if="AItools.length > 0 || smartWriteEnabled">
         <div class="flex gap-2 pt-4 px-4 text-sm font-bold text-[#a782c3]">
           <IconSparkles class="w-5 h-5" /> AI tools
         </div>
@@ -348,6 +354,7 @@ export default {
           <BaseButton
             class="w-fit flex items-center gap-2 py-2 px-4"
             @click="openSmartWriteModal"
+            v-if="smartWriteEnabled"
           >
             <IconPencil class="w-4 h-4" />
             {{ $t("tool.smartWrite.title") }}
@@ -400,12 +407,13 @@ export default {
           </div>
         </div>
         <div
-          class="mt-5 grid gap-3 overflow-y-scroll max-h-32"
+          class="mt-5 grid gap-3 overflow-y-scroll max-h-12"
           ref="el"
           :class="{
             'grid-cols-3': width > 900,
             'grid-cols-2': width < 900 && width > 600,
             'grid-cols-1': width < 600,
+            'max-h-32': minimized,
           }"
         >
           <div v-for="attachment in attachments" :key="attachment.id">

@@ -42,13 +42,12 @@ const emailRoutes = [
     children: [
       {
         path: ":uid",
-        name: "Email",
+        name: "InboxEmail",
         components: {
           default: () => import("@/views/Email/Detail.vue"),
         },
       },
     ],
-
     meta: {
       requiresAuth: true,
       box: "INBOX",
@@ -60,6 +59,15 @@ const emailRoutes = [
     components: {
       default: () => import("@/views/Emailpage.vue"),
     },
+    children: [
+      {
+        path: ":uid",
+        name: "StarredEmail",
+        components: {
+          default: () => import("@/views/Email/Detail.vue"),
+        },
+      },
+    ],
     meta: {
       requiresAuth: true,
       box: "STARRED",
@@ -71,6 +79,15 @@ const emailRoutes = [
     components: {
       default: () => import("@/views/Emailpage.vue"),
     },
+    children: [
+      {
+        path: ":uid",
+        name: "SentEmail",
+        components: {
+          default: () => import("@/views/Email/Detail.vue"),
+        },
+      },
+    ],
     meta: {
       requiresAuth: true,
       box: "SENT",
@@ -82,6 +99,15 @@ const emailRoutes = [
     components: {
       default: () => import("@/views/Emailpage.vue"),
     },
+    children: [
+      {
+        path: ":uid",
+        name: "DraftsEmail",
+        components: {
+          default: () => import("@/views/Email/Detail.vue"),
+        },
+      },
+    ],
     meta: {
       requiresAuth: true,
       box: "DRAFTS",
@@ -93,6 +119,15 @@ const emailRoutes = [
     components: {
       default: () => import("@/views/Emailpage.vue"),
     },
+    children: [
+      {
+        path: ":uid",
+        name: "TrashEmail",
+        components: {
+          default: () => import("@/views/Email/Detail.vue"),
+        },
+      },
+    ],
     meta: {
       requiresAuth: true,
       box: "TRASH",
@@ -104,6 +139,15 @@ const emailRoutes = [
     components: {
       default: () => import("@/views/Emailpage.vue"),
     },
+    children: [
+      {
+        path: ":uid",
+        name: "SpamEmail",
+        components: {
+          default: () => import("@/views/Email/Detail.vue"),
+        },
+      },
+    ],
     meta: {
       requiresAuth: true,
       box: "SPAM",

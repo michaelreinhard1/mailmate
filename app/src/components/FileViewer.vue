@@ -75,7 +75,7 @@ const props = defineProps({
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="transform rounded-2xl bg-white text-left align-middle shadow-xl transition-all flex flex-col"
+              class="transform rounded-2xl text-left align-middle shadow-xl transition-all flex flex-col"
               :class="{
                 'w-full h-full': file.type.includes('pdf'),
               }"

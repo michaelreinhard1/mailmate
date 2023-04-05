@@ -53,7 +53,7 @@
     "disable": "Uitschakelen"
   },
   "dialog": {
-    "forgotAttachmentHeader": "Oeps, ben je vergeten iets bij te voegen?",
+    "forgotAttachmentHeader": "Oeps, bijlage vergeten toe te voegen?",
     "forgotAttachmentBody": "Het lijkt erop dat je vergeten bent een bestand bij je e-mail te voegen. Weet je zeker dat je het zonder bijlage wilt versturen?"
   },
   "nav": {
@@ -145,6 +145,7 @@
       "description": "Schrijf een nieuwe e-mail met onze eenvoudige en intuïtieve interface.",
       "placeholder": "Schrijf een e-mail over",
       "button": "E-mail schrijven",
+      "shortInput": "Geef meer details om de resultaten te verbeteren.",
       "tonality": {
         "title": "Kies een toonzetting",
         "neutral": "Neutraal",

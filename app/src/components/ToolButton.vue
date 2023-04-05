@@ -60,13 +60,7 @@ export default {
     v-ripple="{ center: true }"
     @click="generate"
     :disabled="loading || input === '' || input.length < minimumInputLength"
-    :type="
-      loading
-        ? 'secondary'
-        : input === '' || input.length < minimumInputLength
-        ? 'secondary'
-        : 'primary'
-    "
+    type="primary"
   >
     <slot />
     <slot name="icon"></slot>
@@ -80,7 +74,7 @@ export default {
       <slot name="text" />
     </div>
     <div v-if="loading" class="absolute inset-x-1/2">
-      <LoadingIndicator></LoadingIndicator>
+      <LoadingIndicator />
     </div>
   </BaseButton>
 </template>

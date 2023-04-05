@@ -1,12 +1,14 @@
 <script setup>
 import Navbar from "@/components/Navbar.vue";
 import Compose from "@/components/Compose.vue";
-import { ref } from "vue";
+import { useComponentUtilsStore } from "@/stores/ComponentUtilsStore";
+import { storeToRefs } from "pinia";
+import { watch } from "vue";
+
+const componentUtilsStore = useComponentUtilsStore();
 
 // Open/close the compose modal
-const showCompose = ref(false);
-
-// Get the navbar w
+const showCompose = storeToRefs(componentUtilsStore).showCompose;
 </script>
 
 <template>
