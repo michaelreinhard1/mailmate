@@ -80,6 +80,8 @@ export const useEmailStore = defineStore("EmailStore", {
       if (box) this.box = box;
       this.status = "connecting";
       try {
+        console.log("page", page);
+        console.log("box", box);
         const response = await api.post(`/email/get`, {
           page,
           box: this.box,
@@ -102,13 +104,19 @@ export const useEmailStore = defineStore("EmailStore", {
     },
     async getOneEmail({ uid, box }) {
       try {
-        const response = await api.post(`/email/get-one`, {
-          uid,
-          box,
-        });
-        this.email = response.data.message;
+        await api
+          .post(`/email/get-one`, {
+            uid,
+            box,
+          })
+          .then((response) => {
+            this.email = response.data.message;
+          });
       } catch (error) {
-        console.log(error);
+        this.email = {};
+        toast.error($t("email.errorFetchingEmails"), {
+          icon: IconAlertTriangle,
+        });
       }
     },
     async setFlag({ uid, flag, value }) {

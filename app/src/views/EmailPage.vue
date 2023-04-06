@@ -83,10 +83,10 @@ export default {
       { maxWait: 600 }
     ),
     async getEmails() {
-      if (this.box !== this.storedBox) {
-        this.currentPage = 1;
-      }
+      console.log("getting emails");
+      this.currentPage = 1;
       this.loading = true;
+      console.log(this.currentPage, this.box);
       await this.emailStore.getEmails({
         page: this.currentPage,
         box: this.box,

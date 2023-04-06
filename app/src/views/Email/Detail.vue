@@ -63,24 +63,42 @@ export default {
     $route() {
       this.getOneEmail();
     },
+    emailFetched() {
+      console.log("emailFetched changed");
+      if (!this.emailFetched) {
+        // Get the parent route. This is the route that the user was on before they clicked on an email
+        const parentRoute = this.$router.resolve({
+          name: "Emails",
+          params: { box: this.box },
+        }).route;
+        // Go back to the parent route
+        this.$router.push(parentRoute);
+      }
+    },
   },
   emits: ["compose"],
   methods: {
     async getOneEmail() {
-      this.loading = true;
-      await this.emailStore.getOneEmail({ uid: this.uid, box: this.box });
+      if (this.uid === undefined) return;
+      try {
+        this.loading = true;
+        await this.emailStore.getOneEmail({ uid: this.uid, box: this.box });
+        this.loading = false;
+        this.fromEmail =
+          this.email.from.value.length > 0
+            ? this.email.from.value[0].address
+            : "";
+        this.toEmail =
+          this.email.to.value > 0 ? this.email.to.value[0].address : "";
+        this.fromName = this.email.from.value[0].name;
+      } catch (error) {
+        this.loading = false;
+      }
+
       // this.email object is empty, fetch the email again
       // if (Object.keys(this.email).length === 0) {
       //   await this.getOneEmail();
       // }
-      this.loading = false;
-      this.fromEmail =
-        this.email.from.value.length > 0
-          ? this.email.from.value[0].address
-          : "";
-      this.toEmail =
-        this.email.to.value > 0 ? this.email.to.value[0].address : "";
-      this.fromName = this.email.from.value[0].name;
     },
     convertToDownloadableURL({ buffer, type }) {
       const data = Uint8Array.from(buffer);
@@ -158,7 +176,6 @@ export default {
       }
       return attachmentsArray;
     },
-
     body() {
       let html;
       let text;
@@ -193,6 +210,9 @@ export default {
       }
       return { html, text };
     },
+    emailFetched() {
+      return Object.keys(this.email).length > 0;
+    },
   },
 };
 </script>
@@ -204,7 +224,7 @@ export default {
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <LoadingIndicator v-if="loading" />
     </div>
-    <div v-if="!loading">
+    <div v-if="!loading && emailFetched">
       <div>
         <div class="flex justify-between">
           <div class="flex flex-col mb-5 gap-2">

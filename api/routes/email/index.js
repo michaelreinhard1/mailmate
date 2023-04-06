@@ -107,11 +107,18 @@ const getEmails = async (req, res) => {
   const { page, box } = req.body;
 
   if (!page || !box) {
-    throw new Error("Page and box are required");
+    console.log("Page and box are required");
+    return res.status(400).json({
+      message: "Page and box are required",
+      status: 0,
+    });
   }
 
   if (!["INBOX", "STARRED", "SENT", "DRAFTS", "TRASH", "SPAM"].includes(box)) {
-    throw new Error("Invalid box");
+    return res.status(400).json({
+      message: "Invalid box",
+      status: 0,
+    });
   }
 
   const password = await getAppPassword(email);
@@ -121,7 +128,6 @@ const getEmails = async (req, res) => {
       message: "App password not found. Please save it first",
       status: 0,
     });
-  // If the connection failes, send status 500 and stop the function
 
   const imap = new Imap({
     user: email,
@@ -132,116 +138,10 @@ const getEmails = async (req, res) => {
     tlsOptions: { rejectUnauthorized: false },
   });
 
-  // imap.once("ready", function () {
-  //   imap.getBoxes(function (err, boxes) {
-  //     // get the object where attribute includes \\Drafts
-  //     drafts = Object.values(boxes["[Gmail]"].children).find((box) =>
-  //       box.attribs.includes("\\Drafts")
-  //     );
-  //   });
-  // });
-
   const emails = [];
 
   let totalEmails = 0;
   let unreadEmails = 0;
-
-  // imap.once("ready", function () {
-  //   imap.openBox("INBOX", false, function (err, box) {
-  //     // Get the messages flagged as draft
-  //     //     const emailsPerPage = 50;
-  //     //     totalEmails = box.messages.total;
-  //     //     const start = totalEmails - (page - 1) * emailsPerPage;
-  //     //     const end = start - emailsPerPage;
-
-  //     imap.search([searchCriteria], function (err, results) {
-  //       if (results.length === 0)
-  //         return res
-  //           .status(200)
-  //           .json({ emails: [], totalEmails: 0, unreadEmails: 0 });
-  //       if (err) throw err;
-  //       const f = imap.fetch(results, {
-  //         bodies: "HEADER.FIELDS (FROM TO SUBJECT DATE)",
-  //         struct: true,
-  //       });
-  //       f.on("message", function (msg, seqno) {
-  //         let message = { uid: seqno };
-  //         let prefix = "(#" + seqno + ") ";
-  //         msg.on("body", function (stream, info) {
-  //           let buffer = "";
-  //           stream.on("data", function (chunk) {
-  //             buffer += chunk.toString("utf8");
-  //           });
-  //           stream.once("end", function () {
-  //             // console.log(
-  //             //   prefix + "Parsed header: %s",
-  //             //   inspect(Imap.parseHeader(buffer))
-  //             // );
-  //             message = { ...message, ...Imap.parseHeader(buffer) };
-  //           });
-  //         });
-  //         msg.once("attributes", function (attrs) {
-  //           message = { ...message, ...attrs };
-  //         });
-  //         msg.once("end", function () {
-  //           emails.push(message);
-  //         });
-  //       });
-  //       f.once("error", function (err) {
-  //         console.log("Fetch error: " + err);
-  //       });
-  //       f.once("end", function () {
-  //         console.log(emails);
-  //         console.log("Done fetching all messages!");
-  //         imap.end();
-  //       });
-  //     });
-  //   });
-  // });
-
-  // imap.once("ready", function () {
-  //   // Get the drafts
-  //   openInbox(function (err, box) {
-  //     imap.search(["ALL"], function (err, results) {
-  //       if (err) throw err;
-  //       const f = imap.fetch(results, {
-  //         bodies: "HEADER.FIELDS (FROM TO SUBJECT DATE)",
-  //         struct: true,
-  //       });
-  //       f.on("message", function (msg, seqno) {
-  //         let message = { uid: seqno };
-  //         let prefix = "(#" + seqno + ") ";
-  //         msg.on("body", function (stream, info) {
-  //           let buffer = "";
-  //           stream.on("data", function (chunk) {
-  //             buffer += chunk.toString("utf8");
-  //           });
-  //           stream.once("end", function () {
-  //             // console.log(
-  //             //   prefix + "Parsed header: %s",
-  //             //   inspect(Imap.parseHeader(buffer))
-  //             // );
-  //             message = { ...message, ...Imap.parseHeader(buffer) };
-  //           });
-  //         });
-  //         msg.once("attributes", function (attrs) {
-  //           message = { ...message, ...attrs };
-  //         });
-  //         msg.once("end", function () {
-  //           emails.push(message);
-  //         });
-  //       });
-  //       f.once("error", function (err) {
-  //         console.log("Fetch error: " + err);
-  //       });
-  //       f.once("end", function () {
-  //         console.log(messages);
-  //         console.log("Done fetching all messages!");
-  //         imap.end();
-  //       });
-  //     });
-  //   });
-  // });
 
   let specialUseAttrib;
 
@@ -286,7 +186,9 @@ const getEmails = async (req, res) => {
         imap.on("mail", function (numNewMsgs) {
           console.log(`Received ${numNewMsgs} new message(s)`);
           imap.search(["UNSEEN"], function (err, results) {
-            if (err) throw err;
+            console.log("err", err);
+            if (err)
+              return res.status(500).json({ message: "Something went wrong" });
             var f = imap.fetch(results, { bodies: "" });
             f.on("message", function (msg, seqno) {
               console.log(`Message ${seqno}`);
@@ -317,7 +219,8 @@ const getEmails = async (req, res) => {
         totalEmails = box?.messages?.total;
         const start = totalEmails - (page - 1) * emailsPerPage;
         const end = start - emailsPerPage;
-        if (err) throw err;
+        if (err)
+          return res.status(500).json({ message: "Something went wrong" });
         const f = imap.seq.fetch(`${start}:${end}`, {
           bodies: "HEADER.FIELDS (FROM TO SUBJECT DATE)",
           struct: true,
@@ -365,15 +268,17 @@ const getEmails = async (req, res) => {
       if (box === "INBOX") {
         // Get the number of the unread emails
         imap.openBox("INBOX", false, (err, box) => {
-          if (err) throw err;
+          if (err)
+            return res.status(500).json({ message: "Something went wrong" });
           imap.search(["UNSEEN"], function (err, results) {
             if (results.length === 0) return;
             unreadEmails = results.length;
-            if (err) throw err;
+            if (err)
+              return res.status(500).json({ message: "Something went wrong" });
             var f = imap.fetch(results, { bodies: "" });
             f.once("error", function (err) {
               console.log("Fetch error");
-              res.status(500).json({ error: err });
+              return res.status(500).json({ message: "Something went wrong" });
             });
             f.once("end", function () {
               // console.log("Done fetching all messages!");
@@ -388,7 +293,6 @@ const getEmails = async (req, res) => {
   let hasError = false;
 
   imap.once("error", (err) => {
-    console.log(err);
     hasError = true;
     res.status(500).send("Error connecting to IMAP server");
   });
@@ -411,6 +315,11 @@ const getOneEmail = async (req, res) => {
   const { email } = req.user;
 
   const { uid, box } = req.body;
+
+  if (!uid || !box) {
+    console.log('Missing "uid" or "box"');
+    return res.status(400).json({ message: "Missing uid or box" });
+  }
 
   console.log(uid, box);
 
@@ -467,6 +376,8 @@ const getOneEmail = async (req, res) => {
       }
       imap.openBox(`${mailboxName}`, false, () => {
         imap.search([["UID", uid]], (err, results) => {
+          if (err)
+            return res.status(404).json({ message: "Something went wrong" });
           const f = imap.fetch(results, { bodies: "" });
           f.on("message", (msg) => {
             msg.on("body", (stream) => {
