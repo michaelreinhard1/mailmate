@@ -16,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
+console.log(corsOptions);
 
 app.use(bodyParser.urlencoded({ extended: true, limit: "25mb" }));
 
