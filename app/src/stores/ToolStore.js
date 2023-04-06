@@ -3,10 +3,9 @@ import { api } from "./index";
 import cheerio from "cheerio";
 import { useToast } from "vue-toastification";
 import { useStorage } from "@vueuse/core";
-import { IconAlertTriangle } from "@tabler/icons-vue";
 import i18n from "../i18n";
+import { DisplayError } from "@/core/DisplayError";
 
-const toast = useToast();
 const $t = i18n.global.t;
 
 export const useToolStore = defineStore("ToolStore", {
@@ -123,16 +122,12 @@ export const useToolStore = defineStore("ToolStore", {
       } catch (error) {
         console.log("There was an error");
         if (error.response.data.success === false) {
-          toast.error($t("tool.error"), {
-            icon: IconAlertTriangle,
-          });
+          DisplayError($t("tool.error"));
           throw error;
         }
         if (error.response.data.safeContent === false) {
           console.log("unsafe content detected");
-          toast.error($t("tool.unsafeContentDetected"), {
-            icon: IconAlertTriangle,
-          });
+          DisplayError($t("tool.tool.unsafeContentDetected"));
           throw error;
         }
       }

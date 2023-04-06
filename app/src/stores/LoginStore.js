@@ -3,8 +3,9 @@ import { api } from "./index";
 import { useStorage } from "@vueuse/core";
 import { useToast } from "vue-toastification";
 import i18n from "../i18n";
-import { IconCircleCheck, IconAlertTriangle } from "@tabler/icons-vue";
-import { useRoute, useRouter } from "vue-router";
+import { IconCircleCheck } from "@tabler/icons-vue";
+import { useRouter } from "vue-router";
+import { DisplayError } from "@/core/DisplayError";
 
 const toast = useToast();
 const $t = i18n.global.t;
@@ -56,9 +57,7 @@ export const useLoginStore = defineStore("LoginStore", {
             this.token = response.data.token;
           });
       } catch (error) {
-        toast.error($t("tool.error"), {
-          icon: IconAlertTriangle,
-        });
+        DisplayError($t("tool.error"));
         throw error;
       }
     },
@@ -78,9 +77,7 @@ export const useLoginStore = defineStore("LoginStore", {
             this.token = response.data.token;
           });
       } catch (error) {
-        toast.error($t("tool.error"), {
-          icon: IconAlertTriangle,
-        });
+        DisplayError($t("tool.error"));
         throw error;
       }
     },
@@ -97,9 +94,7 @@ export const useLoginStore = defineStore("LoginStore", {
             });
           });
       } catch (error) {
-        toast.error($t("tool.error"), {
-          icon: IconAlertTriangle,
-        });
+        DisplayError($t("tool.error"));
         throw error;
       }
     },

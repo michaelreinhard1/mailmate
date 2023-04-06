@@ -5,6 +5,7 @@ import i18n from "../i18n";
 import { IconAlertTriangle, IconSend } from "@tabler/icons-vue";
 import { useLoginStore } from "./LoginStore";
 import { useStorage } from "@vueuse/core";
+import { DisplayError } from "@/core/DisplayError";
 
 const $t = i18n.global.t;
 
@@ -49,9 +50,7 @@ export const useEmailStore = defineStore("EmailStore", {
             }
           });
       } catch (error) {
-        toast.error($t("tool.error"), {
-          icon: IconAlertTriangle,
-        });
+        DisplayError($t("tool.error"));
         throw error;
       }
     },
@@ -65,9 +64,7 @@ export const useEmailStore = defineStore("EmailStore", {
         await this.getEmails({ page: 1, box: "INBOX" });
         loginStore.setup = false;
       } catch (error) {
-        toast.error($t("settings.profile.couldNotConnect"), {
-          icon: IconAlertTriangle,
-        });
+        DisplayError($t("settings.profile.couldNotConnect"));
         this.status = "disconnected";
         console.log("error", error);
         this.emails = [];
@@ -80,8 +77,6 @@ export const useEmailStore = defineStore("EmailStore", {
       if (box) this.box = box;
       this.status = "connecting";
       try {
-        console.log("page", page);
-        console.log("box", box);
         const response = await api.post(`/email/get`, {
           page,
           box: this.box,
@@ -95,9 +90,7 @@ export const useEmailStore = defineStore("EmailStore", {
         this.message = "Emails fetched successfully";
         this.currentPage = page;
       } catch (error) {
-        toast.error($t("email.errorFetchingEmails"), {
-          icon: IconAlertTriangle,
-        });
+        DisplayError($t("email.errorFetchingEmails"));
         this.status = "disconnected";
         console.log(error.message);
       }
@@ -114,9 +107,7 @@ export const useEmailStore = defineStore("EmailStore", {
           });
       } catch (error) {
         this.email = {};
-        toast.error($t("email.errorFetchingEmails"), {
-          icon: IconAlertTriangle,
-        });
+        DisplayError($t("email.errorFetchingEmails"));
       }
     },
     async setFlag({ uid, flag, value }) {
