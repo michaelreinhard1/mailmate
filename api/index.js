@@ -10,7 +10,11 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.APP_URL,
+};
+
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: "25mb" }));
