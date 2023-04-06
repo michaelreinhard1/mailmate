@@ -31,6 +31,7 @@ process.on("SIGINT", () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    mongoose.set("strictQuery", false);
     console.log("Mongoose connected successfully");
   } catch (err) {
     console.error("Mongoose connection error:", err);
