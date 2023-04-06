@@ -1782,8 +1782,8 @@ video {
   background-color: rgb(26 26 26 / var(--tw-bg-opacity));
 }
 
-.bg-black\/10{
-  background-color: rgb(0 0 0 / 0.1);
+.bg-black\/20{
+  background-color: rgb(0 0 0 / 0.2);
 }
 
 .bg-gray-100{
@@ -1808,14 +1808,6 @@ video {
 .bg-blue-500{
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
-.bg-black\/20{
-  background-color: rgb(0 0 0 / 0.2);
-}
-
-.bg-black\/90{
-  background-color: rgb(0 0 0 / 0.9);
 }
 
 .object-contain{
