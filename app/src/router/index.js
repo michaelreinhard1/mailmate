@@ -37,7 +37,7 @@ const emailRoutes = [
     path: "/inbox",
     name: "Inbox",
     components: {
-      default: () => import("@/views/Emailpage.vue"),
+      default: () => import("@/views/EmailPage.vue"),
     },
     children: [
       {
@@ -57,7 +57,7 @@ const emailRoutes = [
     path: "/starred",
     name: "Starred",
     components: {
-      default: () => import("@/views/Emailpage.vue"),
+      default: () => import("@/views/EmailPage.vue"),
     },
     children: [
       {
@@ -77,7 +77,7 @@ const emailRoutes = [
     path: "/sent",
     name: "Sent",
     components: {
-      default: () => import("@/views/Emailpage.vue"),
+      default: () => import("@/views/EmailPage.vue"),
     },
     children: [
       {
@@ -97,7 +97,7 @@ const emailRoutes = [
     path: "/drafts",
     name: "Drafts",
     components: {
-      default: () => import("@/views/Emailpage.vue"),
+      default: () => import("@/views/EmailPage.vue"),
     },
     children: [
       {
@@ -117,7 +117,7 @@ const emailRoutes = [
     path: "/trash",
     name: "Trash",
     components: {
-      default: () => import("@/views/Emailpage.vue"),
+      default: () => import("@/views/EmailPage.vue"),
     },
     children: [
       {
@@ -137,7 +137,7 @@ const emailRoutes = [
     path: "/spam",
     name: "Spam",
     components: {
-      default: () => import("@/views/Emailpage.vue"),
+      default: () => import("@/views/EmailPage.vue"),
     },
     children: [
       {
