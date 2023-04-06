@@ -10,11 +10,8 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// cess to XMLHttpRequest at 'https://mailmate-api.herokuapp.com/api/auth/signin/google' from origin 'https://mailmate.michaelreinhard.be' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-
 const corsOptions = {
-  origin: "*", // "https://mailmate.michaelreinhard.be",
-  optionsSuccessStatus: 200,
+  origin: process.env.APP_URL,
 };
 
 app.use(cors(corsOptions));
