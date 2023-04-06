@@ -15,14 +15,19 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(morgan("dev"));
 console.log(corsOptions);
+
+app.use(morgan("dev"));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: "25mb" }));
 
 app.set("jwt", process.env.JWT_SECRET);
 
 app.use("/api", require("./routes/api"));
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 app.listen(port, () => {
   console.log(`Listening at ${process.env.DOMAIN}:${port}`);
