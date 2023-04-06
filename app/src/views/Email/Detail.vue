@@ -59,18 +59,14 @@ export default {
   created() {
     this.getOneEmail();
   },
-  updated() {
-    // If the uid is changed, get the new email
-    if (this.uid !== this.$router.currentRoute.value.params.uid) {
-      this.formattedEmail = {};
-      this.uid = this.$router.currentRoute.value.params.uid;
+  watch: {
+    $route() {
       this.getOneEmail();
-    }
+    },
   },
   emits: ["compose"],
   methods: {
     async getOneEmail() {
-      console.log(this.uid, this.box);
       this.loading = true;
       await this.emailStore.getOneEmail({ uid: this.uid, box: this.box });
       // this.email object is empty, fetch the email again
@@ -141,7 +137,7 @@ export default {
       return this.$route.meta.box;
     },
     uid() {
-      return this.$route.params.uid;
+      return this.$router.currentRoute.value.params.uid;
     },
     attachments() {
       const attachmentsArray = [];

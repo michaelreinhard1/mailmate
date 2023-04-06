@@ -5,7 +5,7 @@ const cors = require("cors");
 
 require("./routes/middlewares/mongo");
 
-require("dotenv-flow").config();
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
