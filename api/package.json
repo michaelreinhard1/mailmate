@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "prod": "tsc && cp -v -r public build && node build/index.js"
+    "prod": "node index.js"
   },
   "keywords": [],
   "author": "",
