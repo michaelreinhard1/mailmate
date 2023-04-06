@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 require("dotenv-flow").config();
 
 const uri = process.env.MONGO_URI;
-console.log(`url: ` + uri);
 
 const db = require("../models");
 
@@ -27,14 +26,14 @@ process.on("SIGINT", () => {
 
 (async () => {
   try {
-    await mongoose.connect(uri, {
+    mongoose.set("strictQuery", false);
+    mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    mongoose.set("strictQuery", false);
-    console.log("Mongoose connected successfully");
+    console.log("MongoDB Connected...");
   } catch (err) {
-    console.error("Mongoose connection error:", err);
+    console.error("MongoDB Connection Error: ", err);
     process.exit(1);
   }
 })();
