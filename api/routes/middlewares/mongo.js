@@ -27,10 +27,7 @@ process.on("SIGINT", () => {
 (async () => {
   try {
     mongoose.set("strictQuery", false);
-    mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    mongoose.connect(uri);
     console.log("MongoDB Connected...");
   } catch (err) {
     console.error("MongoDB Connection Error: ", err);
