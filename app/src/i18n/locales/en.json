@@ -126,7 +126,7 @@
     "alpha": "Alpha",
     "generateSubject": {
       "title": "Generate subject",
-      "description": "Generate a catchy subject for your email."
+      "description": "Generate a catchy subject line for your email."
     },
     "autocomplete": {
       "title": "Autocomplete",
