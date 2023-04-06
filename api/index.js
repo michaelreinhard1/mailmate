@@ -12,11 +12,6 @@ const port = process.env.PORT || 5000;
 
 const corsOptions = {
   origin: process.env.APP_URL,
-  optionsSuccessStatus: 200,
-  methods: "GET,PUT,POST,DELETE",
-  allowedHeaders:
-    "Content-Type, Authorization, Origin, X-Requested-With, Accept",
-  exposedHeaders: "Authorization",
 };
 
 app.use(cors(corsOptions));
