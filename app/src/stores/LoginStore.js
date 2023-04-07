@@ -61,26 +61,6 @@ export const useLoginStore = defineStore("LoginStore", {
         throw error;
       }
     },
-    async googleSignIn({ code }) {
-      try {
-        await api
-          .post(`/auth/signin/google`, {
-            code,
-          })
-          .then((response) => {
-            this.setup = true;
-            if (response.data.profile.setup === false) {
-              this.setup = false;
-            }
-            delete response.data.profile.setup;
-            this.profile = response.data.profile;
-            this.token = response.data.token;
-          });
-      } catch (error) {
-        DisplayError($t("tool.error"));
-        throw error;
-      }
-    },
     async saveFullName({ name }) {
       try {
         await api

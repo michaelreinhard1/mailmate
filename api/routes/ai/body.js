@@ -62,18 +62,17 @@ const send = async (req, res, next) => {
         temp = 0.3;
     }
 
-    // const response = await openai.createCompletion({
-    //   model: "text-davinci-003",
-    //   prompt: prompt,
-    //   max_tokens: 250,
-    //   temperature: temp,
-    //   stop: ["###", "EMAIL BODY:", "EMAIL BODY: "],
-    // });
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: prompt,
+      max_tokens: 250,
+      temperature: temp,
+      stop: ["###", "EMAIL BODY:", "EMAIL BODY: "],
+    });
 
-    // let output = `${response.data.choices[0].text}`;
+    let output = `${response.data.choices[0].text}`;
 
-    // output = output.replace(/^\s+/, "");
-    let output = "Hello, this is a test email body. Thank you for your time.";
+    output = output.replace(/^\s+/, "");
 
     req.ai.output = output;
 

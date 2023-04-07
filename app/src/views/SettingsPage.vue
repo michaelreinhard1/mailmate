@@ -101,30 +101,30 @@ const toggleTabs = (tab) => {
   openTab.value = tab;
 };
 
-const fullName = ref(
-  `${loginStore.profile?.fname} ${loginStore.profile?.lname}`
-);
+const fullName = ref(`${loginStore.profile?.name}`);
 const appPassword = ref("");
 
 const status = storeToRefs(emailStore).status;
-
-const handleFullName = (event) => {
-  fullName.value = event.target.value;
-};
-
-const handleAppPassword = (event) => {
-  appPassword.value = event.target.value;
-};
 
 const appPasswordRequirements = ref(true);
 
 const loading = ref(false);
 
+const userCanSave = computed(() => {
+  return (
+    fullName.value !== loginStore.profile?.name ||
+    appPassword.value !== "" ||
+    appPasswordRequirements.value === false
+  );
+});
+
 const saveAll = () => {
   loading.value = true;
-  loginStore.saveFullName({
-    name: fullName.value,
-  });
+  if (fullName.value !== loginStore.profile?.name) {
+    loginStore.saveFullName({
+      name: fullName.value,
+    });
+  }
   if (appPassword.value !== "") {
     if (appPassword.value.length === 16) {
       appPasswordRequirements.value = true;
@@ -320,7 +320,6 @@ const saveAll = () => {
                           class="rounded-md border dark:border-dark-100 border-solid w-full p-2 outline-none"
                           spellcheck="false"
                           v-model="fullName"
-                          @input="handleFullName"
                         />
                         <div
                           class="mt-2 text-xs text-gray-500 dark:text-primary-600"
@@ -362,7 +361,6 @@ const saveAll = () => {
                           class="rounded-md border border-solid w-full p-2 outline-none transition-colors"
                           placeholder="••••••••••••••••"
                           v-model="appPassword"
-                          @input="handleAppPassword"
                           maxlength="16"
                           minlength="16"
                           :class="
@@ -405,7 +403,12 @@ const saveAll = () => {
                       </span>
                     </div>
                     <div class="buttons ml-auto flex gap-2">
-                      <BaseButton type="primary" @click="saveAll()">
+                      <BaseButton
+                        type="primary"
+                        @click="saveAll()"
+                        :loading="loading"
+                        :disabled="!userCanSave"
+                      >
                         {{ $t("settings.profile.save") }}
                       </BaseButton>
                     </div>

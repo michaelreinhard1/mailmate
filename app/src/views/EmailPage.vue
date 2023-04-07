@@ -60,9 +60,9 @@ export default {
   },
   computed: {
     title() {
-      return this.$t(
-        "nav." + this.$router.currentRoute.value.name.toLowerCase()
-      );
+      // Get the parent route name and convert it to lowercase
+
+      return this.$t("nav." + this.box.toLowerCase());
     },
     box() {
       return this.$route.meta.box;
@@ -86,7 +86,6 @@ export default {
       console.log("getting emails");
       this.currentPage = 1;
       this.loading = true;
-      console.log(this.currentPage, this.box);
       await this.emailStore.getEmails({
         page: this.currentPage,
         box: this.box,

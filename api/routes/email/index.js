@@ -12,65 +12,75 @@ const emailValidator = require("deep-email-validator");
 const crypto = require("crypto");
 
 const saveAppPassword = async (req, res) => {
-  const { password } = req.body;
+  try {
+    const { password } = req.body;
+    const { email } = req.user;
 
-  const { email } = req.user;
+    const base64PublicKey = process.env.RSA_PUBLIC_KEY;
+    const publicKey = Buffer.from(base64PublicKey, "base64");
+    const encryptedData = crypto.publicEncrypt(
+      {
+        key: publicKey,
+        padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+        oaepHash: "sha256",
+      },
+      Buffer.from(password)
+    );
 
-  const base64PublicKey = process.env.RSA_PUBLIC_KEY;
+    const imap = new Imap({
+      user: email,
+      password: password,
+      host: "imap.gmail.com",
+      port: 993,
+      tls: true,
+      tlsOptions: { rejectUnauthorized: false },
+    });
 
-  const publicKey = Buffer.from(base64PublicKey, "base64");
+    imap.once("error", (err) => {
+      console.log("Error connecting to IMAP server");
+      return res.status(500).send("Error connecting to IMAP server");
+    });
 
-  const encryptedData = crypto.publicEncrypt(
-    {
-      key: publicKey,
-      padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-      oaepHash: "sha256",
-    },
-    Buffer.from(password)
-  );
+    imap.once("ready", async () => {
+      try {
+        await User.findOneAndUpdate(
+          { email },
+          { appPassword: encryptedData.toString("base64") }
+        );
+        return res.status(200).json({ message: "App password saved" });
+      } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Error saving app password" });
+      }
+    });
 
-  const user = await User.findOne({ email });
+    imap.once("end", () => {
+      console.log("Connection ended");
+    });
 
-  user.appPassword = encryptedData.toString("base64");
-
-  await user.save();
-
-  // Check if the password is correct
-  const imap = new Imap({
-    user: email,
-    password: password,
-    host: "imap.gmail.com",
-    port: 993,
-    tls: true,
-    tlsOptions: { rejectUnauthorized: false },
-  });
-
-  imap.once("error", (err) => {
-    console.log("Error connecting to IMAP server");
-    res.status(500).send("Error connecting to IMAP server");
-  });
-
-  imap.once("ready", async () => {
-    res.status(200).json({ message: "App password saved" });
-  });
-
-  imap.once("end", () => {
-    console.log("Connection ended");
-  });
-
-  imap.connect();
+    imap.connect();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error saving app password" });
+  }
 };
 
 const saveFullName = async (req, res, next) => {
   const { name } = req.body;
 
-  const { email } = req.user;
+  const { googleId } = req.user;
 
-  const user = await User.findOne({ email });
-
-  user.name = name;
-
-  await user.save();
+  try {
+    await User.findOneAndUpdate(
+      { googleId },
+      {
+        name,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error saving full name" });
+  }
 
   res.status(200).json({ message: "Full name saved" });
 };
