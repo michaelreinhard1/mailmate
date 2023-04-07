@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { IconDownload, IconX } from "@tabler/icons-vue";
+import BaseButton from "@/components/BaseButton.vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -75,7 +76,7 @@ const props = defineProps({
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="transform rounded-2xl text-left align-middle shadow-xl transition-all flex flex-col"
+              class="transform rounded-2xl text-left align-middle transition-all flex flex-col"
               :class="{
                 'w-full h-full': file.type.includes('pdf'),
               }"
@@ -99,12 +100,10 @@ const props = defineProps({
               />
               <div class="flex justify-center py-5">
                 <a :download="file.name" :href="file.url">
-                  <button
-                    class="flex items-center justify-center gap-2 px-5 text-dark-900 dark:text-primary-900 hover:cursor-pointer bg-primary-100 dark:bg-dark-500 p-3 rounded-2xl min-w-max hover:bg-primary-200 dark:hover:bg-dark-400 transition-all"
-                  >
+                  <BaseButton>
                     <IconDownload class="w-5 h-5" />
                     {{ $t("email.download") }}
-                  </button>
+                  </BaseButton>
                 </a>
               </div>
             </DialogPanel>

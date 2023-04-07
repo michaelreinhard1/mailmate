@@ -8,7 +8,7 @@ import { storeToRefs } from "pinia";
 import BaseLayout from "@/layouts/BaseLayout.vue";
 import { useHead } from "@vueuse/head";
 import { useDebounceFn } from "@vueuse/core";
-import { ref } from "vue";
+import { useScroll } from "@vueuse/core";
 
 import {
   IconChevronRight,
@@ -60,8 +60,6 @@ export default {
   },
   computed: {
     title() {
-      // Get the parent route name and convert it to lowercase
-
       return this.$t("nav." + this.box.toLowerCase());
     },
     box() {
@@ -102,7 +100,7 @@ export default {
     },
     setHeader() {
       let headTitle;
-      if (this.unreadEmails > 0) {
+      if (this.unreadEmails > 0 && this.box === "INBOX") {
         headTitle = `${this.title} (${this.unreadEmails}) - ${this.loginStore.profile.email}`;
       } else {
         headTitle = `${this.title} - ${this.loginStore.profile.email}`;

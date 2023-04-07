@@ -64,6 +64,9 @@ export default {
 
       return this.currentPage <= latestPageNumber ? latestPageNumber : 0;
     },
+    onInboxPage() {
+      return this.title === "Inbox";
+    },
   },
   emits: ["setCurrentPage"],
   methods: {
@@ -134,6 +137,9 @@ export default {
       }
       return email;
     },
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
   },
 };
 </script>
@@ -154,8 +160,9 @@ export default {
         >
           <div class="flex gap-2">
             <span> {{ totalEmails }} {{ $t("inbox.emails") }} </span>
-            <span v-if="unreadEmails > 0" class="opacity-80">•</span
-            ><span v-if="unreadEmails > 0">
+            <span v-if="unreadEmails > 0 && onInboxPage" class="opacity-80"
+              >•</span
+            ><span v-if="unreadEmails > 0 && onInboxPage">
               {{ unreadEmails }} {{ $t("inbox.unread") }}
             </span>
           </div>
