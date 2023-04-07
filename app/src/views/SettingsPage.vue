@@ -1,8 +1,18 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
-import { TransitionRoot, TransitionChild } from "@headlessui/vue";
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  RadioGroup,
+  RadioGroupLabel,
+  RadioGroupDescription,
+  RadioGroupOption,
+} from "@headlessui/vue";
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
-import { IconX } from "@tabler/icons-vue";
+import { IconX, IconCheck } from "@tabler/icons-vue";
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
 import { useLoginStore } from "@/stores/LoginStore";
@@ -50,9 +60,6 @@ const isOpen = storeToRefs(componentUtilsStore).clickedSettings;
 function closeModal() {
   componentUtilsStore.clickedSettings = false;
 }
-function openModal() {
-  componentUtilsStore.clickedSettings = true;
-}
 
 const sideBarItems = computed(() => [
   {
@@ -86,10 +93,9 @@ const toggleAItool = (id) => {
 
 const signOut = async () => {
   try {
-    await loginStore.signOut().then(() => {
-      componentUtilsStore.clickedSettings = false;
-      router.push({ name: "Login" });
-    });
+    await loginStore.signOut();
+    componentUtilsStore.clickedSettings = false;
+    router.push({ name: "Login" });
   } catch (error) {
     console.log(error);
   }
@@ -137,6 +143,22 @@ const saveAll = () => {
     }
   }
 };
+const themes = [
+  {
+    name: $t("settings.general.light"),
+    dark: false,
+  },
+  {
+    name: $t("settings.general.dark"),
+    dark: true,
+  },
+];
+
+const selected = ref(themes[isDark.value ? 1 : 0]);
+
+watch(selected, (newTheme) => {
+  preferencesStore.toggleDarkMode(newTheme.dark);
+});
 </script>
 
 <template>
@@ -238,42 +260,42 @@ const saveAll = () => {
                       </div>
                     </div>
                     <div>
-                      <div
-                        class="flex items-center mb-4"
-                        @click="preferencesStore.toggleDarkMode(false)"
-                      >
-                        <input
-                          id="light-mode"
-                          type="radio"
-                          name="theme"
-                          class="w-4 h-4 text-accent-900 bg-gray-100 border-gray-300"
-                          :checked="!isDark"
-                        />
-                        <label
-                          for="light-mode"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-primary-900"
-                        >
-                          {{ $t("settings.general.light") }}
-                        </label>
-                      </div>
-                      <div
-                        class="flex items-center"
-                        @click="preferencesStore.toggleDarkMode(true)"
-                      >
-                        <input
-                          id="dark-mode"
-                          type="radio"
-                          name="theme"
-                          class="w-4 h-4 text-accent-900 bg-gray-100 border-gray-300"
-                          :checked="isDark"
-                        />
-                        <label
-                          for="dark-mode"
-                          class="ml-2 text-sm font-medium text-gray-900 dark:text-primary-900"
-                        >
-                          {{ $t("settings.general.dark") }}
-                        </label>
-                      </div>
+                      <RadioGroup v-model="selected" as="div">
+                        <RadioGroupLabel class="sr-only">
+                          {{ $t("settings.general.theme") }}
+                        </RadioGroupLabel>
+                        <div class="w-fit flex gap-5">
+                          <RadioGroupOption
+                            as="template"
+                            v-for="theme in themes"
+                            :key="theme.name"
+                            :value="theme"
+                            v-slot="{ active, checked }"
+                          >
+                            <div
+                              :class="[
+                                active ? ' ' : '',
+                                checked ? 'border-accent-900' : '',
+                                theme.dark ? 'bg-dark-900' : 'bg-white',
+                              ]"
+                              class="relative p-6 aspect-square rounded-full border-2 cursor-pointer"
+                            >
+                              <div
+                                class="flex w-full items-center justify-between"
+                                v-show="checked"
+                              >
+                                <div
+                                  class="shrink-0 text-white absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/3"
+                                >
+                                  <div class="bg-accent-700 rounded-full p-1">
+                                    <IconCheck class="w-4 h-4" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </RadioGroupOption>
+                        </div>
+                      </RadioGroup>
                     </div>
                     <hr class="my-5 dark:border-dark-200 transition-colors" />
                     <div>

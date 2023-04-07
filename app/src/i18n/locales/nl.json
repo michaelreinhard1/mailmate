@@ -3,8 +3,6 @@
     "loginUsingGoogle": "Inloggen met Google"
   },
   "setup": {
-    "previous": "Vorige",
-    "next": "Volgende",
     "step1": {
       "title": "Google Beveiliging",
       "subSteps": [
@@ -50,7 +48,9 @@
     "cancel": "Annuleren",
     "sendAnyway": "Toch verzenden",
     "enable": "Inschakelen",
-    "disable": "Uitschakelen"
+    "disable": "Uitschakelen",
+    "previous": "Vorige",
+    "next": "Volgende"
   },
   "dialog": {
     "forgotAttachmentHeader": "Oeps, bijlage vergeten toe te voegen?",

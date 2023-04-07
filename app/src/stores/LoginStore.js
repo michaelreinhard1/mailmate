@@ -4,7 +4,6 @@ import { useStorage } from "@vueuse/core";
 import { useToast } from "vue-toastification";
 import i18n from "../i18n";
 import { IconCircleCheck } from "@tabler/icons-vue";
-import { useRouter } from "vue-router";
 import { DisplayError } from "@/core/DisplayError";
 
 const toast = useToast();
@@ -82,8 +81,6 @@ export const useLoginStore = defineStore("LoginStore", {
       this.profile = {};
       this.token = "";
       this.setup = true;
-      const router = useRouter();
-      await router.push({ name: "Login" });
     },
   },
 });

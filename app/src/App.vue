@@ -14,6 +14,9 @@ usePreferencesStore();
   $color-pack: false
 );
 @use "three-dots";
+.disable-transitions * {
+  transition-property: none !important;
+}
 #app {
   @apply bg-primary-900 dark:bg-dark-800;
   min-height: 100vh;

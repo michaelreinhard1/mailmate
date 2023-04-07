@@ -5,37 +5,36 @@
   "setup": {
     "step1": {
       "title": "Google Security",
-      "description": "Google Security",
       "subSteps": [
         {
-          "title": "Make sure you have Two-Factor Authentication enabled"
+          "title": "Make sure you have <strong>2-Step Verification</strong> enabled"
         },
         {
-          "title": "Go to myaccount.google.com to enable Two-Factor Authentication"
+          "link": "<a href=\"https://myaccount.google.com/security\" target=\"_blank\" class=\"text-blue-500 underline\">myaccount.google.com/security</a>",
+          "title": "Go to @:setup.step1.subSteps[1].link to enable two-factor authentication"
         },
         {
-          "title": "Scroll down to App passwords"
+          "title": "Click on <strong>2-Step Verification</strong> and scroll down to <strong>App Passwords</strong>"
         }
       ]
     },
     "step2": {
       "title": "App passwords",
-      "description": "App passwords",
       "subSteps": [
         {
-          "title": "Select Mail from the select app field",
+          "title": "Select <strong>E-mail</strong> from the select app field",
           "description": ""
         },
         {
-          "title": "Select Other (Custom name) from the select device field",
+          "title": "Select <strong>Other (Custom Name)</strong> in the Select Device field",
           "description": ""
         },
         {
-          "title": "Enter <strong>MailMate</strong>",
+          "title": "Enter <strong>MailMate</strong> in the Device Name field",
           "description": ""
         },
         {
-          "title": "Click Generate",
+          "title": "Click <strong>Generate</strong>",
           "description": ""
         }
       ]
@@ -49,7 +48,9 @@
     "cancel": "Cancel",
     "sendAnyway": "Send anyway",
     "enable": "Enable",
-    "disable": "Disable"
+    "disable": "Disable",
+    "previous": "Previous",
+    "next": "Next"
   },
   "dialog": {
     "forgotAttachmentHeader": "Oops, forgot to add attachment?",
@@ -194,7 +195,7 @@
       "connecting": "Connecting",
       "status": "Status",
       "couldNotConnect": "Could not connect",
-      "passwordMinChars": "Wachtwoord moet minstens {number} tekens lang zijn"
+      "passwordMinChars": "Password must be at least {number} characters long"
     },
     "AItools": {
       "title": "AI Tools",

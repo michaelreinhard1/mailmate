@@ -1,6 +1,5 @@
 <script>
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
 import Tr from "@/i18n/translation";
 import Dropdown from "@/components/Dropdown.vue";
 import { usePreferencesStore } from "@/stores/PreferencesStore";
@@ -26,7 +25,14 @@ export default {
   },
   computed: {
     dropdownItems() {
-      return this.supportedLocales.map((sLocale) => {
+      const currentLocale = this.locale;
+      const sortedLocales = [...this.supportedLocales].sort((a, b) => {
+        if (a === currentLocale) return -1;
+        if (b === currentLocale) return 1;
+        return 0;
+      });
+
+      return sortedLocales.map((sLocale) => {
         return {
           name: this.t(`locale.${sLocale}`),
           value: sLocale,
@@ -49,21 +55,6 @@ export default {
 </script>
 
 <template>
-  <!-- <select
-    id="countries"
-    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-    @change="switchLanguage"
-  >
-    <option
-      v-for="sLocale in supportedLocales"
-      :key="`locale-${sLocale}`"
-      :value="sLocale"
-      :selected="locale === sLocale"
-    >
-      {{ t(`locale.${sLocale}`) }}
-    </option>
-  </select> -->
-
   <Dropdown :items="dropdownItems" @executeAction="handleExecuteAction">
     {{ t(`locale.${locale}`) }}
   </Dropdown>

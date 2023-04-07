@@ -40,18 +40,16 @@ const Trans = {
   },
 
   getUserLocale() {
-    const { locale } = useNavigatorLanguage();
+    const { language } = useNavigatorLanguage();
 
     return {
-      locale: locale,
-      localeNoRegion: locale.split("-")[0],
+      locale: language.value,
+      localeNoRegion: language.value.split("-")[0],
     };
   },
 
   getPersistedLocale() {
     const persistedLocale = localStorage.getItem("locale");
-
-    console.log(persistedLocale);
 
     if (Trans.isLocaleSupported(persistedLocale)) {
       return persistedLocale;
@@ -79,26 +77,12 @@ const Trans = {
     return Trans.defaultLocale;
   },
 
-  async routeMiddleware(to, _from, next) {
-    const paramLocale = to.params.locale;
-
-    if (!Trans.isLocaleSupported(paramLocale)) {
-      return next(Trans.guessDefaultLocale());
+  async setLocale(locale) {
+    if (!Trans.isLocaleSupported(locale)) {
+      return Trans.guessDefaultLocale();
     }
 
-    await Trans.switchLanguage(paramLocale);
-
-    return next();
-  },
-
-  i18nRoute(to) {
-    return {
-      ...to,
-      params: {
-        locale: Trans.currentLocale,
-        ...to.params,
-      },
-    };
+    await Trans.switchLanguage(locale);
   },
 };
 

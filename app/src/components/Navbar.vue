@@ -275,7 +275,7 @@ export default {
 }
 
 .unread-emails.collapsed {
-  @apply absolute right-2 top-2 transform translate-x-1/2 -translate-y-1/2   bg-primary-700 dark:bg-accent-700 dark:text-primary-900 overflow-hidden px-2  flex items-center justify-center;
+  @apply absolute right-2 top-2 transform translate-x-1/2 -translate-y-1/2  bg-accent-900 dark:text-primary-900 overflow-hidden px-2  flex items-center justify-center;
 }
 
 .active-link .unread-emails {

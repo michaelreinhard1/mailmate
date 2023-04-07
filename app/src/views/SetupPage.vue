@@ -107,14 +107,14 @@ export default {
 
 <template>
   <div
-    class="mx-auto grid place-items-center h-screen dark:bg-dark-900 bg-primary-800"
+    class="mx-auto md:grid md:place-items-center h-screen dark:bg-dark-900 bg-primary-800 flex justify-center items-center"
   >
     <div
-      class="bg-primary-900 dark:bg-dark-800 shadow-lg flex rounded-xl h-[500px] dark:text-white min-w-fit w-[1000px]"
+      class="bg-primary-900 dark:bg-dark-800 shadow-lg flex rounded-xl h-[500px] dark:text-white min-w-fit w-[1000px] m-4"
     >
       <!-- Step indicator with dots and line -->
       <div
-        class="flex flex-col justify-between items-center dark:bg-dark-700 w-fit rounded-l-xl dark:border-dark-600 border-r"
+        class="hidden md:flex flex-col justify-between items-center dark:bg-dark-700 w-fit rounded-l-xl dark:border-dark-600 border-r"
       >
         <div class="flex flex-col justify-between h-full p-4">
           <div>
@@ -141,7 +141,7 @@ export default {
               </div>
               <!-- Dotted line to conncect the steps -->
               <div
-                class="transition-all text-sm"
+                class="transition-all text-sm min-w-max"
                 :class="
                   ({ 'text-blue-500': index + 1 === currentStep },
                   { 'text-primary-900-500': index < currentStep })
@@ -167,7 +167,9 @@ export default {
         </BaseButton> -->
       </div>
 
-      <div class="py-4 px-8 flex flex-col justify-between w-3/4">
+      <div
+        class="md:py-4 md:px-8 flex flex-col justify-between md:w-3/4 m-5 w-full"
+      >
         <div>
           <div v-if="currentStep === 1">
             <h2>
@@ -243,7 +245,7 @@ export default {
             class="bg-transparent py-2 rounded-lg text-sm text-gray-600 dark:text-primary-600"
             type="button"
           >
-            {{ $t("setup.previous") }}
+            {{ $t("common.previous") }}
           </button>
           <BaseButton
             v-if="currentStep !== steps.length"
@@ -251,7 +253,7 @@ export default {
             class="ml-auto"
             :disabled="loading"
           >
-            {{ $t("setup.next") }}
+            {{ $t("common.next") }}
           </BaseButton>
           <BaseButton
             v-else

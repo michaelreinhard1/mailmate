@@ -74,7 +74,7 @@ export const useEmailStore = defineStore("EmailStore", {
       }
     },
     async getEmails({ page, box }) {
-      if (box) this.box = box;
+      this.box = box;
       this.status = "connecting";
       try {
         const response = await api.post(`/email/get`, {
