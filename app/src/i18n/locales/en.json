@@ -11,7 +11,7 @@
         },
         {
           "link": "<a href=\"https://myaccount.google.com/security\" target=\"_blank\" class=\"text-blue-500 underline\">myaccount.google.com/security</a>",
-          "title": "Go to @:setup.step1.subSteps[1].link to enable two-factor authentication"
+          "title": "Go to <a href=\"https://myaccount.google.com/security\" target=\"_blank\" class=\"text-blue-500 underline\">myaccount.google.com/security</a> to enable two-factor authentication"
         },
         {
           "title": "Click on <strong>2-Step Verification</strong> and scroll down to <strong>App Passwords</strong>"
