@@ -130,7 +130,7 @@ export default {
             >
               <!-- Set class bg-blue-500 if index+1 is equal to currentStep and all of the below -->
               <div
-                class="w-6 h-6 border-2 border-gray-500 rounded-full m-4 ml-0 transition-all flex items-center justify-center z-10 p-3 text-sm"
+                class="w-6 h-6 border-2 rounded-full m-4 ml-0 transition-all flex items-center justify-center z-10 p-3 text-sm"
                 :class="{
                   'border-accent-900': index + 1 === currentStep,
                   'border-gray-500': index + 1 !== currentStep,
