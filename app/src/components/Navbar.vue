@@ -122,19 +122,19 @@ export default {
     "
   >
     <div class="top">
-      <BaseButton
-        class="my-4 flex relative rounded-md px-3 py-2 w-full max-h-10"
+      <button
+        class="menu-item rounded-md px-3 py-2 max-h-10 bg-accent-900 text-white hover:bg-accent-900/90 disabled:bg-accent-900 disabled:hover:bg-accent-900 my-4"
+        :class="collapsed ? '' : 'open'"
+        v-ripple="{ center: true }"
         @click="compose"
       >
-        <div class="flex items-center font-bold gap-3 min-w-max">
-          <IconPlus stroke-width="2.0" />
-          <Transition key="compose" name="fade">
-            <span v-if="!collapsed">
-              {{ $t("nav.compose") }}
-            </span>
-          </Transition>
-        </div>
-      </BaseButton>
+        <IconPlus stroke-width="2.0" class="outline-none menu-icon" />
+        <Transition key="compose" name="fade">
+          <span v-if="!collapsed" class="font-bold min-w-max ml-3">
+            {{ $t("nav.compose") }}
+          </span>
+        </Transition>
+      </button>
       <v-tooltip
         v-for="item in nav"
         :text="item.name"
@@ -193,6 +193,7 @@ export default {
       >
         <template v-slot:activator="{ props }">
           <button
+            id="collapse-button"
             class="menu-item rounded-md px-3 py-2 mt-2 max-h-10"
             :class="collapsed ? '' : 'open'"
             @click="toggleSideBar"
@@ -249,7 +250,8 @@ export default {
   width: 100%;
   @apply transition-transform transition-colors;
 }
-.menu-item:hover {
+a.menu-item:hover,
+button#collapse-button:hover {
   @apply bg-primary-800 dark:bg-dark-500 dark:text-primary-900;
 }
 .active-link.menu-item:hover {

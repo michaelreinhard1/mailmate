@@ -11,7 +11,7 @@
         },
         {
           "link": "<a href=\"https://myaccount.google.com/security\" target=\"_blank\" class=\"text-blue-500 underline\">myaccount.google.com/security</a>",
-          "title": "Ga naar @:setup.step1.subSteps[1].link om twee-factor authenticatie in te schakelen"
+          "title": "Ga naar <a href=\"https://myaccount.google.com/security\" target=\"_blank\" class=\"text-blue-500 underline\">myaccount.google.com/security</a> om twee-factor authenticatie in te schakelen"
         },
         {
           "title": "Klik op <strong>Verificatie in 2 stappen</strong> en scroll naar beneden naar <strong>App-wachtwoorden</strong>"
@@ -22,7 +22,7 @@
       "title": "App-wachtwoorden",
       "subSteps": [
         {
-          "title": "Selecteer <strong>E-mail</strong> uit het select app veld",
+          "title": "Selecteer <strong>E-mail</strong> uit het veld App selecteren",
           "description": ""
         },
         {

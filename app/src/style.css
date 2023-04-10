@@ -1123,6 +1123,11 @@ video {
   margin-right: auto;
 }
 
+.my-8{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .mr-2{
   margin-right: 0.5rem;
 }
@@ -2605,6 +2610,11 @@ video {
 .disabled\:hover\:bg-primary-700:hover:disabled{
   --tw-bg-opacity: 1;
   background-color: rgb(230 230 230 / var(--tw-bg-opacity));
+}
+
+.disabled\:hover\:bg-accent-900:hover:disabled{
+  --tw-bg-opacity: 1;
+  background-color: rgb(69 86 225 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:divide-dark-400 > :not([hidden]) ~ :not([hidden]){
