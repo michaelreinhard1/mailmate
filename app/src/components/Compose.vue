@@ -163,7 +163,6 @@ export default {
       }
     },
     async sendAndClear() {
-      this.$emit("close");
       if (this.type == "new") {
         if (this.to.length === 0) return;
       } else {
@@ -179,7 +178,6 @@ export default {
             const attachmentNeeded = await this.checkAttachment();
             if (attachmentNeeded) {
               this.showForgotAttachmentDialog = true;
-              // Stop the email from being sent
               return;
             }
           }
@@ -198,6 +196,7 @@ export default {
       this.body = "";
       this.attachments = [];
       this.userHasBeenWarned = false;
+      this.$emit("close");
     },
     async checkAttachment() {
       console.log("Checking if attachment is needed...");
