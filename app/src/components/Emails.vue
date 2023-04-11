@@ -34,6 +34,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    box: {
+      type: String,
+      default: "INBOX",
+    },
   },
   components: {
     EmailCard,
@@ -65,7 +69,7 @@ export default {
       return this.currentPage <= latestPageNumber ? latestPageNumber : 0;
     },
     onInboxPage() {
-      return this.title === "Inbox";
+      return this.box === "INBOX";
     },
   },
   emits: ["setCurrentPage"],

@@ -124,6 +124,7 @@ export default {
           :unreadEmails="unreadEmails"
           :totalEmails="totalEmails"
           :loading="loading"
+          :box="box"
           @setCurrentPage="setCurrentPage"
         />
         <router-view v-slot="{ Component }">
