@@ -3,12 +3,8 @@ import { ref, watch, onMounted } from "vue";
 import {
   TransitionRoot,
   TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
   RadioGroup,
   RadioGroupLabel,
-  RadioGroupDescription,
   RadioGroupOption,
 } from "@headlessui/vue";
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
@@ -165,6 +161,7 @@ watch(selected, (newTheme) => {
   <button
     type="button"
     @click="componentUtilsStore.toggleSettings(0)"
+    id="settings-button"
     class="menu-item px-3 py-2 mt-2 max-h-10 rounded-md"
     :class="collapsed ? '' : 'open'"
   >

@@ -251,7 +251,8 @@ export default {
   @apply transition-transform transition-colors;
 }
 a.menu-item:hover,
-button#collapse-button:hover {
+button#collapse-button:hover,
+button#settings-button:hover {
   @apply bg-primary-800 dark:bg-dark-500 dark:text-primary-900;
 }
 .active-link.menu-item:hover {

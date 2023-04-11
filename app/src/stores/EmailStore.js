@@ -82,7 +82,6 @@ export const useEmailStore = defineStore("EmailStore", {
           box: this.box,
         });
         this.status = "connected";
-        this.emails = response.data.emails;
         this.totalEmails = response.data.totalEmails;
         if (box === "INBOX") {
           this.unreadEmails = response.data.unreadEmails;
