@@ -1799,9 +1799,9 @@ video {
   background-color: transparent;
 }
 
-.bg-\[\#6a73bc\]{
+.bg-\[\#5260d4\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(106 115 188 / var(--tw-bg-opacity));
+  background-color: rgb(82 96 212 / var(--tw-bg-opacity));
 }
 
 .bg-dark-900{
@@ -1817,11 +1817,6 @@ video {
 .bg-blue-500{
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#5260d4\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(82 96 212 / var(--tw-bg-opacity));
 }
 
 .object-contain{

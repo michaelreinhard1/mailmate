@@ -225,13 +225,21 @@ const getEmails = async (req, res) => {
           return res
             .status(200)
             .json({ emails: [], totalEmails: 0, unreadEmails: 0 });
+
+        let fetchQuery;
         const emailsPerPage = 50;
         totalEmails = box?.messages?.total;
-        const start = totalEmails - (page - 1) * emailsPerPage;
-        const end = start - emailsPerPage;
+        if (totalEmails > emailsPerPage) {
+          const start = totalEmails - (page - 1) * emailsPerPage;
+          const end = start - emailsPerPage;
+          fetchQuery = `${start}:${end}`;
+        } else {
+          fetchQuery = "1:*";
+        }
+        console.log("fetchQuery", fetchQuery);
         if (err)
           return res.status(500).json({ message: "Something went wrong" });
-        const f = imap.seq.fetch(`${start}:${end}`, {
+        const f = imap.seq.fetch(fetchQuery, {
           bodies: "HEADER.FIELDS (FROM TO SUBJECT DATE)",
           struct: true,
         });
@@ -313,7 +321,9 @@ const getEmails = async (req, res) => {
         emails.sort(function (a, b) {
           return new Date(b.date) - new Date(a.date);
         });
-        emails.forEach((email) => {});
+        emails.forEach((email) => {
+          console.log(email.subject);
+        });
         res.status(200).json({ emails, unreadEmails, totalEmails });
       }
   });

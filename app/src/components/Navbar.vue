@@ -274,11 +274,11 @@ button#settings-button:hover {
 }
 
 .unread-emails {
-  @apply text-primary-900 rounded-lg ml-auto text-sm font-bold p-3 py-1;
+  @apply rounded-lg ml-auto text-sm font-bold p-3 py-1;
 }
 
 .unread-emails.collapsed {
-  @apply absolute right-2 top-2 transform translate-x-1/2 -translate-y-1/2  bg-accent-900 dark:text-primary-900 overflow-hidden px-2  flex items-center justify-center;
+  @apply text-primary-900 absolute right-2 top-2 transform translate-x-1/2 -translate-y-1/2  bg-accent-900 dark:text-primary-900 overflow-hidden px-2  flex items-center justify-center;
 }
 
 .active-link .unread-emails {
