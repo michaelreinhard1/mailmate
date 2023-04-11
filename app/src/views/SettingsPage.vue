@@ -204,7 +204,7 @@ watch(selected, (newTheme) => {
                   {{ $t("nav.settings") }}
                 </span>
                 <IconX
-                  class="w-4 h-4 cursor-pointer hover:text-primary-500 transition-all"
+                  class="w-4 h-4 cursor-pointer dark:hover:text-primary-500 transition-colors hover:text-dark-200"
                   @click="closeModal"
                 />
               </div>

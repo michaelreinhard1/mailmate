@@ -2492,6 +2492,11 @@ video {
   color: rgb(204 204 204 / var(--tw-text-opacity));
 }
 
+.hover\:text-dark-200:hover{
+  --tw-text-opacity: 1;
+  color: rgb(64 64 64 / var(--tw-text-opacity));
+}
+
 .hover\:scrollbar-thumb-gray-500\/20{
   --scrollbar-thumb-hover: rgb(107 114 128 / 0.2) !important;
 }
