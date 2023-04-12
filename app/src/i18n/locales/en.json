@@ -1,4 +1,19 @@
 {
+  "app": {
+    "title": "MailMate - Email made easy",
+    "description": "Email made easy",
+    "keywords": "email, mail, gmail, outlook, yahoo, mailmate, mail mate, email made easy, email made simple, email made better, email made faster, email made smarter, email made more productive, email made more efficient, email made more effective, email made more organized, email made more organized",
+    "author": "MailMate",
+    "url": "https://mailmate.michaelreinhard.be",
+    "version": "1.0.0",
+    "build": "1.0.0",
+    "year": "2023",
+    "og": {
+      "title": "MailMate - Email made easy",
+      "description": "Email made easy",
+      "url": "https://mailmate.michaelreinhard.be"
+    }
+  },
   "auth": {
     "loginUsingGoogle": "Login using Google"
   },
@@ -144,7 +159,7 @@
     "smartWrite": {
       "title": "smartWrite",
       "description": "Write a new email with our simple and intuitive interface.",
-      "placeholder": "eg. An email requesting a meeting with the potential client to discuss the features and benefits of your software.",
+      "placeholder": "eg. An email to [NAME], following up on a job application, expressing your interest in the position, highlighting your qualifications, and asking for an update on the hiring process.",
       "button": "Write email",
       "shortInput": "Please provide more details to improve results.",
       "tonality": {

@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "MailMate",
+    "productName": "mailmate",
     "version": "0.0.0"
   },
   "tauri": {

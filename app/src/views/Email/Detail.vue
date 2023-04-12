@@ -64,7 +64,6 @@ export default {
       this.getOneEmail();
     },
     emailFetched() {
-      console.log("emailFetched changed");
       if (!this.emailFetched) {
         // Get the parent route. This is the route that the user was on before they clicked on an email
         const parentRoute = this.$router.resolve({
@@ -219,35 +218,36 @@ export default {
 
 <template>
   <div
-    class="relative flex flex-col p-10 bg-primary-900 w-full overflow-y-scroll dark:bg-dark-800 dark:text-primary-900"
+    class="relative flex flex-col p-10 bg-primary-900 overflow-y-scroll dark:bg-dark-800 dark:text-primary-900 w-full"
   >
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <LoadingIndicator v-if="loading" />
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      v-if="loading"
+    >
+      <LoadingIndicator />
     </div>
-    <div v-if="!loading && emailFetched">
-      <div>
-        <div class="flex justify-between">
-          <div class="flex flex-col mb-5 gap-2">
-            <div class="font-bold">
-              {{ fromName }}
+    <template v-if="!loading && emailFetched">
+      <div class="flex justify-between">
+        <div class="flex flex-col mb-5 gap-2">
+          <div class="font-bold">
+            {{ fromName }}
+          </div>
+          <div class="flex justify-between gap-2">
+            <div class="text-sm">
+              {{ fromEmail }}
             </div>
-            <div class="flex justify-between gap-2">
-              <div class="text-sm">
-                {{ fromEmail }}
-              </div>
-              <div class="text-sm lowercase" v-if="toEmail !== ''">
-                {{ $t("email.to") }}
-              </div>
-              <div class="text-sm" v-if="toEmail !== ''">
-                {{ toEmail }}
-              </div>
+            <div class="text-sm lowercase" v-if="toEmail !== ''">
+              {{ $t("email.to") }}
+            </div>
+            <div class="text-sm" v-if="toEmail !== ''">
+              {{ toEmail }}
             </div>
           </div>
         </div>
-        <h1 class="text font-bold text-3xl pb-5">
-          {{ email.subject }}
-        </h1>
       </div>
+      <h2 class="text font-bold text-2xl pb-5 break-words w-3/4">
+        {{ email.subject }}
+      </h2>
       <HtmlParser :body="body" />
       <div class="mt-5">
         <Compose v-if="replyModal" @close="replyModal = false" />
@@ -328,6 +328,6 @@ export default {
           </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>

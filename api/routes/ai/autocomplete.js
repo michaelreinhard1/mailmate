@@ -11,11 +11,12 @@ const send = async (req, res, next) => {
 
     const prompt =
       `Autocomplete the following email body based on the content:\n###\n` +
-      `EMAIL BODY: Dear Mom,\n\n` +
-      `On this special day, I want to take a moment to wish you a very happy birthday! You have always been such an incredible mother to me and I am so grateful for all of the love and support that you have given me throughout my life.\n\n` +
-      `I hope that your birthday is full of joy and celebration. I know that you deserve nothing less! I am so proud to be your daughter and I want to thank you for always being there for me.\n\n` +
-      `I hope that you have a wonderful day, surro\n\n` +
-      `AUTOCOMPLETION:\nunded by friends and family who love you.\nWith all my love, \n\n` +
+      `EMAIL BODY: Dear Josh,\n\n` +
+      `I am pleased to share with you our proposal for marketing services that we believe will help your business grow and reach new heights.\n\n` +
+      `As we discussed in our previous meetings, our team has developed a comprehensive strategy that will ensure your brand is seen by the right audience, at the right time, and in the right place. We have outlined our approach, services, and pricing in the attached PDF document.\n\n` +
+      `Please find attached our proposal for marketing services. We believe this docume\n\n` +
+      `AUTOCOMPLETION:\nnt will give you a better understanding of how we can help your business and the value we can provide.\n\nThank you for considering our proposal, and we look forward to working with you.\n\n` +
+      `Best regards,\n\n` +
       `[Your Name]\n###\n` +
       `EMAIL BODY: ${content}\n\n` +
       `AUTOCOMPLETION:\n`;

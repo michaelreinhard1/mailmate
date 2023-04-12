@@ -65,6 +65,7 @@ export const useEmailStore = defineStore("EmailStore", {
         loginStore.setup = false;
       } catch (error) {
         DisplayError($t("settings.profile.couldNotConnect"));
+        loginStore.setup = true;
         this.status = "disconnected";
         console.log("error", error);
         this.emails = [];

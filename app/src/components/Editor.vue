@@ -154,6 +154,7 @@ import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import { storeToRefs } from "pinia";
 import { useToolStore } from "@/stores/ToolStore";
+import { usePreferencesStore } from "@/stores/PreferencesStore";
 import Underline from "@tiptap/extension-underline";
 import CharacterCount from "@tiptap/extension-character-count";
 import { markPasteRule } from "@tiptap/core";
@@ -175,8 +176,10 @@ export default {
   emits: ["update:modelValue", "onTab"],
   setup() {
     const toolStore = useToolStore();
+    const preferencesStore = usePreferencesStore();
     return {
       toolStore,
+      preferencesStore,
     };
   },
   data() {
@@ -184,7 +187,7 @@ export default {
       editor: null,
       autocomplete: storeToRefs(this.toolStore).autocomplete,
       generatedBody: storeToRefs(this.toolStore).generatedBody,
-      showCounters: false,
+      showCounters: storeToRefs(this.preferencesStore).showCounters,
     };
   },
   watch: {
@@ -226,6 +229,14 @@ export default {
   },
   mounted() {
     this.editor = new Editor({
+      editorProps: {
+        transformPastedText(text) {
+          return text.replace(/\xA0/g, " ");
+        },
+        transformPastedHTML(html) {
+          return html.replace(/\xA0/g, " ");
+        },
+      },
       extensions: [
         TextStyle,
         Color,
@@ -249,7 +260,9 @@ export default {
             editor.chain().focus().run();
           },
         }),
-        CharacterCount,
+        CharacterCount.configure({
+          limit: 384000,
+        }),
         Link.configure({
           openOnClick: false,
         }),

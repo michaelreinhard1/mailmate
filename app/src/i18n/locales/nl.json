@@ -1,4 +1,19 @@
 {
+  "app": {
+    "title": "MailMate - E-mail eenvoudig gemaakt",
+    "description": "E-mail eenvoudig gemaakt",
+    "keywords": "email, mail, gmail, outlook, yahoo, mailmate, mail mate, e-mail eenvoudig gemaakt, e-mail simpel gemaakt, e-mail verbeterd, e-mail sneller gemaakt, e-mail slimmer gemaakt, e-mail productiever gemaakt, e-mail efficiënter gemaakt, e-mail effectiever gemaakt, e-mail beter georganiseerd, e-mail meer georganiseerd",
+    "author": "MailMate",
+    "url": "https://mailmate.michaelreinhard.be",
+    "version": "1.0.0",
+    "build": "1.0.0",
+    "year": "2023",
+    "og": {
+      "title": "MailMate - E-mail eenvoudig gemaakt",
+      "description": "E-mail eenvoudig gemaakt",
+      "url": "https://mailmate.michaelreinhard.be"
+    }
+  },
   "auth": {
     "loginUsingGoogle": "Inloggen met Google"
   },
@@ -143,7 +158,7 @@
     "smartWrite": {
       "title": "Slim schrijven",
       "description": "Schrijf een nieuwe e-mail met onze eenvoudige en intuïtieve interface.",
-      "placeholder": "bijv. Een e-mail met het verzoek om een ontmoeting met de potentiële klant om de kenmerken en voordelen van uw software te bespreken.",
+      "placeholder": "bijv. Een e-mail aan [NAAM], naar aanleiding van een sollicitatie, waarin u uw belangstelling voor de functie toont, uw kwalificaties benadrukt en vraagt om een update over de aanwervingsprocedure.",
       "button": "E-mail schrijven",
       "shortInput": "Geef meer details om de resultaten te verbeteren.",
       "tonality": {

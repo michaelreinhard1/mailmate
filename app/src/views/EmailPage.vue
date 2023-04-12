@@ -110,6 +110,11 @@ export default {
       });
     },
   },
+  watch: {
+    title() {
+      this.setHeader();
+    },
+  },
 };
 </script>
 
@@ -126,6 +131,7 @@ export default {
           :loading="loading"
           :box="box"
           @setCurrentPage="setCurrentPage"
+          @refresh="refresh"
         />
         <router-view v-slot="{ Component }">
           <component :is="Component" />

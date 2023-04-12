@@ -72,7 +72,7 @@ export default {
       return this.box === "INBOX";
     },
   },
-  emits: ["setCurrentPage"],
+  emits: ["setCurrentPage", "refresh"],
   methods: {
     formatEmails(emails) {
       return emails.map((email) => {
@@ -115,8 +115,10 @@ export default {
             // If there is no email.subject, show "No subject"
             email.subject === undefined
               ? this.$t("inbox.noSubject")
-              : // Else, show the subject without ""
-                email.subject.toString().replace(/"/g, ""),
+              : // Else, show the first 70 characters of the subject followed by "..."
+              email.subject.toString().length > 70
+              ? email.subject.toString().slice(0, 70) + "..."
+              : email.subject.toString(),
         };
       });
     },
@@ -148,21 +150,35 @@ export default {
 };
 </script>
 <template>
-  <div class="w-full border-r border-gray-200 dark:border-dark-400">
+  <div class="w-full border-r border-gray-200 dark:border-dark-400 relative">
+    <div class="w-full absolute top-0 left-0 z-20">
+      <v-progress-linear
+        indeterminate
+        color="#4556e1"
+        height="2"
+        v-if="loading"
+      />
+    </div>
     <div
       id="inboxHeader"
       class="sticky bg-primary-900 top-0 z-10 border-b border-gray-200 min-h-48 dark:bg-dark-500 dark:text-primary-900 dark:border-dark-400"
       ref="el"
     >
-      <div class="justify-between min-h-max py-10 px-5 w-full">
+      <div class="min-h-max py-10 px-5 w-full">
         <h1 class="text font-black text-3xl dark:text-primary-900">
           {{ title }}
         </h1>
         <div
           v-if="totalEmails !== 0"
-          class="text-md text-gray-500 gap-2 mt-5 lowercase dark:text-gray-300 flex justify-between w-full"
+          class="text-md text-gray-500 gap-2 mt-5 lowercase dark:text-gray-300 flex justify-between w-full flex-wrap"
         >
-          <div class="flex gap-2">
+          <div class="flex gap-2 items-center">
+            <button
+              @click="$emit('refresh')"
+              class="bg-gray-200 dark:bg-dark-400 rounded-full p-1 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-dark-300 disabled:opacity-50 disabled:dark:hover:bg-dark-400/50 disabled:cursor-default transition-colors mr-3"
+            >
+              <IconReload class="w-5 h-5" />
+            </button>
             <span> {{ totalEmails }} {{ $t("inbox.emails") }} </span>
             <span v-if="unreadEmails > 0 && onInboxPage" class="opacity-80"
               >•</span
@@ -201,7 +217,7 @@ export default {
     <div
       v-else
       id="email-list"
-      class="flex flex-col scrollbar-thin scrollbar-thumb-gray-500/0 scrollbar-track-transparant overflow-y-scroll scrollbar-thumb-rounded-xl hover:scrollbar-thumb-gray-500/20"
+      class="flex flex-col scrollbar-thin scrollbar-thumb-gray-500/0 scrollbar-track-transparant overflow-y-scroll scrollbar-thumb-rounded-xl hover:scrollbar-thumb-gray-500/20 w-full"
     >
       <EmailCard
         v-for="email in formattedEmails"

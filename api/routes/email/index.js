@@ -236,7 +236,6 @@ const getEmails = async (req, res) => {
         } else {
           fetchQuery = "1:*";
         }
-        console.log("fetchQuery", fetchQuery);
         if (err)
           return res.status(500).json({ message: "Something went wrong" });
         const f = imap.seq.fetch(fetchQuery, {
@@ -320,9 +319,6 @@ const getEmails = async (req, res) => {
       if (!hasError) {
         emails.sort(function (a, b) {
           return new Date(b.date) - new Date(a.date);
-        });
-        emails.forEach((email) => {
-          console.log(email.subject);
         });
         res.status(200).json({ emails, unreadEmails, totalEmails });
       }
@@ -469,8 +465,6 @@ const send = async (req, res, next) => {
   const user = await User.findOne({ email });
 
   const name = user.name;
-
-  console.log(name, email, password);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",

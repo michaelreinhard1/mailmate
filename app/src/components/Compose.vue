@@ -104,6 +104,15 @@ export default {
   data() {
     return {
       to: [],
+      emailRules: (value) => {
+        if (!value || value.length === 0) {
+          return "Email is required";
+        } else if (!this.isValidEmail(value)) {
+          return "Please enter a valid email address";
+        } else {
+          return true;
+        }
+      },
       subject: storeToRefs(this.toolStore).subject,
       body: storeToRefs(this.toolStore).body,
       AIgenerated: storeToRefs(this.toolStore).AIgenerated,
@@ -150,18 +159,6 @@ export default {
     },
   },
   methods: {
-    async chat() {
-      try {
-        this.loading = true;
-        await this.toolStore.getContacts().then(() => {
-          this.loading = false;
-        });
-        this.loading = false;
-      } catch (error) {
-        this.loading = false;
-        console.log(error);
-      }
-    },
     async sendAndClear() {
       if (this.type == "new") {
         if (this.to.length === 0) return;
@@ -265,6 +262,11 @@ export default {
     openSmartWriteModal() {
       this.showSmartWriteModal = true;
     },
+    isValidEmail(email) {
+      // Use a regular expression to validate the email address.
+      const emailRegex = /\S+@\S+\.\S+/;
+      return emailRegex.test(email);
+    },
   },
 };
 </script>
@@ -322,11 +324,37 @@ export default {
             :placeholder="$t('email.to')"
             class="p-4 sm:text-sm block w-full placeholder-dark-100 dark:placeholder-primary-500 outline-none"
           />
+          <!-- <v-combobox
+            v-model="to"
+            chips
+            clearable
+            closable-chips
+            label="Aan"
+            multiple
+            variant="solo"
+            bg-color="white"
+            theme="dark"
+            update:modelValue="updateTo"
+            :rules="[emailRules]"
+          >
+            <template v-slot:selection="{ attrs, item, select, selected }">
+              <v-chip
+                v-bind="attrs"
+                :model-value="selected"
+                closable
+                @click="select"
+                @click:close="remove(item)"
+              >
+                <strong>{{ item }}</strong>
+              </v-chip>
+            </template>
+          </v-combobox> -->
         </div>
         <div>
           <input
             type="text"
             v-model="subject"
+            maxlength="997"
             :placeholder="$t('email.subject')"
             class="p-4 sm:text-sm block w-full placeholder-dark-100 dark:placeholder-primary-500 outline-none"
           />

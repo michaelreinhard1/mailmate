@@ -15,6 +15,7 @@ export const usePreferencesStore = defineStore("PreferencesStore", () => {
     valueLight: "light",
   });
   const locale = useStorage("locale", language.value.split("-")[0]);
+  const showCounters = useStorage("showCounters", true);
 
   onMounted(async () => {
     await Tr.setLocale(locale.value);
@@ -51,5 +52,6 @@ export const usePreferencesStore = defineStore("PreferencesStore", () => {
     toggleSideBar,
     toggleDarkMode,
     setLocale,
+    showCounters,
   };
 });

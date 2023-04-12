@@ -1,7 +1,35 @@
 <script setup>
 import { usePreferencesStore } from "@/stores/PreferencesStore";
+import { useHead } from "@vueuse/head";
+import { useI18n } from "vue-i18n";
+import { computed } from "vue";
+import { onUpdated } from "vue";
+
+const { t: $t } = useI18n();
 
 usePreferencesStore();
+
+const title = computed(() => $t("app.title"));
+const description = computed(() => $t("app.description"));
+const ogTitle = computed(() => $t("app.og.title"));
+const ogDescription = computed(() => $t("app.og.description"));
+
+const setHeader = () => {
+  useHead({
+    title: title.value,
+    description: description.value,
+    og: {
+      title: ogTitle.value,
+      description: ogDescription.value,
+    },
+  });
+};
+
+setHeader();
+
+onUpdated(() => {
+  setHeader();
+});
 </script>
 
 <template>

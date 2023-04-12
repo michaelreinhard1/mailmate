@@ -38,7 +38,7 @@ export default {
     ref="iframe"
     v-if="html"
     scrolling="no"
-    class="my-5 bg-white w-full overflow-hidden border border-gray-200 dark:border-dark-500 rounded-md"
+    class="my-5 bg-white overflow-hidden border border-gray-200 dark:border-dark-500 rounded-md"
   />
 
   <div id="html-text" v-html="text" v-else />
