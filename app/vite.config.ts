@@ -10,6 +10,7 @@ export default defineConfig({
     vue(),
     VueI18nPlugin({
       include: [`${__dirname}/src/locales/**`],
+      runtimeOnly: false,
     }),
     vuetify({
       styles: { configFile: "src/plugins/settings.scss" },
