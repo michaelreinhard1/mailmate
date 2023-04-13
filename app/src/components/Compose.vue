@@ -379,7 +379,7 @@ export default {
             </ToolButton>
           </div>
           <BaseButton
-            class="w-fit flex items-center gap-2 py-2 px-4"
+            class="w-fit flex items-center gap-2 py-2 px-4 transition-colors"
             @click="openSmartWriteModal"
             v-if="smartWriteEnabled"
           >
