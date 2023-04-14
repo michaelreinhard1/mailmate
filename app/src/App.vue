@@ -1,5 +1,6 @@
 <script setup>
 import { usePreferencesStore } from "@/stores/PreferencesStore";
+import { useToolStore } from "@/stores/ToolStore";
 import { useHead } from "@vueuse/head";
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
@@ -8,6 +9,7 @@ import { onUpdated } from "vue";
 const { t: $t } = useI18n();
 
 usePreferencesStore();
+useToolStore();
 
 const title = computed(() => $t("app.title"));
 const description = computed(() => $t("app.description"));
