@@ -150,23 +150,23 @@
     "alpha": "Alpha",
     "generateSubject": {
       "title": "Generate subject",
-      "description": "Generate a catchy subject line for your email."
+      "description": "Generate a subject line for your email."
     },
     "autocomplete": {
       "title": "Autocomplete",
-      "description": "Streamline your email writing process with our automatic completion feature."
+      "description": "Let the AI complete your email to help you save time."
     },
     "checkGrammar": {
       "title": "Check grammar",
-      "description": "Ensure flawless grammar with our grammar-checking tool."
+      "description": "Ensure flawless spelling and grammar."
     },
     "attachmentDetection": {
       "title": "Attachment detection",
-      "description": "Never forget to attach a file again with our email editor's attachment detection feature."
+      "description": "Never forget to attach a file again."
     },
     "smartWrite": {
-      "title": "smartWrite",
-      "description": "Write a new email with our simple and intuitive interface.",
+      "title": "Smart writing",
+      "description": "Write emails that stand out.",
       "placeholder": "eg. An email to [NAME], following up on a job application, expressing your interest in the position, highlighting your qualifications, and asking for an update on the hiring process.",
       "button": "Write email",
       "shortInput": "Please provide more details to improve results.",

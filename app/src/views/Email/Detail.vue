@@ -179,7 +179,21 @@ export default {
       let html;
       let text;
       if (this.email.html) {
-        const $ = cheerio.load(this.email.html);
+        const $ = cheerio.load(this.email.html, { sanitize: true });
+
+        // remove any script tags
+        $("script").remove();
+
+        // remove email trackers and other tracking pixels
+        $("img").each((i, el) => {
+          const src = $(el).attr("src");
+          if (src.includes("pixel")) {
+            $(el).remove();
+          }
+        });
+
+        const sanitizedHtml = $.html();
+
         const hasScriptTags = $("script").length > 0;
 
         const hasFormTags = $("form").length > 0;

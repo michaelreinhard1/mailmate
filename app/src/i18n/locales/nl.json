@@ -149,23 +149,23 @@
     "alpha": "Alfa",
     "generateSubject": {
       "title": "Onderwerp genereren",
-      "description": "Genereer een pakkend onderwerp voor uw e-mail."
+      "description": "Genereer een onderwerp voor uw e-mail."
     },
     "autocomplete": {
       "title": "Automatisch aanvullen",
-      "description": "Vereenvoudig het schrijven van e-mails met onze automatische aanvulling functie."
+      "description": "Laat de AI uw e-mail voltooien om u te helpen tijd te besparen."
     },
     "checkGrammar": {
       "title": "Grammatica controleren",
-      "description": "Zorg voor foutloze grammatica met onze grammaticacontrole tool."
+      "description": "Zorg voor foutloze spelling en grammatica."
     },
     "attachmentDetection": {
       "title": "Bijlage detectie",
-      "description": "Vergeet nooit meer een bestand bij te voegen met de bijlage-detectiefunctie."
+      "description": "Vergeet nooit meer een bestand bij te voegen."
     },
     "smartWrite": {
       "title": "Slim schrijven",
-      "description": "Schrijf een nieuwe e-mail met onze eenvoudige en intuïtieve interface.",
+      "description": "Schrijf e-mails die eruit springen.",
       "placeholder": "bijv. Een e-mail aan [NAAM], naar aanleiding van een sollicitatie, waarin u uw belangstelling voor de functie toont, uw kwalificaties benadrukt en vraagt om een update over de aanwervingsprocedure.",
       "button": "E-mail schrijven",
       "shortInput": "Geef meer details om de resultaten te verbeteren.",
