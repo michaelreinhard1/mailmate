@@ -67,11 +67,9 @@ export default {
     <div
       :class="{
         'text-transparent': loading,
-        'dark:text-primary-900':
-          input !== '' && input.length >= minimumInputLength,
       }"
     >
-      <slot name="text" />
+      <slot name="text"></slot>
     </div>
     <div v-if="loading" class="absolute inset-x-1/2">
       <LoadingIndicator color="light" />

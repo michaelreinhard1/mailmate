@@ -15,7 +15,6 @@ const send = async (req, res, next) => {
     });
 
     let output = `${response.data.choices[0].message.content}`;
-    req.ai.output = output;
 
     req.ai.output = output;
 

@@ -497,7 +497,7 @@ export default {
             {{ $t("email.dropFilesHere") }}
           </div>
         </Transition>
-        <Editor v-model="body" @onTab="onTab" />
+        <Editor v-model="body" />
       </div>
     </div>
 
