@@ -36,8 +36,6 @@ const send = async (req, res, next) => {
 
     req.ai.output = output;
 
-    console.log(output);
-
     next();
   } catch (err) {
     console.log(err.message);

@@ -100,7 +100,6 @@ export const useEmailStore = defineStore("EmailStore", {
       } catch (error) {
         DisplayError($t("email.errorFetchingEmails"));
         this.status = "disconnected";
-        console.log(error.message);
       }
     },
     async getOneEmail({ uid, box }) {

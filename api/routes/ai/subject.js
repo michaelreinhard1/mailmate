@@ -38,25 +38,16 @@ const send = async (req, res, next) => {
 
    `;
 
-    // const response = await openai.createCompletion({
-    //   model: "text-davinci-003",
-    //   prompt: prompt,
-    //   max_tokens: 50,
-    //   temperature: 0,
-    //   // Remove spaces before output
-    //   stop: ["###", "SUBJECT LINE:", "SUBJECT LINE: "],
-    // });
-
-    // let output = `${response.data.choices[0].text}`;
-
-    // output = output.replace(/^\s+|"+$|\n$/, "");
-
-    const response = await openai.createChatCompletion({
-      model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: prompt,
+      max_tokens: 50,
+      temperature: 0.7,
+      // Remove spaces before output
+      stop: ["###", "SUBJECT LINE:", "SUBJECT LINE: "],
     });
 
-    let output = `${response.data.choices[0].message.content}`;
+    let output = `${response.data.choices[0].text}`;
 
     req.ai.output = output;
 

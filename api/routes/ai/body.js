@@ -16,7 +16,7 @@ const send = async (req, res, next) => {
     - content: ${content}
 
     Output:
-    - email body: a text that matches the given tonality and incorporates the provided content, and is at least 100 words long.
+    - email body: a text that matches the given tonality, incorporates the provided content, is at least 100 words long, and is in the same language as the content provided.
 
     ###
     EMAIL BODY:

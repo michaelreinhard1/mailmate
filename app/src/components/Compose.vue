@@ -131,11 +131,6 @@ export default {
       invalidEmailAddress: "",
     };
   },
-  watch: {
-    to() {
-      console.log(this.to);
-    },
-  },
   mounted() {
     this.dropZoneRef = this.$refs.dropZoneRef;
     const { isOverDropZone } = useDropZone(this.dropZoneRef, this.onDrop);
@@ -191,19 +186,12 @@ export default {
     },
     async sendAndClear() {
       try {
-        // if to is empty
-
         this.updateTo();
 
-        console.log(this.to.length);
-
         if (this.to.length === 0) {
-          // if to is empty
-          console.log("to is empty");
           this.showInvalidEmailsDialog = true;
           return;
         }
-        console.log(this.to);
 
         const invalidEmails = this.to.filter(
           (email) => !this.isValidEmail(email)
@@ -250,15 +238,11 @@ export default {
       }
     },
     async checkAttachment() {
-      console.log("Checking if attachment is needed...");
       const response = await this.toolStore.generate({
         content: this.body,
         type: "attachmentDetection",
       });
       if (response.toUpperCase().includes("YES")) {
-        console.log("Showing dialog", this.showForgotAttachmentDialog);
-        console.log("User has been warned", this.userHasBeenWarned);
-        console.log("Attachment needed");
         return true;
       }
     },
@@ -277,7 +261,6 @@ export default {
         file.forEach((f) => this.attachments.push({ ...f }));
         return;
       }
-      console.log(file);
       this.attachments.push({ ...file });
     },
     onDrop(files) {
@@ -293,7 +276,6 @@ export default {
               lastModified: file.lastModified,
               content: toBase64(fileBuffer),
             });
-            console.log(this.attachments);
           };
           reader.readAsArrayBuffer(file);
         });

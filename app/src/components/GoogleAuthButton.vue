@@ -24,7 +24,6 @@ export default {
               this.$router.push({ name: "Inbox" });
             });
         } catch (error) {
-          console.log("Something went wrong");
           this.loading = false;
           console.log(error);
         }

@@ -205,12 +205,8 @@ export default {
       this.editor.commands.setContent(value, false);
     },
     autocomplete() {
-      console.log(this.autocomplete);
-
       // use formatText() to format the text
       const formattedAutocomplete = this.formatText(this.autocomplete);
-
-      console.log(formattedAutocomplete);
 
       this.editor.commands.insertContent(formattedAutocomplete);
 
@@ -220,7 +216,6 @@ export default {
       }, 2000);
     },
     generatedBody() {
-      console.log("body changed");
       const paragraphs = this.generatedBody.split(/\n\s*\n/);
       const html = paragraphs.map((p) => `<p>${p.trim()}</p>`).join("");
       this.editor.commands.setContent(html, false);

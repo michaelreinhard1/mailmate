@@ -32,11 +32,6 @@ export default {
       isDark: storeToRefs(this.preferencesStore).isDark,
     };
   },
-  computed: {
-    errorMessage() {
-      console.log(this.$store.state.errorMessage);
-    },
-  },
   methods: {
     async login() {
       await googleAuthCodeLogin()

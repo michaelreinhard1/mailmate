@@ -49,7 +49,6 @@ export const useToolStore = defineStore("ToolStore", {
   }),
   actions: {
     typeWriter(text, type) {
-      console.log("typeWriter");
       return new Promise((resolve) => {
         let i = 0;
         const speed = 20;
@@ -120,13 +119,11 @@ export const useToolStore = defineStore("ToolStore", {
         }
         this.AIgenerated = true;
       } catch (error) {
-        console.log("There was an error");
         if (error.response.data.success === false) {
           DisplayError($t("tool.error"));
           throw error;
         }
         if (error.response.data.safeContent === false) {
-          console.log("unsafe content detected");
           DisplayError($t("tool.tool.unsafeContentDetected"));
           throw error;
         }

@@ -96,7 +96,6 @@ async function generateEmailBody() {
       content: emailBody.value,
       tonality: selected.value.type,
     });
-    console.log("Email generated");
     loading.value = false;
     closeModal();
   } catch (error) {
