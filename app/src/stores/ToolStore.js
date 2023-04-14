@@ -132,18 +132,12 @@ export const useToolStore = defineStore("ToolStore", {
         }
       }
     },
-    async getContacts() {
-      try {
-        const response = await api.get("/contact/get");
-        console.log(response.data);
-        return response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
     toggleAItool(id) {
-      this.AIgenerated = false;
       this.AItools[id].enabled = !this.AItools[id].enabled;
+      // if all tools are disabled, this.AIgenerated = false;
+      if (this.AItools.filter((tool) => tool.enabled === true).length === 0) {
+        this.AIgenerated = false;
+      }
     },
   },
 });

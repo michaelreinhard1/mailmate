@@ -2365,6 +2365,18 @@ video {
   --scrollbar-thumb: rgb(107 114 128 / 0) !important;
 }
 
+.scrollbar-thumb-gray-500{
+  --scrollbar-thumb: #6b7280 !important;
+}
+
+.scrollbar-thumb-gray-500\/50{
+  --scrollbar-thumb: rgb(107 114 128 / 0.5) !important;
+}
+
+.scrollbar-thumb-gray-500\/30{
+  --scrollbar-thumb: rgb(107 114 128 / 0.3) !important;
+}
+
 .scrollbar-thumb-rounded-xl::-webkit-scrollbar-thumb{
   border-radius: 0.75rem;
 }

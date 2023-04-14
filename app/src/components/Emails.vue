@@ -214,11 +214,7 @@ export default {
     >
       <NoResult />
     </div>
-    <div
-      v-else
-      id="email-list"
-      class="flex flex-col scrollbar-thin scrollbar-thumb-gray-500/0 scrollbar-track-transparant overflow-y-scroll scrollbar-thumb-rounded-xl hover:scrollbar-thumb-gray-500/20 w-full"
-    >
+    <div v-else id="email-list" class="flex flex-col custom-scrollbar w-full">
       <EmailCard
         v-for="email in formattedEmails"
         :key="email.uid"

@@ -234,8 +234,9 @@ function closeModal() {
                   required
                   v-model="emailBody"
                   :placeholder="$t('tool.smartWrite.placeholder')"
-                  class="w-full h-96 rounded-md p-4 resize-none bg-gray-100 outline-none bg-transparent transition-colors"
+                  class="w-full h-96 rounded-md p-4 resize-none bg-gray-100 outline-none bg-transparent transition-colors custom-scrollbar"
                   spellcheck="false"
+                  maxlength="1500"
                   :class="{
                     'dark:text-primary-900 text-black': !loading,
                     'dark:text-primary-300': loading,

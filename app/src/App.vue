@@ -52,4 +52,7 @@ onUpdated(() => {
 html {
   overflow: hidden;
 }
+.custom-scrollbar {
+  @apply scrollbar-thin scrollbar-thumb-gray-500/30 overflow-y-scroll scrollbar-thumb-rounded-xl hover:scrollbar-thumb-gray-500/20;
+}
 </style>
