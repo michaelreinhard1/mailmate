@@ -10,8 +10,6 @@ import Toast, { POSITION } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import vuetify from "./plugins/vuetify";
 import FileIconPlugin from "./plugins/FileIcon/FileIconPlugin";
-import { QuillEditor } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 const head = createHead();
 
@@ -41,7 +39,6 @@ app.use(vuetify);
 app.use(Toast, options);
 app.use(i18n);
 app.use(FileIconPlugin);
-app.component("QuillEditor", QuillEditor);
 app.mount("#app");
 
 export default app;
