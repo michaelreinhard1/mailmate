@@ -32,7 +32,7 @@ const props = defineProps({
 
 const emits = defineEmits(["close"], ["primaryButtonAction"]);
 
-function primaryButtonAction() {
+function executePrimaryButtonAction() {
   emits("primaryButtonAction");
 }
 
@@ -46,7 +46,7 @@ function openModal() {
 
 <template>
   <TransitionRoot appear :show="props.isOpen" as="template">
-    <Dialog as="div" class="relative z-50">
+    <Dialog as="div" class="relative z-50" @close="closeModal">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -97,7 +97,7 @@ function openModal() {
                   {{ props.secondaryButtonText }}
                 </BaseButton>
 
-                <BaseButton type="primary" @click="primaryButtonAction">
+                <BaseButton type="primary" @click="executePrimaryButtonAction">
                   {{ props.primaryButtonText }}
                 </BaseButton>
               </div>
