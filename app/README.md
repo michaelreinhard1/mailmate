@@ -1,6 +1,6 @@
 # MailMate: AI-Powered Email Client
 
-[![MailMate](app/public/mailmate_Full_Logo.png)](https://mailmate.michaelreinhard.be/)
+[![MailMate](public/mailmate_Full_Logo.png)](https://mailmate.michaelreinhard.be/)
 
 **Table of Contents**
 
