@@ -2375,10 +2375,22 @@ video {
   background-color: rgb(26 26 26 / var(--tw-bg-opacity));
 }
 
+.before\:bg-white::before{
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .before\:text-dark-800::before{
   content: var(--tw-content);
   --tw-text-opacity: 1;
   color: rgb(26 26 26 / var(--tw-text-opacity));
+}
+
+.before\:text-white::before{
+  content: var(--tw-content);
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .after\:bg-dark-800::after{
@@ -2387,10 +2399,22 @@ video {
   background-color: rgb(26 26 26 / var(--tw-bg-opacity));
 }
 
+.after\:bg-white::after{
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .after\:text-dark-800::after{
   content: var(--tw-content);
   --tw-text-opacity: 1;
   color: rgb(26 26 26 / var(--tw-text-opacity));
+}
+
+.after\:text-white::after{
+  content: var(--tw-content);
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .focus\:outline-none:focus{

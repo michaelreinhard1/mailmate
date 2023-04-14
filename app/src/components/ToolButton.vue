@@ -74,7 +74,7 @@ export default {
       <slot name="text" />
     </div>
     <div v-if="loading" class="absolute inset-x-1/2">
-      <LoadingIndicator />
+      <LoadingIndicator color="light" />
     </div>
   </BaseButton>
 </template>
