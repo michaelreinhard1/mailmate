@@ -473,16 +473,12 @@ const send = async (req, res, next) => {
       pass: password,
     },
   });
-
-  const toEmails = to.split(",");
-  console.log(toEmails);
-  for (let i = 0; i < toEmails.length; i++) {
-    const email = toEmails[i];
-    if (!(await isEmailValid(email))) {
-      console.log("Invalid email");
+  // Check if the to emails are valid
+  to.forEach((email) => {
+    if (!isEmailValid(email)) {
       return res.status(400).json({ message: "Invalid email" });
     }
-  }
+  });
 
   const info = {
     from: `${name} <${email}>`,

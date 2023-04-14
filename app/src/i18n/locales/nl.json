@@ -65,13 +65,18 @@
     "enable": "Inschakelen",
     "disable": "Uitschakelen",
     "previous": "Vorige",
-    "next": "Volgende"
+    "next": "Volgende",
+    "ok": "Ok"
   },
   "dialog": {
     "forgotAttachmentHeader": "Oeps, bijlage vergeten toe te voegen?",
     "forgotAttachmentBody": "Het lijkt erop dat je vergeten bent een bestand bij je e-mail te voegen. Weet je zeker dat je het zonder bijlage wilt versturen?",
     "forgotSubjectHeader": "Onderwerp vergeten?",
-    "forgotSubjectBody": "Het lijkt erop dat je het onderwerp van je e-mail vergeten bent. Weet je zeker dat je het zonder onderwerp wilt versturen?"
+    "forgotSubjectBody": "Het lijkt erop dat je het onderwerp van je e-mail vergeten bent. Weet je zeker dat je het zonder onderwerp wilt versturen?",
+    "forgotRecipientsHeader": "Fout",
+    "forgotRecipientsBody": "Geef ten minste één ontvanger op.",
+    "invalidEmailAddressesHeader": "Fout",
+    "invalidEmailAddressesBody": "Het adres '{email}' in het veld 'Aan' wordt niet herkend. Controleer of u de adressen correct hebt ingevoerd."
   },
   "nav": {
     "home": "Home",

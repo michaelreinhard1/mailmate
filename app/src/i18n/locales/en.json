@@ -65,13 +65,18 @@
     "enable": "Enable",
     "disable": "Disable",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "ok": "OK"
   },
   "dialog": {
     "forgotAttachmentHeader": "Oops, forgot to add attachment?",
     "forgotAttachmentBody": "It looks like you forgot to attach a file to your email. Are you sure you want to send it without the attachment?",
     "forgotSubjectHeader": "Oops, forgot to add subject?",
-    "forgotSubjectBody": "It looks like you forgot to add a subject to your email. Are you sure you want to send it without a subject?"
+    "forgotSubjectBody": "Are you sure you want to send it without a subject?",
+    "forgotRecipientsHeader": "Error",
+    "forgotRecipientsBody": "Enter at least one recipient.",
+    "invalidEmailAddressesHeader": "Error",
+    "invalidEmailAddressesBody": "The address '{email}' in the 'To' field is not recognized. Please check that you have entered the addresses correctly."
   },
   "nav": {
     "inbox": "Inbox",

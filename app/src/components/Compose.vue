@@ -103,6 +103,7 @@ export default {
   emits: ["close"],
   data() {
     return {
+      emailList: "",
       to: [],
       emailRules: (value) => {
         if (!value || value.length === 0) {
@@ -127,8 +128,13 @@ export default {
       showSmartWriteModal: false,
       invalidEmails: storeToRefs(this.emailStore).invalidEmails,
       showInvalidEmailsDialog: false,
-      showNoSubjectDialog: false,
+      invalidEmailAddress: "",
     };
+  },
+  watch: {
+    to() {
+      console.log(this.to);
+    },
   },
   mounted() {
     this.dropZoneRef = this.$refs.dropZoneRef;
@@ -175,12 +181,41 @@ export default {
     },
   },
   methods: {
+    updateTo() {
+      if (this.emailList.length === 0) {
+        this.to = [];
+        return;
+      }
+      const emails = this.emailList.split(",").map((email) => email.trim());
+      this.to = emails;
+    },
     async sendAndClear() {
       try {
-        if (this.subject.length === 0) {
-          this.showNoSubjectDialog = true;
+        // if to is empty
+
+        this.updateTo();
+
+        console.log(this.to.length);
+
+        if (this.to.length === 0) {
+          // if to is empty
+          console.log("to is empty");
+          this.showInvalidEmailsDialog = true;
           return;
         }
+        console.log(this.to);
+
+        const invalidEmails = this.to.filter(
+          (email) => !this.isValidEmail(email)
+        );
+
+        if (invalidEmails.length > 0) {
+          this.invalidEmails = invalidEmails;
+          this.showInvalidEmailsDialog = true;
+          return;
+        }
+
+        // Check if attachment is needed
         const attachmentDetectionPreference = this.tools.find(
           (tool) => tool.name === "attachmentDetection"
         );
@@ -226,6 +261,12 @@ export default {
         console.log("Attachment needed");
         return true;
       }
+    },
+    checkValidRecipient(email) {
+      if (this.isValidEmail(email)) {
+        return true;
+      }
+      return false;
     },
     minimize() {
       this.minimized = !this.minimized;
@@ -284,10 +325,14 @@ export default {
     isValidEmail(email) {
       // Use a regular expression to validate the email address.
       const emailRegex = /\S+@\S+\.\S+/;
-      return emailRegex.test(email);
-    },
-    test() {
-      console.log(this.to);
+
+      const isValid = emailRegex.test(email);
+
+      if (!isValid) {
+        this.invalidEmailAddress = email;
+      }
+
+      return isValid;
     },
   },
 };
@@ -322,19 +367,28 @@ export default {
       :secondaryButtonText="$t('common.cancel')"
     />
     <Dialog
-      :isOpen="showNoSubjectDialog"
-      @close="showNoSubjectDialog = false"
-      @primaryButtonAction="test()"
-      :title="$t('dialog.forgotSubjectHeader')"
-      :body="$t('dialog.forgotSubjectBody')"
-      :primaryButtonText="$t('common.sendAnyway')"
-      :secondaryButtonText="$t('common.cancel')"
+      :isOpen="showInvalidEmailsDialog"
+      @close="showInvalidEmailsDialog = false"
+      @primaryButtonAction="showInvalidEmailsDialog = false"
+      :title="
+        to.length === 0
+          ? $t('dialog.forgotRecipientsHeader')
+          : $t('dialog.invalidEmailAddressesHeader')
+      "
+      :body="
+        to.length === 0
+          ? $t('dialog.forgotRecipientsBody')
+          : $t('dialog.invalidEmailAddressesBody', {
+              email: invalidEmailAddress,
+            })
+      "
+      :primaryButtonText="$t('common.ok')"
     />
     <SmartWriteModal
       :isOpen="showSmartWriteModal"
       @close="showSmartWriteModal = false"
     />
-    <form
+    <div
       class="divide-y divide-gray-200 dark:divide-dark-400 h-full flex flex-col overflow-hidden"
     >
       <div class="flex justify-between p-4" v-if="type === 'new'">
@@ -355,8 +409,8 @@ export default {
         <div>
           <input
             type="text"
-            v-model="to"
             :placeholder="$t('email.to')"
+            v-model="emailList"
             class="p-4 sm:text-sm block w-full placeholder-dark-100 dark:placeholder-primary-500 outline-none"
           />
           <!-- <v-combobox
@@ -445,7 +499,7 @@ export default {
         </Transition>
         <Editor v-model="body" @onTab="onTab" />
       </div>
-    </form>
+    </div>
 
     <div ref="el" class="w-full dark:bg-dark-800">
       <div
@@ -511,11 +565,7 @@ export default {
             <UploadFile @file="newFiles"></UploadFile>
           </div>
         </div>
-        <BaseButton
-          @click="sendAndClear()"
-          class="flex items-center gap-3"
-          :disabled="!sendRequirements"
-        >
+        <BaseButton @click="sendAndClear()" class="flex items-center gap-3">
           {{ $t("email.send") }}
         </BaseButton>
       </div>
