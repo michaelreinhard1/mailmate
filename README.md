@@ -6,8 +6,7 @@
 2.  [Local installation](#local-installation)
 3.  [Usage](#usage)
 4.  [Troubleshooting and Support](#troubleshooting-and-support)
-5.  [Contributing](#contributing)
-6.  [Licensing](#licensing)
+5.  [Licensing](#licensing)
 
 ## Introduction
 
