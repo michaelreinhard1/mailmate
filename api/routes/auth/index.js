@@ -131,7 +131,6 @@ const signInWithGoogle = async (req, res) => {
   });
 };
 
-app.post("/signup", signup);
 app.post("/signin", signin);
 // app.post("/signin/google", signInWithGoogle);
 app.post("/signin/google", signInWithGoogle);

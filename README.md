@@ -1,17 +1,71 @@
-# MailMate
+# MailMate: AI-Powered Email Client
 
-MailMate is the ultimate email client for Gmail users. With its powerful AI technology, it makes email management a breeze. Built with Vue 3, vite, and tauri, MailMate is a desktop application that brings the convenience of a desktop app to your email.
+**Table of Contents**
+
+1.  [Introduction](#introduction)
+2.  [Local installation](#local-installation)
+3.  [Usage](#usage)
+4.  [Troubleshooting and Support](#troubleshooting-and-support)
+5.  [Contributing](#contributing)
+6.  [Licensing](#licensing)
+
+## Introduction
+
+MailMate is an AI-powered email client developed as a thesis project for the final year of web development studies. The application is built using Node.js, Vue 3, and Tauri, and is hosted at <https://mailmate.michaelreinhard.be/>. It includes several AI features such as subject generation, autocompletion, smart writing, and grammar checking.
 
 It's easy to use, fast, and efficient, allowing you to focus on what matters most - your inbox. With its compatibility with Google app password and node imap, MailMate ensures that your email is safe and secure. Say goodbye to email overload and hello to MailMate.
 
-## Features
+## Local installation
 
-- **Subject line generator** - suggests subject lines for your email based on the content of your message, making it easier to craft effective and attention-grabbing subject lines.
+To set up and run the MailMate application, follow these steps:
 
-- **Autocomplete** - suggests words and phrases, helping you write faster and with fewer errors.
+1.  Clone the repository:
 
-- **Attachment detection** - alerts you when you forget to attach a file to your email, preventing you from sending an incomplete message.
+<!---->
 
-- **Spell/grammar correction** - checks your spelling and grammar as you type, ensuring that your emails are professional and error-free.
+    git clone https://github.com/michaelreinhard1/mailmate.git
 
+2.  Navigate to the project folder:
+
+<!---->
+
+    cd mailmate/app
+
+3.  Install the required dependencies:
+
+<!---->
+
+    npm install
+
+4.  Create a `.env` file in the root directory
+
+<!---->
+
+    cp .env.example .env
+
+5.  Run the application in development mode:
+
+<!---->
+
+    npm run serve
+
+6.  Open the application in your web browser at <http://localhost:3000>.
+
+## Usage
+
+To use the MailMate application, you must first sign in with your Gmail account. Once logged in, you can access the various AI features:
+
+- **Subject Generation**: Automatically generate email subject lines based on the content of your email.
+- **Auto-Completion**: Suggests words and phrases, helping you write faster and with fewer errors.
+- **Smart Writing**: Composes an entire email for you. By selecting a tone and providing instructions, you can leave the task of writing to smartWrite, which will generate a high-quality email that meets your needs.
+- **Spell/grammar correction** - Checks your spelling and grammar, ensuring that your emails are professional and error-free.
+- **Attachment detection** - Alerts you when you forget to attach a file to your email, preventing you from sending an incomplete message.
 - **smartWrite** - composes an entire email for you. By selecting a tone and providing instructions, you can leave the task of writing to smartWrite, which will generate a high-quality email that meets your needs.
+
+## Troubleshooting and Support
+
+If you encounter any issues or errors while using the MailMate application, please contact me at <michael.reinhard.91@gmail.com>.
+
+## Author
+
+[@michaelreinhard1](https://github.com/michaelreinhard1)
