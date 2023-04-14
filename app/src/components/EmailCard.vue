@@ -127,7 +127,7 @@ export default {
             email.subject
           }}</span>
           <div class="flags flex gap-1">
-            <button
+            <!-- <button
               v-for="flag in flags"
               :key="flag.name"
               @click.prevent="setFlag(flag.name)"
@@ -140,7 +140,22 @@ export default {
               />
               <component :is="flag.icons.inactive" v-else class="w-5 h-5">
               </component>
-            </button>
+            </button> -->
+            <v-tooltip
+              v-for="flag in flags"
+              :text="$t('feature.comingSoon')"
+              location="bottom"
+            >
+              <template v-slot:activator="{ props }">
+                <button
+                  class="flex items-center justify-center"
+                  :key="flag.name"
+                  v-bind="props"
+                >
+                  <component :is="flag.icons.inactive" class="w-5 h-5" />
+                </button>
+              </template>
+            </v-tooltip>
           </div>
         </div>
       </div>

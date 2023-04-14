@@ -1,3 +1,49 @@
+<script setup>
+import BaseButton from "@/components/BaseButton.vue";
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/vue";
+
+const props = defineProps({
+  isOpen: {
+    type: Boolean,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  body: {
+    type: String,
+    required: true,
+  },
+  primaryButtonText: {
+    type: String,
+    required: true,
+  },
+  secondaryButtonText: {
+    type: String,
+  },
+});
+
+const emits = defineEmits(["close"], ["primaryButtonAction"]);
+
+function primaryButtonAction() {
+  emits("primaryButtonAction");
+}
+
+function closeModal() {
+  emits("close");
+}
+function openModal() {
+  isOpen.value = true;
+}
+</script>
+
 <template>
   <TransitionRoot appear :show="props.isOpen" as="template">
     <Dialog as="div" class="relative z-50">
@@ -33,25 +79,26 @@
                 as="h3"
                 class="text-lg font-medium leading-6 text-gray-900 dark:text-white"
               >
-                {{ $t("dialog.forgotAttachmentHeader") }}
+                {{ props.title }}
               </DialogTitle>
               <div class="mt-2">
                 <p class="text-sm text-gray-500 dark:text-gray-300">
-                  {{ $t("dialog.forgotAttachmentBody") }}
+                  {{ props.body }}
                 </p>
               </div>
 
               <div class="mt-4 gap-2 flex justify-end">
                 <BaseButton
+                  v-if="props.secondaryButtonText"
                   type="secondary"
                   @click="closeModal"
                   class="bg-gray-200 dark:bg-dark-500"
                 >
-                  {{ $t("common.cancel") }}
+                  {{ props.secondaryButtonText }}
                 </BaseButton>
 
-                <BaseButton type="primary" @click="sendAnyway">
-                  {{ $t("common.sendAnyway") }}
+                <BaseButton type="primary" @click="primaryButtonAction">
+                  {{ props.primaryButtonText }}
                 </BaseButton>
               </div>
             </DialogPanel>
@@ -61,35 +108,3 @@
     </Dialog>
   </TransitionRoot>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import BaseButton from "@/components/BaseButton.vue";
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/vue";
-
-const props = defineProps({
-  isOpen: {
-    type: Boolean,
-    required: true,
-  },
-});
-
-const emits = defineEmits(["close"], ["sendAnyway"]);
-
-function sendAnyway() {
-  emits("sendAnyway");
-}
-
-function closeModal() {
-  emits("close");
-}
-function openModal() {
-  isOpen.value = true;
-}
-</script>

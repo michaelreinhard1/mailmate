@@ -22,9 +22,11 @@ export const useEmailStore = defineStore("EmailStore", {
     email: {},
     box: "",
     status: "disconnected",
+    invalidEmails: false,
   }),
   actions: {
     async sendEmail({ to, subject, body, attachments, replyTo, inReplyTo }) {
+      this.invalidEmails = false;
       try {
         await api
           .post(`/email/send`, {
@@ -50,7 +52,12 @@ export const useEmailStore = defineStore("EmailStore", {
             }
           });
       } catch (error) {
-        DisplayError($t("tool.error"));
+        if (error.response.status === 400) {
+          DisplayError($t("email.invalidEmailAddresses"));
+          this.invalidEmails = true;
+        } else {
+          DisplayError($t("tool.error"));
+        }
         throw error;
       }
     },

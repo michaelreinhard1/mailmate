@@ -69,7 +69,9 @@
   },
   "dialog": {
     "forgotAttachmentHeader": "Oops, forgot to add attachment?",
-    "forgotAttachmentBody": "It looks like you forgot to attach a file to your email. Are you sure you want to send it without the attachment?"
+    "forgotAttachmentBody": "It looks like you forgot to attach a file to your email. Are you sure you want to send it without the attachment?",
+    "forgotSubjectHeader": "Oops, forgot to add subject?",
+    "forgotSubjectBody": "It looks like you forgot to add a subject to your email. Are you sure you want to send it without a subject?"
   },
   "nav": {
     "inbox": "Inbox",
@@ -118,7 +120,8 @@
     "download": "Download",
     "sentSuccesfully": "Email sent successfully",
     "errorFetchingEmails": "Error fetching emails.",
-    "dropFilesHere": "Drop files here"
+    "dropFilesHere": "Drop files here",
+    "invalidEmailAddresses": "Invalid email addresses"
   },
   "inbox": {
     "title": "Inbox",
@@ -235,5 +238,8 @@
   "locale": {
     "en": "English",
     "nl": "Dutch"
+  },
+  "feature": {
+    "comingSoon": "Coming soon"
   }
 }

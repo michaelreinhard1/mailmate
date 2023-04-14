@@ -253,14 +253,29 @@ export default {
         <Compose v-if="replyModal" @close="replyModal = false" />
       </div>
       <div class="mt-8 flex gap-2">
-        <BaseButton class="w-fit flex gap-2" @click="openReplyModal">
-          <IconArrowBackUp class="w-5 h-5" />
-          {{ $t("email.reply") }}
-        </BaseButton>
-        <BaseButton class="w-fit flex gap-2">
-          <IconArrowForwardUp class="w-5 h-5" />
-          {{ $t("email.forward") }}
-        </BaseButton>
+        <v-tooltip :text="$t('feature.comingSoon')" location="bottom">
+          <template v-slot:activator="{ props }">
+            <button
+              class="w-fit relative flex justify-center gap-2 text-sm rounded-lg px-3 py-2 items-center opacity-50 cursor-default transition-colors text-white hover:bg-accent-900/90 bg-accent-900 hover:bg-accent-900"
+              @click="openReplyModal"
+              v-bind="props"
+            >
+              <IconArrowBackUp class="w-5 h-5" />
+              {{ $t("email.reply") }}
+            </button>
+          </template>
+        </v-tooltip>
+        <v-tooltip :text="$t('feature.comingSoon')" location="bottom">
+          <template v-slot:activator="{ props }">
+            <button
+              class="w-fit relative flex justify-center gap-2 text-sm rounded-lg px-3 py-2 items-center opacity-50 cursor-default transition-colors text-white hover:bg-accent-900/90 bg-accent-900 hover:bg-accent-900"
+              v-bind="props"
+            >
+              <IconArrowForwardUp class="w-5 h-5" />
+              {{ $t("email.forward") }}
+            </button>
+          </template>
+        </v-tooltip>
       </div>
       <div id="attachments" v-if="attachments?.length > 0" class="mt-5">
         <div class="flex justify-between">

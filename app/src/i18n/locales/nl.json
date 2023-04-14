@@ -69,7 +69,9 @@
   },
   "dialog": {
     "forgotAttachmentHeader": "Oeps, bijlage vergeten toe te voegen?",
-    "forgotAttachmentBody": "Het lijkt erop dat je vergeten bent een bestand bij je e-mail te voegen. Weet je zeker dat je het zonder bijlage wilt versturen?"
+    "forgotAttachmentBody": "Het lijkt erop dat je vergeten bent een bestand bij je e-mail te voegen. Weet je zeker dat je het zonder bijlage wilt versturen?",
+    "forgotSubjectHeader": "Onderwerp vergeten?",
+    "forgotSubjectBody": "Het lijkt erop dat je het onderwerp van je e-mail vergeten bent. Weet je zeker dat je het zonder onderwerp wilt versturen?"
   },
   "nav": {
     "home": "Home",
@@ -118,7 +120,8 @@
     "download": "Downloaden",
     "sentSuccesfully": "Email succesvol verzonden",
     "errorFetchingEmails": "Er is een fout opgetreden bij het ophalen van de emails.",
-    "dropFilesHere": "Bestanden hier neerzetten"
+    "dropFilesHere": "Bestanden hier neerzetten",
+    "invalidEmailAddresses": "Ongeldige e-mailadressen"
   },
   "inbox": {
     "title": "Postvak IN",
@@ -236,5 +239,8 @@
   "locale": {
     "en": "Engels",
     "nl": "Nederlands"
+  },
+  "feature": {
+    "comingSoon": "Binnenkort beschikbaar"
   }
 }

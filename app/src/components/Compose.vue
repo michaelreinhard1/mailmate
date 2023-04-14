@@ -125,6 +125,9 @@ export default {
       userHasBeenWarned: false,
       tools: storeToRefs(this.toolStore).AItools,
       showSmartWriteModal: false,
+      invalidEmails: storeToRefs(this.emailStore).invalidEmails,
+      showInvalidEmailsDialog: false,
+      showNoSubjectDialog: false,
     };
   },
   mounted() {
@@ -157,43 +160,59 @@ export default {
       );
       return smartWritePreference.enabled;
     },
+    sendRequirements() {
+      // this.to cant be empty
+      // this.body cant be empty
+      // this.subject can be empty, but if it is, it will be set to "No Subject"
+      // this.attachments can be empty
+      if (this.to.length === 0) {
+        return false;
+      }
+      if (this.body.length === 0) {
+        return false;
+      }
+      return true;
+    },
   },
   methods: {
     async sendAndClear() {
-      if (this.type == "new") {
-        if (this.to.length === 0) return;
-      } else {
-        this.to = this.emailStore.email.from.text;
-      }
-      const attachmentDetectionPreference = this.tools.find(
-        (tool) => tool.name === "attachmentDetection"
-      );
+      try {
+        if (this.subject.length === 0) {
+          this.showNoSubjectDialog = true;
+          return;
+        }
+        const attachmentDetectionPreference = this.tools.find(
+          (tool) => tool.name === "attachmentDetection"
+        );
 
-      if (attachmentDetectionPreference.enabled) {
-        if (this.attachments.length === 0) {
-          if (!this.showForgotAttachmentDialog && !this.userHasBeenWarned) {
-            const attachmentNeeded = await this.checkAttachment();
-            if (attachmentNeeded) {
-              this.showForgotAttachmentDialog = true;
-              return;
+        if (attachmentDetectionPreference.enabled) {
+          if (this.attachments.length === 0) {
+            if (!this.showForgotAttachmentDialog && !this.userHasBeenWarned) {
+              const attachmentNeeded = await this.checkAttachment();
+              if (attachmentNeeded) {
+                this.showForgotAttachmentDialog = true;
+                return;
+              }
             }
           }
         }
-      }
 
-      await this.emailStore.sendEmail({
-        to: this.to,
-        subject: this.subject,
-        body: this.body,
-        attachments: this.attachments,
-        inReplyTo: this.emailStore.email.uid,
-      });
-      this.to = "";
-      this.subject = "";
-      this.body = "";
-      this.attachments = [];
-      this.userHasBeenWarned = false;
-      this.$emit("close");
+        await this.emailStore.sendEmail({
+          to: this.to,
+          subject: this.subject,
+          body: this.body,
+          attachments: this.attachments,
+          inReplyTo: this.emailStore.email.uid,
+        });
+        this.to = [];
+        this.subject = "";
+        this.body = "";
+        this.attachments = [];
+        this.userHasBeenWarned = false;
+        this.$emit("close");
+      } catch (error) {
+        console.log(error);
+      }
     },
     async checkAttachment() {
       console.log("Checking if attachment is needed...");
@@ -267,6 +286,9 @@ export default {
       const emailRegex = /\S+@\S+\.\S+/;
       return emailRegex.test(email);
     },
+    test() {
+      console.log(this.to);
+    },
   },
 };
 </script>
@@ -289,17 +311,30 @@ export default {
     <Dialog
       :isOpen="showForgotAttachmentDialog"
       @close="(userHasBeenWarned = true), (showForgotAttachmentDialog = false)"
-      @sendAnyway="
+      @primaryButtonAction="
         (userHasBeenWarned = true),
           (showForgotAttachmentDialog = false),
           sendAndClear()
       "
+      :title="$t('dialog.forgotAttachmentHeader')"
+      :body="$t('dialog.forgotAttachmentBody')"
+      :primaryButtonText="$t('common.sendAnyway')"
+      :secondaryButtonText="$t('common.cancel')"
+    />
+    <Dialog
+      :isOpen="showNoSubjectDialog"
+      @close="showNoSubjectDialog = false"
+      @primaryButtonAction="test()"
+      :title="$t('dialog.forgotSubjectHeader')"
+      :body="$t('dialog.forgotSubjectBody')"
+      :primaryButtonText="$t('common.sendAnyway')"
+      :secondaryButtonText="$t('common.cancel')"
     />
     <SmartWriteModal
       :isOpen="showSmartWriteModal"
       @close="showSmartWriteModal = false"
     />
-    <div
+    <form
       class="divide-y divide-gray-200 dark:divide-dark-400 h-full flex flex-col overflow-hidden"
     >
       <div class="flex justify-between p-4" v-if="type === 'new'">
@@ -386,16 +421,7 @@ export default {
             <IconPencil class="w-4 h-4" />
             {{ $t("tool.smartWrite.title") }}
           </BaseButton>
-          <!-- <BaseButton
-            class="w-fit flex items-center gap-2 py-2 px-4"
-            @click="chat"
-          >
-            CONTACTS
-          </BaseButton> -->
         </div>
-        <!-- <div class="text-sm dark:text-primary-400 px-6 pb-4">
-          {{ $t("tool.CharMinReqForAI", { number: 30 }) }}
-        </div> -->
       </div>
       <div
         class="bg-primary-800 dark:bg-dark-900 dark:text-primary-500 font-bold py-2 px-4 flex items-center text-sm w-full outline-none"
@@ -419,7 +445,7 @@ export default {
         </Transition>
         <Editor v-model="body" @onTab="onTab" />
       </div>
-    </div>
+    </form>
 
     <div ref="el" class="w-full dark:bg-dark-800">
       <div
@@ -485,7 +511,11 @@ export default {
             <UploadFile @file="newFiles"></UploadFile>
           </div>
         </div>
-        <BaseButton @click="sendAndClear()" class="flex items-center gap-3">
+        <BaseButton
+          @click="sendAndClear()"
+          class="flex items-center gap-3"
+          :disabled="!sendRequirements"
+        >
           {{ $t("email.send") }}
         </BaseButton>
       </div>

@@ -453,7 +453,7 @@ const getOneEmail = async (req, res) => {
 };
 
 async function isEmailValid(email) {
-  return emailValidator.validate(email);
+  return emailValidator.validate(email).valid;
 }
 
 const send = async (req, res, next) => {
@@ -474,6 +474,16 @@ const send = async (req, res, next) => {
     },
   });
 
+  const toEmails = to.split(",");
+  console.log(toEmails);
+  for (let i = 0; i < toEmails.length; i++) {
+    const email = toEmails[i];
+    if (!(await isEmailValid(email))) {
+      console.log("Invalid email");
+      return res.status(400).json({ message: "Invalid email" });
+    }
+  }
+
   const info = {
     from: `${name} <${email}>`,
     to,
@@ -484,7 +494,7 @@ const send = async (req, res, next) => {
     ...(inReplyTo && { inReplyTo }),
   };
 
-  const mail = await transporter.sendMail(info, (err, info) => {
+  await transporter.sendMail(info, (err, info) => {
     if (err) {
       console.log(err);
       res.status(500).json({ message: "Something went wrong" });
@@ -492,10 +502,6 @@ const send = async (req, res, next) => {
       res.status(200).json({ message: "Email sent" });
     }
   });
-
-  console.log("Message sent: %s", mail);
-
-  res.status(200).json({ message: "Email sent" });
 };
 
 const setFlag = async (req, res) => {

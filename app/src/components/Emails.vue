@@ -113,7 +113,10 @@ export default {
             : null,
           subject:
             // If there is no email.subject, show "No subject"
-            email.subject === undefined
+            email.subject === undefined ||
+            email.subject === null ||
+            email.subject === "" ||
+            email.subject[0] === ""
               ? this.$t("inbox.noSubject")
               : // Else, show the first 70 characters of the subject followed by "..."
               email.subject.toString().length > 70
