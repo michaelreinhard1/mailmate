@@ -1,5 +1,6 @@
 {
   "app": {
+    "name": "MailMate",
     "title": "MailMate - Email made easy",
     "description": "Email made easy",
     "keywords": "email, mail, gmail, outlook, yahoo, mailmate, mail mate, email made easy, email made simple, email made better, email made faster, email made smarter, email made more productive, email made more efficient, email made more effective, email made more organized, email made more organized",
@@ -246,5 +247,8 @@
   },
   "feature": {
     "comingSoon": "Coming soon"
+  },
+  "tauri": {
+    "downloadDesktopApp": "Download desktop app"
   }
 }

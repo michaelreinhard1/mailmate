@@ -1,5 +1,6 @@
 {
   "app": {
+    "name": "MailMate",
     "title": "MailMate - E-mail eenvoudig gemaakt",
     "description": "E-mail eenvoudig gemaakt",
     "keywords": "email, mail, gmail, outlook, yahoo, mailmate, mail mate, e-mail eenvoudig gemaakt, e-mail simpel gemaakt, e-mail verbeterd, e-mail sneller gemaakt, e-mail slimmer gemaakt, e-mail productiever gemaakt, e-mail efficiënter gemaakt, e-mail effectiever gemaakt, e-mail beter georganiseerd, e-mail meer georganiseerd",
@@ -247,5 +248,8 @@
   },
   "feature": {
     "comingSoon": "Binnenkort beschikbaar"
+  },
+  "tauri": {
+    "downloadDesktopApp": "Download desktop app"
   }
 }

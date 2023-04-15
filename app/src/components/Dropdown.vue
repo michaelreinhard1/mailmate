@@ -54,7 +54,7 @@ const handleClick = (action) => {
     </transition>
 
     <MenuButton
-      class="rounded-md px-3 py-2 max-h-10 bg-primary-800 font-bold hover:bg-primary-700 transition-all text-left dark:bg-dark-500 dark:hover:bg-dark-500/50"
+      class="rounded-md px-3 py-2 max-h-10 bg-primary-800 font-bold hover:bg-primary-700 transition-all text-left dark:bg-dark-500 dark:hover:bg-dark-500/50 text-sm"
     >
       <slot></slot>
     </MenuButton>

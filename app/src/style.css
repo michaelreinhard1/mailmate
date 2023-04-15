@@ -1231,10 +1231,6 @@ video {
   display: inline-flex;
 }
 
-.table{
-  display: table;
-}
-
 .grid{
   display: grid;
 }
@@ -1391,6 +1387,10 @@ video {
 
 .w-3\/4{
   width: 75%;
+}
+
+.w-2\/5{
+  width: 40%;
 }
 
 .min-w-max{
@@ -2139,11 +2139,6 @@ video {
 
 .underline{
   text-decoration-line: underline;
-}
-
-.antialiased{
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .placeholder-dark-100::-moz-placeholder{

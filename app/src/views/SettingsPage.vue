@@ -8,7 +8,7 @@ import {
   RadioGroupOption,
 } from "@headlessui/vue";
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
-import { IconX, IconCheck } from "@tabler/icons-vue";
+import { IconX, IconCheck, IconDownload } from "@tabler/icons-vue";
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
 import { useLoginStore } from "@/stores/LoginStore";
@@ -52,8 +52,6 @@ const props = defineProps({
 });
 
 const isOpen = storeToRefs(componentUtilsStore).showSettings;
-
-console.log(isOpen.value);
 
 function closeModal() {
   componentUtilsStore.showSettings = false;
@@ -157,6 +155,16 @@ const selected = ref(themes[isDark.value ? 1 : 0]);
 watch(selected, (newTheme) => {
   preferencesStore.toggleDarkMode(newTheme.dark);
 });
+
+const checkTauri = () => {
+  if (window.__TAURI__) {
+    // Running in Tauri
+    return false;
+  } else {
+    // Running in a web browser
+    return true;
+  }
+};
 </script>
 
 <template>
@@ -203,7 +211,7 @@ watch(selected, (newTheme) => {
               <hr class="dark:border-dark-200 transition-colors" />
               <div class="pl-6 pr-6 pb-6 mt-5 flex gap-10 grow">
                 <div
-                  class="text-sm text-dark-900 dark:text-primary-900 w-1/3 flex flex-col justify-between"
+                  class="text-sm text-dark-900 dark:text-primary-900 min-w-max flex flex-col justify-between"
                 >
                   <ul class="mt-0">
                     <li
@@ -229,11 +237,21 @@ watch(selected, (newTheme) => {
                       </a>
                     </li>
                   </ul>
+
                   <div>
+                    <a
+                      class="w-full dark:bg-dark-500 dark:hover:bg-dark-500/50 flex items-center justify-center gap-2 bg-primary-800 hover:bg-primary-800 transition-all font-bold rounded-lg px-3 py-2"
+                      download
+                      href="tauri/mailmate_0.0.1_x64.msi"
+                      v-ripple="{ center: true }"
+                    >
+                      <IconDownload class="w-4 h-4" />
+                      {{ $t("tauri.downloadDesktopApp") }}
+                    </a>
                     <hr class="dark:border-dark-200 transition-colors my-5" />
 
                     <BaseButton
-                      class="w-full dark:bg-dark-500 dark:hover:bg-dark-500/50 flex items-center justify-center gap-2 bg-primary-800 hover:bg-primary-800 transition-all text-red-500 font-bold"
+                      class="w-full dark:bg-dark-500 dark:hover:bg-dark-500/50 flex items-center justify-center gap-2 bg-primary-800 hover:bg-primary-800 transition-all font-bold"
                       @click="signOut"
                     >
                       <IconLogout class="w-4 h-4" />
@@ -298,7 +316,7 @@ watch(selected, (newTheme) => {
                   </div>
                   <form
                     v-if="openTab === 1"
-                    class="flex flex-col justify-between h-full"
+                    class="flex flex-col justify-between h-full text-sm"
                   >
                     <div>
                       <div class="mb-5">
