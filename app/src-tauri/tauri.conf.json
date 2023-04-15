@@ -58,8 +58,7 @@
         "minHeight": 800,
         "resizable": true,
         "title": "Mail Mate",
-        "width": 200,
-        "url": "https://mailmate.michaelreinhard.be"
+        "width": 200
       }
     ],
     "bundle": {
