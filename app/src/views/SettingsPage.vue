@@ -51,10 +51,12 @@ const props = defineProps({
   },
 });
 
-const isOpen = storeToRefs(componentUtilsStore).clickedSettings;
+const isOpen = storeToRefs(componentUtilsStore).showSettings;
+
+console.log(isOpen.value);
 
 function closeModal() {
-  componentUtilsStore.clickedSettings = false;
+  componentUtilsStore.showSettings = false;
 }
 
 const sideBarItems = computed(() => [
@@ -90,7 +92,7 @@ const toggleAItool = (id) => {
 const signOut = async () => {
   try {
     await loginStore.signOut();
-    componentUtilsStore.clickedSettings = false;
+    componentUtilsStore.showSettings = false;
     router.push({ name: "Login" });
   } catch (error) {
     console.log(error);
@@ -158,16 +160,6 @@ watch(selected, (newTheme) => {
 </script>
 
 <template>
-  <button
-    type="button"
-    @click="componentUtilsStore.toggleSettings(0)"
-    id="settings-button"
-    class="menu-item px-3 py-2 mt-2 max-h-10 rounded-md"
-    :class="collapsed ? '' : 'open'"
-  >
-    <slot name="icon" />
-    <slot name="title" />
-  </button>
   <TransitionRoot appear :show="isOpen" as="template">
     <div @close="closeModal" class="relative z-[51]">
       <TransitionChild
@@ -304,7 +296,7 @@ watch(selected, (newTheme) => {
                       <LanguageSwitcher />
                     </div>
                   </div>
-                  <div
+                  <form
                     v-if="openTab === 1"
                     class="flex flex-col justify-between h-full"
                   >
@@ -324,6 +316,7 @@ watch(selected, (newTheme) => {
                           </span>
                         </div>
                       </div>
+
                       <div class="flex justify-between">
                         <label
                           for="full-name"
@@ -431,7 +424,7 @@ watch(selected, (newTheme) => {
                         {{ $t("settings.profile.save") }}
                       </BaseButton>
                     </div>
-                  </div>
+                  </form>
                   <div
                     v-if="openTab === 2"
                     class="flex flex-col justify-between h-full"

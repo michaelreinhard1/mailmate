@@ -2,13 +2,13 @@
   "build": {
     "beforeDevCommand": "yarn dev",
     "beforeBuildCommand": "yarn build",
-    "devPath": "http://localhost:3000",
+    "devPath": "../dist",
     "distDir": "../dist",
     "withGlobalTauri": false
   },
   "package": {
     "productName": "mailmate",
-    "version": "0.0.0"
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -58,7 +58,8 @@
         "minHeight": 800,
         "resizable": true,
         "title": "Mail Mate",
-        "width": 200
+        "width": 200,
+        "url": "https://mailmate.michaelreinhard.be"
       }
     ],
     "bundle": {

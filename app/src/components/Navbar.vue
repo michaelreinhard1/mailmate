@@ -55,6 +55,7 @@ export default {
       unreadEmails: storeToRefs(this.emailStore).unreadEmails,
       isComposeMinimized: storeToRefs(this.componentUtilsStore)
         .isComposeMinimized,
+      showSettings: storeToRefs(this.componentUtilsStore).showSettings,
     };
   },
   emits: ["compose", "close"],
@@ -106,6 +107,9 @@ export default {
     ...mapActions(usePreferencesStore, {
       toggleSideBar: "toggleSideBar",
     }),
+    openSettings() {
+      this.componentUtilsStore.toggleSettings(0);
+    },
   },
 };
 </script>
@@ -210,18 +214,20 @@ export default {
       </v-tooltip>
     </div>
     <div class="bottom mb-5">
-      <SettingsPage :collapsed="collapsed">
-        <template #icon>
-          <IconSettings stroke-width="2.0" class="outline-0 menu-icon" />
-        </template>
-        <template #title>
-          <Transition name="fade">
-            <span class="font-bold min-w-max ml-3" v-if="!collapsed">
-              {{ $t("nav.settings") }}
-            </span>
-          </Transition>
-        </template>
-      </SettingsPage>
+      <button
+        type="button"
+        @click="openSettings"
+        id="settings-button"
+        class="menu-item px-3 py-2 mt-2 max-h-10 rounded-md"
+        :class="collapsed ? '' : 'open'"
+      >
+        <IconSettings stroke-width="2.0" class="outline-0 menu-icon" />
+        <Transition name="fade">
+          <span class="font-bold min-w-max ml-3" v-if="!collapsed">
+            {{ $t("nav.settings") }}
+          </span>
+        </Transition>
+      </button>
     </div>
   </div>
 </template>
