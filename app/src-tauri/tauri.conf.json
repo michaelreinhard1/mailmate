@@ -57,7 +57,7 @@
         "minWidth": 1400,
         "minHeight": 800,
         "resizable": true,
-        "title": "Mail Mate",
+        "title": "MailMate",
         "width": 200,
         "url": "https://mailmate.michaelreinhard.be?tauri=true"
       }

@@ -144,7 +144,7 @@
   },
   "tool": {
     "AIresponseAlert": "AI-antwoorden kunnen onnauwkeurig of misleidend zijn.",
-    "CharMinReqForAI": "Minimaal {number} karakters vereist voor AI tools.",
+    "CharMinReqForAI": "Minimaal {number} karakters vereist voor AI-functies.",
     "unsafeContentDetected": "Onveilige inhoud gedetecteerd. Probeer het opnieuw.",
     "error": "Er is een fout opgetreden. Probeer het opnieuw.",
     "alpha": "Alfa",
@@ -223,7 +223,7 @@
       "passwordMinChars": "Wachtwoord moet minimaal {number} karakters bevatten"
     },
     "AItools": {
-      "title": "AI Tools",
+      "title": "AI-functies",
       "autocomplete": "Autocomplete",
       "checkGrammar": "Check grammar",
       "generateSubject": "Generate subject"
