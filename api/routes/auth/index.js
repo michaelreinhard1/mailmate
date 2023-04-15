@@ -6,10 +6,11 @@ const express = require("express");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 
-const client = new OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, [
-  process.env.REDIRECT_URI_1,
-  process.env.REDIRECT_URI_2,
-]);
+const client = new OAuth2(
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URI
+);
 
 const authJwt = require("./authJwt");
 
