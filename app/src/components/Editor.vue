@@ -234,7 +234,6 @@ export default {
       },
       extensions: [
         TextStyle,
-        Color,
         Highlight.configure({
           types: ["highlight"],
           HTMLAttributes: {

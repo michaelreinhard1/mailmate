@@ -23,7 +23,7 @@ api.interceptors.response.use(
   },
   (error) => {
     console.log(error);
-    if (error.response.status === 401) {
+    if (error) {
       localStorage.clear();
       // window.location.href = "/";
     }
