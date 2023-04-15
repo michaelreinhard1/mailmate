@@ -1304,6 +1304,11 @@ video {
   height: fit-content;
 }
 
+.h-min{
+  height: -moz-min-content;
+  height: min-content;
+}
+
 .max-h-12{
   max-height: 3rem;
 }
@@ -1583,6 +1588,10 @@ video {
 
 .gap-5{
   gap: 1.25rem;
+}
+
+.gap-y-2{
+  row-gap: 0.5rem;
 }
 
 .divide-y > :not([hidden]) ~ :not([hidden]){
@@ -1977,6 +1986,10 @@ video {
 
 .pb-5{
   padding-bottom: 1.25rem;
+}
+
+.pl-4{
+  padding-left: 1rem;
 }
 
 .text-left{

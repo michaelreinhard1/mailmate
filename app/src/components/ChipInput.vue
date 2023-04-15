@@ -21,8 +21,13 @@ export default {
   methods: {
     saveChip() {
       const { chips, currentInput, set } = this;
-      if (currentInput !== "" && set && chips.indexOf(currentInput) === -1) {
-        chips.push(currentInput);
+      if (
+        currentInput !== "" &&
+        set &&
+        chips.indexOf(currentInput) === -1 &&
+        currentInput.indexOf(" ") === -1
+      ) {
+        chips.push(currentInput.toLowerCase());
         this.$emit("update:chips", chips);
       }
       this.currentInput = "";
@@ -61,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .chip-container {
-  @apply w-full flex flex-wrap content-between items-center;
+  @apply w-full flex flex-wrap items-center h-min gap-y-2 py-2;
 }
 
 .chip {
@@ -73,6 +78,6 @@ export default {
 }
 
 .chip-container input {
-  @apply p-4 sm:text-sm placeholder-dark-100 dark:placeholder-primary-500 outline-none grow;
+  @apply pl-4 sm:text-sm placeholder-dark-100 dark:placeholder-primary-500 outline-none grow my-2;
 }
 </style>

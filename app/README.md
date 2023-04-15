@@ -1,6 +1,6 @@
 # MailMate: AI-Powered Email Client
 
-[![MailMate](public/mailmate_Full_Logo.png)](https://mailmate.michaelreinhard.be/)
+[![MailMate](app/public/mailmate_Full_Logo.png)](https://mailmate.michaelreinhard.be/)
 
 **Table of Contents**
 
@@ -61,7 +61,6 @@ To use the MailMate application, you must first sign in with your Gmail account.
 - **Smart Writing**: Composes an entire email for you. By selecting a tone and providing instructions, you can leave the task of writing to smartWrite, which will generate a high-quality email that meets your needs.
 - **Spell/grammar correction** - Checks your spelling and grammar, ensuring that your emails are professional and error-free.
 - **Attachment detection** - Alerts you when you forget to attach a file to your email, preventing you from sending an incomplete message.
-- **smartWrite** - composes an entire email for you. By selecting a tone and providing instructions, you can leave the task of writing to smartWrite, which will generate a high-quality email that meets your needs.
 
 ## Troubleshooting and Support
 
