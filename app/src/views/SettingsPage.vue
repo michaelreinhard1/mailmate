@@ -157,13 +157,10 @@ watch(selected, (newTheme) => {
 });
 
 const checkTauri = () => {
-  console.log(window);
   if (window.__TAURI__) {
-    console.log("Running in Tauri");
     // Running in Tauri
     return false;
   } else {
-    console.log("Running in a web browser");
     // Running in a web browser
     return true;
   }
