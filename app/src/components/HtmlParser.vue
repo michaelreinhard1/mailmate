@@ -6,9 +6,6 @@ export default {
     body: {
       type: Object,
     },
-    attachments: {
-      type: Array,
-    },
   },
   computed: {
     html() {
@@ -45,7 +42,7 @@ export default {
     class="my-5 bg-white overflow-hidden border border-gray-200 dark:border-dark-500 rounded-md"
   />
 
-  <div id="html-text" v-html="text" v-else />
+  <div id="html-text" v-html="html" v-else />
 </template>
 
 <style lang="scss" scoped>

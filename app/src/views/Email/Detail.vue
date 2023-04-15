@@ -64,6 +64,7 @@ export default {
       html: "",
       text: "",
       replyModal: false,
+      style: "",
     };
   },
   created() {
@@ -194,6 +195,12 @@ export default {
         // remove any script tags
         $("script").remove();
 
+        const style = $("style").html();
+
+        this.style = style;
+
+        // remove any images with width or height greater equal to 1
+
         const sanitizedHtml = $.html();
 
         const hasScriptTags = $("script").length > 0;
@@ -232,7 +239,7 @@ export default {
       const emailDate = new Date(this.email.date);
       const today = isToday(emailDate);
       const thisYear = isThisYear(emailDate);
-      const formatString = today ? "p" : thisYear ? "Pp" : "PPpp";
+      const formatString = today ? "p" : thisYear ? "p" : "PPpp";
 
       let DateLocale;
 
@@ -320,7 +327,7 @@ export default {
           </div>
         </div>
         <span
-          class="text-sm bg-primary-800 h-fit rounded-lg py-1 px-3 border border-primary-700"
+          class="text-sm bg-primary-800 h-fit rounded-lg py-1 px-3 border border-primary-700 dark:bg-dark-700 dark:border-dark-600"
         >
           {{ date }}
         </span>
@@ -328,7 +335,7 @@ export default {
       <h2 class="text font-bold text-2xl pb-5 break-words w-3/4">
         {{ email.subject }}
       </h2>
-      <HtmlParser :body="body" />
+      <HtmlParser :body="body" :style="style" />
       <div class="mt-5">
         <Compose v-if="replyModal" @close="replyModal = false" />
       </div>
