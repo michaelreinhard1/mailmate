@@ -6,7 +6,7 @@ import "./style.css";
 import router from "./router";
 import i18n from "./i18n";
 import { createHead } from "@vueuse/head";
-import Toast, { POSITION } from "vue-toastification";
+import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import vuetify from "./plugins/vuetify";
 import FileIconPlugin from "./plugins/FileIcon/FileIconPlugin";

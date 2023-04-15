@@ -34,7 +34,7 @@ import Editor from "@/components/Editor.vue";
 import { useToast } from "vue-toastification";
 import Dialog from "@/components/Dialog.vue";
 import SmartWriteModal from "@/components/SmartWriteModal.vue";
-import Combobox from "@/components/Combobox.vue";
+import ChipInput from "@/components/ChipInput.vue";
 
 export default {
   setup() {
@@ -86,7 +86,7 @@ export default {
     Editor,
     Dialog,
     SmartWriteModal,
-    Combobox,
+    ChipInput,
   },
   props: {
     show: {
@@ -174,18 +174,11 @@ export default {
     },
   },
   methods: {
-    updateTo() {
-      if (this.emailList.length === 0) {
-        this.to = [];
-        return;
-      }
-      const emails = this.emailList.split(",").map((email) => email.trim());
-      this.to = emails;
+    updateTo(chips) {
+      this.to = chips;
     },
     async sendAndClear() {
       try {
-        // this.updateTo();
-
         if (this.to.length === 0) {
           this.showInvalidEmailsDialog = true;
           return;
@@ -388,17 +381,7 @@ export default {
       </div>
       <template v-if="type === 'new'">
         <div>
-          <Combobox
-            v-model="to"
-            chips
-            clearable
-            closable-chips
-            label="Aan"
-            multiple
-            variant="solo"
-            :rules="[emailRules]"
-          >
-          </Combobox>
+          <ChipInput @update:chips="updateTo" />
         </div>
         <div>
           <input
