@@ -38,10 +38,8 @@ onUpdated(() => {
 onMounted(() => {
   const params = useUrlSearchParams("history");
   params.tauri;
-  if (params.tauri === "true") {
+  if (params.tauri === "true" || preferencesStore.tauri) {
     preferencesStore.tauri = true;
-  } else {
-    preferencesStore.tauri = false;
   }
 });
 </script>
