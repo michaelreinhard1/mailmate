@@ -34,14 +34,14 @@
       <button
         @click="editor.chain().focus().toggleBold().run()"
         class=""
-        :class="{ 'dark:bg-dark-500 bg-primary-500 ': editor.isActive('bold') }"
+        :class="{ 'dark:bg-dark-500 bg-primary-800 ': editor.isActive('bold') }"
       >
         <b>B</b>
       </button>
       <button
         @click="editor.chain().focus().toggleUnderline().run()"
         :class="{
-          'dark:bg-dark-500 bg-primary-500 ': editor.isActive('underline'),
+          'dark:bg-dark-500 bg-primary-800 ': editor.isActive('underline'),
         }"
       >
         <u>U</u>
@@ -50,7 +50,7 @@
         @click="editor.chain().focus().toggleItalic().run()"
         class=""
         :class="{
-          'dark:bg-dark-500 bg-primary-500 ': editor.isActive('italic'),
+          'dark:bg-dark-500 bg-primary-800 ': editor.isActive('italic'),
         }"
       >
         <i>I</i>
@@ -59,7 +59,7 @@
         @click="editor.chain().focus().toggleStrike().run()"
         class=""
         :class="{
-          'dark:bg-dark-500 bg-primary-500 ': editor.isActive('strike'),
+          'dark:bg-dark-500 bg-primary-800 ': editor.isActive('strike'),
         }"
       >
         <s>S</s>
@@ -67,7 +67,7 @@
       <!-- <button
         @click="editor.chain().focus().toggleCode().run()"
         class=""
-        :class="{ 'dark:bg-dark-500 bg-primary-500 ': editor.isActive('code') }"
+        :class="{ 'dark:bg-dark-500 bg-primary-800 ': editor.isActive('code') }"
       >
         <code>Code</code>
       </button> -->
@@ -75,7 +75,7 @@
         @click="editor.chain().focus().toggleBulletList().run()"
         class=""
         :class="{
-          'dark:bg-dark-500 bg-primary-500': editor.isActive('bulletList'),
+          'dark:bg-dark-500 bg-primary-800': editor.isActive('bulletList'),
         }"
       >
         <ul>
@@ -85,7 +85,7 @@
       <button
         @click="editor.chain().focus().toggleOrderedList().run()"
         :class="{
-          'dark:bg-dark-500 bg-primary-500 ': editor.isActive('orderedList'),
+          'dark:bg-dark-500 bg-primary-800 ': editor.isActive('orderedList'),
         }"
       >
         <ol>
@@ -117,11 +117,15 @@
         @click="showCounters = !showCounters"
         class="is-active min-w-max flex items-center gap-2"
       >
-        <div v-if="editor && showCounters">
-          {{ editor.storage.characterCount.characters() }} characters
+        <div v-if="editor && showCounters" class="lowercase">
+          {{ editor.storage.characterCount.characters() }}
+          {{
+            $t("editor.characters", editor.storage.characterCount.characters())
+          }}
         </div>
-        <div v-if="editor && showCounters">
-          {{ editor.storage.characterCount.words() }} words
+        <div v-if="editor && showCounters" class="lowercase">
+          {{ editor.storage.characterCount.words() }}
+          {{ $t("editor.words", editor.storage.characterCount.words()) }}
         </div>
         <IconAlphabetLatin class="w-5 h-5" stroke-width="2.5" v-else />
       </button>

@@ -6,15 +6,20 @@ const app = express();
 const send = async (req, res, next) => {
   try {
     const { content } = req.body;
-
-    const prompt = `${content} `;
+    console.log(content);
 
     const response = await openai.createEdit({
       model: "text-davinci-edit-001",
-      instruction: "Fix the spelling mistakes",
-      input: prompt,
+      instruction: `Revise the grammar and spelling in the provided HTML text without altering the existing formatting.`,
+      input: content,
     });
+
     let output = `${response.data.choices[0].text}`;
+
+    output = output.replace(/^[ \t\r\n]+/, "");
+
+    console.log(output);
+
     req.ai.output = output;
     next();
   } catch (err) {

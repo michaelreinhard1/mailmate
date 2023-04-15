@@ -6,6 +6,7 @@ import { VCombobox } from "vuetify/components/VCombobox";
 import { VProgressLinear } from "vuetify/components/VProgressLinear";
 
 const vuetify = createVuetify({
+  ssr: true,
   components: {
     VTooltip,
     VChip,

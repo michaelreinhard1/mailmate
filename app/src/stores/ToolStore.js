@@ -73,7 +73,14 @@ export const useToolStore = defineStore("ToolStore", {
     },
     async generate({ content, type, tonality }) {
       const $ = cheerio.load(content);
-      const text = $("body").text();
+
+      let body = "";
+
+      if (type !== "checkGrammar") {
+        body = $("body").text();
+      } else {
+        body = content;
+      }
       this.autocomplete = "";
       let APIurl = "";
       switch (type) {
@@ -98,13 +105,13 @@ export const useToolStore = defineStore("ToolStore", {
       }
       try {
         const response = await api.post(`/ai/email/${APIurl}`, {
-          content: text,
+          content: body,
           tonality: tonality,
         });
 
         switch (type) {
           case "checkGrammar":
-            this.generatedBody = response.data.output;
+            this.body = response.data.output;
             break;
           case "attachmentDetection":
             return response.data.output;

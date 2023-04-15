@@ -12,7 +12,7 @@ export const useComponentUtilsStore = defineStore({
   actions: {
     toggleSettings(tab) {
       this.showSettings = !this.showSettings;
-      if (tab) this.settingsOpenTab = tab;
+      this.settingsOpenTab = tab;
     },
     toggleCompose() {
       this.showCompose = !this.showCompose;

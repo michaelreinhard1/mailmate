@@ -241,6 +241,10 @@
       "button": "try again"
     }
   },
+  "editor": {
+    "characters": "Character | Characters",
+    "words": "Word | Words"
+  },
   "locale": {
     "en": "English",
     "nl": "Dutch"

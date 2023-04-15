@@ -34,6 +34,7 @@ import Editor from "@/components/Editor.vue";
 import { useToast } from "vue-toastification";
 import Dialog from "@/components/Dialog.vue";
 import SmartWriteModal from "@/components/SmartWriteModal.vue";
+import Combobox from "@/components/Combobox.vue";
 
 export default {
   setup() {
@@ -85,6 +86,7 @@ export default {
     Editor,
     Dialog,
     SmartWriteModal,
+    Combobox,
   },
   props: {
     show: {
@@ -137,10 +139,6 @@ export default {
     this.isOverDropZone = isOverDropZone;
   },
   computed: {
-    plainBody() {
-      const $ = cheerio.load(this.body);
-      return $.text();
-    },
     AItools() {
       const enabledAndVisibleTools = this.tools.filter(
         (tool) => tool.enabled && tool.visible
@@ -149,7 +147,7 @@ export default {
         return {
           name: this.$t(`tool.${tool.name}.title`),
           type: tool.name,
-          input: this.plainBody,
+          input: this.body,
           minimumInputLength: 30,
         };
       });
@@ -186,7 +184,7 @@ export default {
     },
     async sendAndClear() {
       try {
-        this.updateTo();
+        // this.updateTo();
 
         if (this.to.length === 0) {
           this.showInvalidEmailsDialog = true;
@@ -234,6 +232,7 @@ export default {
         this.userHasBeenWarned = false;
         this.$emit("close");
       } catch (error) {
+        // console.log("Error sending email");
         console.log(error);
       }
     },
@@ -389,13 +388,7 @@ export default {
       </div>
       <template v-if="type === 'new'">
         <div>
-          <input
-            type="text"
-            :placeholder="$t('email.to')"
-            v-model="emailList"
-            class="p-4 sm:text-sm block w-full placeholder-dark-100 dark:placeholder-primary-500 outline-none"
-          />
-          <!-- <v-combobox
+          <Combobox
             v-model="to"
             chips
             clearable
@@ -403,23 +396,9 @@ export default {
             label="Aan"
             multiple
             variant="solo"
-            bg-color="white"
-            theme="dark"
-            update:modelValue="updateTo"
             :rules="[emailRules]"
           >
-            <template v-slot:selection="{ attrs, item, select, selected }">
-              <v-chip
-                v-bind="attrs"
-                :model-value="selected"
-                closable
-                @click="select"
-                @click:close="remove(item)"
-              >
-                <strong>{{ item }}</strong>
-              </v-chip>
-            </template>
-          </v-combobox> -->
+          </Combobox>
         </div>
         <div>
           <input
@@ -440,7 +419,7 @@ export default {
             <ToolButton
               v-for="tool in AItools"
               :type="tool.type"
-              :input="plainBody"
+              :input="tool.input"
               :minimumInputLength="tool.minimumInputLength"
             >
               <template #icon>

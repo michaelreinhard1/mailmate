@@ -16,7 +16,13 @@ const send = async (req, res, next) => {
 
     let output = `${response.data.choices[0].message.content}`;
 
-    req.ai.output = output;
+    if (output.toLowerCase().includes("yes")) {
+      req.ai.output = "Yes";
+    } else if (output.toLowerCase().includes("no")) {
+      req.ai.output = "No";
+    } else {
+      req.ai.output = "Invalid answer, please try again.";
+    }
 
     next();
   } catch (err) {
