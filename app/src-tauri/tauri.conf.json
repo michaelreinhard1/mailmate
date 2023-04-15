@@ -59,7 +59,7 @@
         "resizable": true,
         "title": "Mail Mate",
         "width": 200,
-        "url": "https://mailmate.michaelreinhard.be"
+        "url": "https://mailmate.michaelreinhard.be?tauri=true"
       }
     ],
     "bundle": {

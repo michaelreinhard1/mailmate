@@ -10,12 +10,17 @@ const { language } = useNavigatorLanguage();
 export const usePreferencesStore = defineStore("PreferencesStore", () => {
   // initialize state variables
   const sideBarCollapsed = useStorage("sideBarCollapsed", false);
+
   const isDark = useDark({
     valueDark: "dark",
     valueLight: "light",
   });
+
   const locale = useStorage("locale", language.value.split("-")[0]);
+
   const showCounters = useStorage("showCounters", true);
+
+  const tauri = useStorage("tauri", false);
 
   onMounted(async () => {
     await Tr.setLocale(locale.value);
@@ -53,5 +58,6 @@ export const usePreferencesStore = defineStore("PreferencesStore", () => {
     toggleDarkMode,
     setLocale,
     showCounters,
+    tauri,
   };
 });

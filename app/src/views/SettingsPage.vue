@@ -157,12 +157,11 @@ watch(selected, (newTheme) => {
 });
 
 const checkTauri = () => {
-  if (window.__TAURI__) {
-    // Running in Tauri
-    return false;
-  } else {
-    // Running in a web browser
+  const tauri = preferencesStore.tauri;
+  if (tauri) {
     return true;
+  } else {
+    return false;
   }
 };
 </script>
@@ -239,8 +238,8 @@ const checkTauri = () => {
                   </ul>
 
                   <div>
-                    <!-- <a
-                      v-if="checkTauri()"
+                    <a
+                      v-if="!checkTauri()"
                       class="w-full dark:bg-dark-500 dark:hover:bg-dark-500/50 flex items-center justify-center gap-2 bg-primary-800 hover:bg-primary-800 transition-all font-bold rounded-lg px-3 py-2"
                       download
                       href="tauri/mailmate_0.0.1_x64.msi"
@@ -248,7 +247,7 @@ const checkTauri = () => {
                     >
                       <IconDownload class="w-4 h-4" />
                       {{ $t("tauri.downloadDesktopApp") }}
-                    </a> -->
+                    </a>
                     <hr class="dark:border-dark-200 transition-colors my-5" />
 
                     <BaseButton

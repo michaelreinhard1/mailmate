@@ -3,10 +3,12 @@ import { usePreferencesStore } from "@/stores/PreferencesStore";
 import { useToolStore } from "@/stores/ToolStore";
 import { useHead } from "@vueuse/head";
 import { useI18n } from "vue-i18n";
-import { computed } from "vue";
-import { onUpdated } from "vue";
+import { computed, onMounted, onUpdated } from "vue";
+import { useUrlSearchParams } from "@vueuse/core";
 
 const { t: $t } = useI18n();
+
+const preferencesStore = usePreferencesStore();
 
 usePreferencesStore();
 useToolStore();
@@ -31,6 +33,16 @@ setHeader();
 
 onUpdated(() => {
   setHeader();
+});
+
+onMounted(() => {
+  const params = useUrlSearchParams("history");
+  params.tauri;
+  if (params.tauri === "true") {
+    preferencesStore.tauri = true;
+  } else {
+    preferencesStore.tauri = false;
+  }
 });
 </script>
 
