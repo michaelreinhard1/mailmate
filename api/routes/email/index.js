@@ -406,6 +406,7 @@ const getOneEmail = async (req, res) => {
                   subject,
                   textAsHtml,
                   text,
+                  date,
                 } = parsed;
                 message = {
                   attachments,
@@ -416,6 +417,7 @@ const getOneEmail = async (req, res) => {
                   textAsHtml,
                   text,
                   uid,
+                  date,
                 };
               });
             });
