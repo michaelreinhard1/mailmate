@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      loading: storeToRefs(this.emailStore).loading,
       compose: false,
       currentPage: storeToRefs(this.emailStore).currentPage,
       emails: storeToRefs(this.emailStore).emails,

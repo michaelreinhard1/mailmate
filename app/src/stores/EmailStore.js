@@ -23,6 +23,7 @@ export const useEmailStore = defineStore("EmailStore", {
     box: "",
     status: "disconnected",
     invalidEmails: false,
+    loading: false,
   }),
   actions: {
     async sendEmail({ to, subject, body, attachments, replyTo, inReplyTo }) {
@@ -84,6 +85,7 @@ export const useEmailStore = defineStore("EmailStore", {
     async getEmails({ page, box }) {
       this.box = box;
       this.status = "connecting";
+      this.loading = true;
       try {
         const response = await api.post(`/email/get`, {
           page,
@@ -97,12 +99,15 @@ export const useEmailStore = defineStore("EmailStore", {
         }
         this.message = "Emails fetched successfully";
         this.currentPage = page;
+        this.loading = false;
       } catch (error) {
         DisplayError($t("email.errorFetchingEmails"));
         this.status = "disconnected";
+        this.loading = false;
       }
     },
     async getOneEmail({ uid, box }) {
+      this.loading = true;
       try {
         await api
           .post(`/email/get-one`, {
@@ -111,8 +116,10 @@ export const useEmailStore = defineStore("EmailStore", {
           })
           .then((response) => {
             this.email = response.data.message;
+            this.loading = false;
           });
       } catch (error) {
+        this.loading = false;
         this.email = {};
         DisplayError($t("email.errorFetchingEmails"));
       }

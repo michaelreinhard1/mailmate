@@ -56,6 +56,7 @@ export default {
       isComposeMinimized: storeToRefs(this.componentUtilsStore)
         .isComposeMinimized,
       showSettings: storeToRefs(this.componentUtilsStore).showSettings,
+      loading: storeToRefs(this.emailStore).loading,
     };
   },
   emits: ["compose", "close"],
@@ -66,32 +67,37 @@ export default {
           name: this.$t("nav.inbox"),
           icon: IconInbox,
           to: { name: "Inbox" },
+          box: "INBOX",
         },
         {
           name: this.$t("nav.starred"),
           icon: IconStar,
           to: { name: "Starred" },
+          box: "STARRED",
         },
         {
           name: this.$t("nav.sent"),
           icon: IconSend,
           to: { name: "Sent" },
+          box: "SENT",
         },
         {
           name: this.$t("nav.drafts"),
           icon: IconFile,
           to: { name: "Drafts" },
+          box: "DRAFTS",
         },
         {
           name: this.$t("nav.trash"),
           icon: IconTrash,
           to: { name: "Trash" },
+          box: "TRASH",
         },
-        // spam
         {
           name: this.$t("nav.spam"),
           icon: IconAlertOctagon,
           to: { name: "Spam" },
+          box: "SPAM",
         },
       ];
     },
@@ -109,6 +115,12 @@ export default {
     }),
     openSettings() {
       this.componentUtilsStore.toggleSettings(0);
+    },
+    async getEmails(box) {
+      if (this.$route.meta.box !== box) return;
+      this.loading = true;
+      await this.emailStore.getEmails({ page: 1, box });
+      this.loading = false;
     },
   },
 };
@@ -153,7 +165,7 @@ export default {
             :to="item.to"
             :key="item.name"
             v-bind="props"
-            @click="item.onClick"
+            @click="getEmails(item.box)"
           >
             <component
               v-bind="props"
@@ -285,10 +297,6 @@ button#settings-button:hover {
 
 .unread-emails.collapsed {
   @apply text-primary-900 absolute right-2 top-2 transform translate-x-1/2 -translate-y-1/2  bg-accent-900 dark:text-primary-900 overflow-hidden px-2  flex items-center justify-center;
-}
-
-.active-link .unread-emails {
-  @apply text-accent-900 bg-primary-700 dark:bg-accent-900 dark:text-primary-900;
 }
 
 .fade-enter-active,

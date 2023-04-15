@@ -23,10 +23,6 @@ api.interceptors.response.use(
   },
   (error) => {
     console.log(error);
-    if (error) {
-      localStorage.clear();
-      // window.location.href = "/";
-    }
     return Promise.reject(error);
   }
 );
