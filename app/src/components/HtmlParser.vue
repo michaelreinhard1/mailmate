@@ -22,9 +22,6 @@ export default {
     },
   },
   mounted() {
-    console.log(
-      this.$refs.iframe.contentWindow.document.documentElement.scrollHeight
-    );
     if (this.html) {
       this.$refs.iframe.contentDocument.body.innerHTML = this.html;
       this.$refs.iframe.style.height =

@@ -36,6 +36,7 @@
     "b64-lite": "^1.4.0",
     "buffer": "^6.0.3",
     "cheerio": "^1.0.0-rc.12",
+    "date-fns": "^2.29.3",
     "dompurify": "^3.0.0",
     "file-saver": "^2.0.5",
     "googleapis": "^110.0.0",

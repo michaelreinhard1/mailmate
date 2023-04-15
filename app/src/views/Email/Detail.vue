@@ -18,18 +18,28 @@ import Compose from "@/components/Compose.vue";
 import cheerio from "cheerio";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import { usePreferencesStore } from "@/stores/PreferencesStore";
+import { format, isThisYear, isToday, formatDistanceToNow } from "date-fns";
+import { nl } from "date-fns/locale";
+import { useI18n } from "vue-i18n";
 
 export default {
   name: "Email",
   setup() {
     const emailStore = useEmailStore();
+    const preferencesStore = usePreferencesStore();
     const el = ref(null);
     const { width, height } = useElementSize(el);
+    const { t, locale } = useI18n();
+
     return {
       emailStore,
+      preferencesStore,
       el,
       width,
       height,
+      t,
+      locale,
     };
   },
   components: {
@@ -203,10 +213,10 @@ export default {
           hasIframeTags ||
           hasHtmlTags
         ) {
-          html = this.email.html;
+          html = sanitizedHtml;
           text = null;
         } else {
-          text = this.email.html;
+          text = sanitizedHtml;
           html = null;
         }
       } else {
@@ -217,6 +227,65 @@ export default {
     },
     emailFetched() {
       return Object.keys(this.email).length > 0;
+    },
+    date() {
+      const emailDate = new Date(this.email.date);
+      const today = isToday(emailDate);
+      const thisYear = isThisYear(emailDate);
+      const formatString = today ? "p" : thisYear ? "Pp" : "PPpp";
+
+      let DateLocale;
+
+      switch (this.locale) {
+        case "en":
+          DateLocale = en;
+        case "nl":
+          DateLocale = nl;
+      }
+
+      if (today) {
+        try {
+          const formattedTime = format(emailDate, "p", { locale: DateLocale });
+          const timeAgo = formatDistanceToNow(emailDate, {
+            addSuffix: true,
+            locale: DateLocale,
+          });
+          return `${formattedTime} (${timeAgo})`;
+        } catch (error) {
+          console.error(`Error formatting date: ${error}`);
+          return emailDate.toString();
+        }
+      } else {
+        try {
+          const daysAgo = formatDistanceToNow(emailDate, {
+            addSuffix: true,
+            locale: DateLocale,
+            includeSeconds: false,
+          });
+          if (daysAgo.startsWith("in")) {
+            return format(emailDate, "Pp", { locale: DateLocale });
+          } else if (daysAgo === "1 dag geleden" || daysAgo === "1 day ago") {
+            const timeAgo = formatDistanceToNow(emailDate, {
+              addSuffix: true,
+              locale: DateLocale,
+            });
+            return `${format(emailDate, "EEE d MMM", {
+              locale: DateLocale,
+            })} ${format(emailDate, "p", {
+              locale: DateLocale,
+            })} (${timeAgo})`;
+          } else {
+            return `${format(emailDate, "EEE d MMM", {
+              locale: DateLocale,
+            })} ${format(emailDate, formatString, {
+              locale: DateLocale,
+            }).replace(".", "")} (${daysAgo})`;
+          }
+        } catch (error) {
+          console.error(`Error formatting date: ${error}`);
+          return emailDate.toString();
+        }
+      }
     },
   },
 };
@@ -250,6 +319,11 @@ export default {
             </div>
           </div>
         </div>
+        <span
+          class="text-sm bg-primary-800 h-fit rounded-lg py-1 px-3 border border-primary-700"
+        >
+          {{ date }}
+        </span>
       </div>
       <h2 class="text font-bold text-2xl pb-5 break-words w-3/4">
         {{ email.subject }}

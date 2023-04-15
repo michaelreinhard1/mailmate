@@ -1,11 +1,11 @@
 export default {
-  // The default locale is English
   en: {
-    shortFormat: {
-      dateStyle: "short",
-    },
-    longFormat: {
+    short: {
       year: "numeric",
+      month: "short",
+      day: "numeric",
+    },
+    long: {
       month: "short",
       day: "numeric",
       weekday: "short",
@@ -14,11 +14,12 @@ export default {
     },
   },
   nl: {
-    shortFormat: {
-      dateStyle: "short",
-    },
-    longFormat: {
+    short: {
       year: "numeric",
+      month: "short",
+      day: "numeric",
+    },
+    long: {
       month: "short",
       day: "numeric",
       weekday: "short",
