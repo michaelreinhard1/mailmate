@@ -242,7 +242,7 @@ const checkTauri = () => {
                       v-if="!checkTauri()"
                       class="w-full dark:bg-dark-500 dark:hover:bg-dark-500/50 flex items-center justify-center gap-2 bg-primary-800 hover:bg-primary-800 transition-all font-bold rounded-lg px-3 py-2"
                       download
-                      href="tauri/mailmate_0.0.1_x64.msi"
+                      href="tauri/mailmate_1.0.0_x64.msi"
                       v-ripple="{ center: true }"
                     >
                       <IconDownload class="w-4 h-4" />
