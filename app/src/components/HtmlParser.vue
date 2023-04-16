@@ -22,24 +22,19 @@ export default {
       return this.$refs.iframe;
     },
   },
-  mounted() {
-    this.setIframe();
+  data() {
+    return {
+      frameHeight: 0,
+    };
   },
   methods: {
-    setIframe() {
-      console.log("Iframe loaded");
-      if (this.html && this.style) {
-        if (this.$refs.iframe) {
-          this.$refs.iframe.contentDocument.body.innerHTML = this.html;
-          this.$refs.iframe.style.width = "100%";
-          this.$refs.iframe.style.minHeight = `${
-            this.iframe.contentWindow.document.documentElement.scrollHeight + 20
-          }px`;
-          this.$refs.iframe.style.height = `${
-            this.iframe.contentWindow.document.documentElement.scrollHeight + 20
-          }px`;
-        }
-      }
+    setFrameHeight() {
+      const iframe = this.$refs.iframe;
+      this.frameHeight =
+        iframe.contentWindow.document.documentElement.scrollHeight;
+      iframe.style.height = this.frameHeight + "px";
+
+      console.log(this.frameHeight);
     },
   },
 };
@@ -49,6 +44,10 @@ export default {
   <iframe
     ref="iframe"
     v-if="html && style"
+    :srcdoc="html"
+    scrolling="no"
+    @load="setFrameHeight"
+    :style="{ minHeight: frameHeight + 'px' }"
     class="my-5 bg-white overflow-hidden border border-gray-200 dark:border-dark-500 rounded-md"
   />
 
