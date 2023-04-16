@@ -76,7 +76,7 @@ export default {
         if (this.appPassword.length === 16) {
           this.appPasswordRequirements = true;
           try {
-            await this.emailStore
+            await this.loginStore
               .saveAppPassword({
                 password: this.appPassword,
               })

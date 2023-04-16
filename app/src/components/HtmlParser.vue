@@ -53,6 +53,6 @@ export default {
 
 <style lang="scss" scoped>
 .html-prose {
-  @apply prose bg-white whitespace-normal break-words border border-gray-200 dark:border-dark-500 p-5 rounded-md min-h-max min-w-full prose-p:mt-0 prose-a:text-accent-900 dark:prose-a:text-blue-500 prose-code:text-white prose-pre:overflow-auto prose-pre:rounded-md prose-pre:shadow-md;
+  @apply prose bg-white whitespace-normal break-words border border-gray-200 dark:border-dark-500 p-5 rounded-md min-h-max min-w-full prose-p:mt-0 prose-a:text-accent-900 dark:prose-a:text-blue-500 prose-code:text-white prose-pre:overflow-auto prose-pre:rounded-md prose-pre:shadow-md prose-strong:font-extrabold prose-em:italic;
 }
 </style>

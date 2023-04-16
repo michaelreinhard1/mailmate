@@ -10,7 +10,7 @@ const send = async (req, res, next) => {
 
     const response = await openai.createEdit({
       model: "text-davinci-edit-001",
-      instruction: `Revise the grammar and spelling in the provided HTML text without altering the existing formatting.`,
+      instruction: `Revise the grammar and spelling in the provided HTML text without altering the existing formatting. In the same language as the input.`,
       input: content,
     });
 

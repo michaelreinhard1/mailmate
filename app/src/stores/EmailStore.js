@@ -2,15 +2,13 @@ import { defineStore } from "pinia";
 import { api } from "./index";
 import { useToast } from "vue-toastification";
 import i18n from "../i18n";
-import { IconSend } from "@tabler/icons-vue";
-import { useLoginStore } from "./LoginStore";
+import { IconAlertTriangle, IconSend } from "@tabler/icons-vue";
 import { useStorage } from "@vueuse/core";
 import { DisplayError } from "@/core/DisplayError";
 
 const $t = i18n.global.t;
 
 const toast = useToast();
-const loginStore = useLoginStore();
 
 export const useEmailStore = defineStore("EmailStore", {
   state: () => ({
@@ -62,26 +60,7 @@ export const useEmailStore = defineStore("EmailStore", {
         throw error;
       }
     },
-    async saveAppPassword({ password }) {
-      this.status = "connecting";
-      try {
-        await api.post(`/email/save-app-password`, {
-          password,
-        });
-        this.status = "connected";
-        await this.getEmails({ page: 1, box: "INBOX" });
-        loginStore.setup = false;
-      } catch (error) {
-        DisplayError($t("settings.profile.couldNotConnect"));
-        loginStore.setup = true;
-        this.status = "disconnected";
-        console.log("error", error);
-        this.emails = [];
-        this.totalEmails = 0;
-        this.unreadEmails = 0;
-        throw error;
-      }
-    },
+
     async getEmails({ page, box }) {
       this.box = box;
       this.status = "connecting";

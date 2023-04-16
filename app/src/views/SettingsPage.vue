@@ -136,7 +136,7 @@ const saveAll = () => {
   if (appPassword.value !== "") {
     if (appPassword.value.length === 16) {
       appPasswordRequirements.value = true;
-      emailStore.saveAppPassword({
+      loginStore.saveAppPassword({
         password: appPassword.value,
       });
       appPassword.value = "";

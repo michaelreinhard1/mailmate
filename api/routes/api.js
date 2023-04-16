@@ -23,6 +23,8 @@ app.use("/auth", require("./auth"));
 
 app.use("/", authJwt.verifyToken);
 
+app.use("/user", require("./user"));
+
 app.use("/email", require("./email"));
 
 app.use("/ai", require("./ai"));

@@ -1,7 +1,7 @@
 const db = require("../models");
 const User = db.user;
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 const express = require("express");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;

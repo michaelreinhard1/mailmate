@@ -5,6 +5,7 @@ import { useToast } from "vue-toastification";
 import i18n from "../i18n";
 import { IconCircleCheck } from "@tabler/icons-vue";
 import { DisplayError } from "@/core/DisplayError";
+import { useEmailStore } from "@/stores/EmailStore";
 
 const toast = useToast();
 const $t = i18n.global.t;
@@ -63,7 +64,7 @@ export const useLoginStore = defineStore("LoginStore", {
     async saveFullName({ name }) {
       try {
         await api
-          .post(`/email/save-full-name`, {
+          .post(`/user/save-full-name`, {
             name,
           })
           .then(() => {
@@ -74,6 +75,27 @@ export const useLoginStore = defineStore("LoginStore", {
           });
       } catch (error) {
         DisplayError($t("tool.error"));
+        throw error;
+      }
+    },
+    async saveAppPassword({ password }) {
+      this.status = "connecting";
+      try {
+        await api.post(`/user/save-app-password`, {
+          password,
+        });
+        this.status = "connected";
+        const emailStore = useEmailStore();
+        await emailStore.getEmails({ page: 1, box: "INBOX" });
+        this.setup = false;
+      } catch (error) {
+        DisplayError($t("settings.profile.couldNotConnect"));
+        this.setup = true;
+        this.status = "disconnected";
+        console.log("error", error);
+        this.emails = [];
+        this.totalEmails = 0;
+        this.unreadEmails = 0;
         throw error;
       }
     },
