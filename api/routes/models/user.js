@@ -19,7 +19,6 @@ const UserSchema = new Schema({
   name: { type: String, default: "", maxLength: 100 },
   created: { type: Date, default: Date.now },
   appPassword: { type: String, default: "" },
-  preferences: { type: Object, default: {} },
 });
 
 UserSchema.methods.comparePassword = function (password) {

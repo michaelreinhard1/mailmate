@@ -49,6 +49,7 @@ export default {
   data() {
     return {
       unreadEmails: storeToRefs(this.emailStore).unreadEmails,
+      showCompose: storeToRefs(this.componentUtilsStore).showCompose,
       isComposeMinimized: storeToRefs(this.componentUtilsStore)
         .isComposeMinimized,
       showSettings: storeToRefs(this.componentUtilsStore).showSettings,
@@ -113,6 +114,7 @@ export default {
       this.componentUtilsStore.toggleSettings(0);
     },
     async getEmails(box) {
+      if (!this.isComposeMinimized) this.showCompose = false;
       if (this.$route.meta.box !== box) return;
       this.loading = true;
       await this.emailStore.getEmails({ page: 1, box });

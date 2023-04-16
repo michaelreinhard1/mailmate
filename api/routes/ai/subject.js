@@ -16,7 +16,7 @@ const send = async (req, res, next) => {
     // SUBJECT LINE:
     // `;
 
-    const prompt = `Compose an email subject line that is between 6-8 words long that accurately reflects the email content, such as highlighting the main benefit or call to action. It needs to be in the same language as the email body\n\n
+    const prompt = `Compose a concise email subject line that is between 6-8 words long that accurately reflects the email content, such as highlighting the main benefit or call to action. It needs to be in the same language as the email body\n\n
     
     EMAIL BODY:
     ${content}\n\n
