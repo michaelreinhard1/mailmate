@@ -72,14 +72,10 @@ export default {
     },
   },
   methods: {
-    debouncedFn: useDebounceFn(
-      function () {
-        this.updated += 1;
-        this.getEmails();
-      },
-      300,
-      { maxWait: 600 }
-    ),
+    debouncedFn: useDebounceFn(function () {
+      this.updated += 1;
+      this.getEmails();
+    }, 300),
     async getEmails() {
       if (this.box !== this.storedBox) {
         this.currentPage = 1;

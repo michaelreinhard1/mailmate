@@ -255,60 +255,10 @@ export default {
       const emailDate = new Date(this.email.date);
       const today = isToday(emailDate);
       const thisYear = isThisYear(emailDate);
-      const formatString = today ? "p" : thisYear ? "p" : "PPpp";
 
-      let DateLocale;
+      const format = today ? "shortTime" : thisYear ? "shortWeekday" : "long";
 
-      switch (this.locale) {
-        case "en":
-          DateLocale = en;
-        case "nl":
-          DateLocale = nl;
-      }
-
-      if (today) {
-        try {
-          const formattedTime = format(emailDate, "p", { locale: DateLocale });
-          const timeAgo = formatDistanceToNow(emailDate, {
-            addSuffix: true,
-            locale: DateLocale,
-          });
-          return `${formattedTime} (${timeAgo})`;
-        } catch (error) {
-          console.error(`Error formatting date: ${error}`);
-          return emailDate.toString();
-        }
-      } else {
-        try {
-          const daysAgo = formatDistanceToNow(emailDate, {
-            addSuffix: true,
-            locale: DateLocale,
-            includeSeconds: false,
-          });
-          if (daysAgo.startsWith("in")) {
-            return format(emailDate, "Pp", { locale: DateLocale });
-          } else if (daysAgo === "1 dag geleden" || daysAgo === "1 day ago") {
-            const timeAgo = formatDistanceToNow(emailDate, {
-              addSuffix: true,
-              locale: DateLocale,
-            });
-            return `${format(emailDate, "EEE d MMM", {
-              locale: DateLocale,
-            })} ${format(emailDate, "p", {
-              locale: DateLocale,
-            })} (${timeAgo})`;
-          } else {
-            return `${format(emailDate, "EEE d MMM", {
-              locale: DateLocale,
-            })} ${format(emailDate, formatString, {
-              locale: DateLocale,
-            }).replace(".", "")} (${daysAgo})`;
-          }
-        } catch (error) {
-          console.error(`Error formatting date: ${error}`);
-          return emailDate.toString();
-        }
-      }
+      return this.$d(emailDate, format, this.locale);
     },
   },
 };
@@ -343,6 +293,7 @@ export default {
           </div>
         </div>
         <span
+          v-if="date"
           class="text-sm bg-primary-800 h-fit rounded-lg py-1 px-3 border border-primary-700 dark:bg-dark-700 dark:border-dark-600"
         >
           {{ date }}

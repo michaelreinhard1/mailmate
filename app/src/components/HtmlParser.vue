@@ -33,8 +33,6 @@ export default {
       this.frameHeight =
         iframe.contentWindow.document.documentElement.scrollHeight + 20;
       iframe.style.height = this.frameHeight + "px";
-
-      console.log(this.frameHeight);
     },
   },
 };

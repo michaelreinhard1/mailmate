@@ -11,6 +11,18 @@ export default {
       weekday: "short",
       hour: "numeric",
       minute: "numeric",
+      year: "numeric",
+    },
+    shortWeekday: {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "numeric",
+    },
+    shortTime: {
+      hour: "numeric",
+      minute: "numeric",
     },
   },
   nl: {
@@ -23,6 +35,18 @@ export default {
       month: "short",
       day: "numeric",
       weekday: "short",
+      hour: "numeric",
+      minute: "numeric",
+      year: "numeric",
+    },
+    shortWeekday: {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "numeric",
+    },
+    shortTime: {
       hour: "numeric",
       minute: "numeric",
     },
