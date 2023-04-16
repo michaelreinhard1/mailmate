@@ -207,6 +207,14 @@ export default {
           }
         });
 
+        // if there is a prefer color scheme media query, remove it
+        $("style").each((i, el) => {
+          const style = $(el).html();
+          if (style.includes("prefers-color-scheme")) {
+            $(el).remove();
+          }
+        });
+
         // remove any images with width or height greater equal to 1
 
         const sanitizedHtml = $.html();

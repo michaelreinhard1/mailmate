@@ -23,26 +23,32 @@ export default {
     },
   },
   mounted() {
-    if (this.html && this.style) {
-      this.$refs.iframe.contentDocument.body.innerHTML = this.html;
-      this.$refs.iframe.style.height =
-        this.$refs.iframe.contentWindow.document.documentElement.scrollHeight +
-        "px";
-
-      this.$refs.iframe.style.minHeight =
-        this.$refs.iframe.contentWindow.document.documentElement.scrollHeight +
-        "px";
-    }
+    this.setIframe();
+  },
+  methods: {
+    setIframe() {
+      console.log("Iframe loaded");
+      if (this.html && this.style) {
+        if (this.$refs.iframe) {
+          this.$refs.iframe.contentDocument.body.innerHTML = this.html;
+          this.$refs.iframe.style.width = "100%";
+          this.$refs.iframe.style.minHeight = `${
+            this.iframe.contentWindow.document.documentElement.scrollHeight + 20
+          }px`;
+          this.$refs.iframe.style.height = `${
+            this.iframe.contentWindow.document.documentElement.scrollHeight + 20
+          }px`;
+        }
+      }
+    },
   },
 };
 </script>
 
 <template>
   <iframe
-    id="iframe"
     ref="iframe"
-    v-if="html && this.style"
-    scrolling="no"
+    v-if="html && style"
     class="my-5 bg-white overflow-hidden border border-gray-200 dark:border-dark-500 rounded-md"
   />
 
