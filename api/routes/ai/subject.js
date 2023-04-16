@@ -16,24 +16,28 @@ const send = async (req, res, next) => {
     // SUBJECT LINE:
     // `;
 
-    const prompt = `Compose a concise email subject line that is between 6-8 words long that accurately reflects the email content, such as highlighting the main benefit or call to action. It needs to be in the same language as the email body\n\n
+    const prompt = `Compose a concise email subject line that accurately reflects the email content. It needs to be in the same language as the email body\n\n
     
-    EMAIL BODY:
-    ${content}\n\n
-    SUBJECT LINE:
 
-   `;
+    EMAIL BODY:\n
+    ${content}\n\n
+
+
+    SUBJECT LINE:\n`;
 
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt,
-      max_tokens: 150,
+      max_tokens: 350,
       temperature: 0.7,
       // Remove spaces before output
       stop: ["###", "SUBJECT LINE:", "SUBJECT LINE: "],
     });
 
     let output = `${response.data.choices[0].text}`;
+
+    // Remove spaces before output
+    output = output.replace(/^\s+/, "");
 
     req.ai.output = output;
 

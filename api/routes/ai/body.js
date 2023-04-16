@@ -7,16 +7,15 @@ const send = async (req, res, next) => {
   try {
     const { content, tonality } = req.body;
 
-    const prompt = `Generate an email body with a specific tonality and variable content. You will receive a tonality and the content of the email as input. Your task is to generate an email body that matches the given tonality and incorporates the provided content. The email should be written in a professional language, and the tone should be appropriate to the given tonality.
+    const prompt = `Write an email body with a specific tonality and variable content. You will receive a tonality and the content of the email as input. Your task is to write an email body that matches the given tonality and incorporates the provided content. The tone should be appropriate to the given tonality.\n\n
 
-    Please incorporate the provided content into the email body and generate a text that is at least 100 words long. Make sure that the tone matches the given tonality and that the language is professional and appropriate for an email.
+    Please incorporate the provided content into the email body and write a text that is at least 100 words long. Make sure that the tone matches the given tonality and that the language is professional and appropriate for an email.\n\n
 
-    Input:
-    - tone: ${tonality}
-    - content: ${content}
+    It needs to be in the same language as the provided content.\n\n
 
-    Output:
-    - email body: a text that matches the given tonality, incorporates the provided content, is at least 100 words long, and is in the same language as the content provided.
+    Input:\n
+    - tone: ${tonality}\n
+    - content: ${content}\n\n
 
     ###
     EMAIL BODY:
@@ -65,7 +64,7 @@ const send = async (req, res, next) => {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt,
-      max_tokens: 250,
+      max_tokens: 350,
       temperature: temp,
       stop: ["###", "EMAIL BODY:", "EMAIL BODY: "],
     });
