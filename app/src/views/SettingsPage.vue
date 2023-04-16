@@ -8,7 +8,14 @@ import {
   RadioGroupOption,
 } from "@headlessui/vue";
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
-import { IconX, IconCheck, IconDownload } from "@tabler/icons-vue";
+import {
+  IconX,
+  IconCheck,
+  IconDownload,
+  IconLogout,
+  IconAlertTriangle,
+  IconHelp,
+} from "@tabler/icons-vue";
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
 import { useLoginStore } from "@/stores/LoginStore";
@@ -16,7 +23,6 @@ import { useEmailStore } from "@/stores/EmailStore";
 import { usePreferencesStore } from "@/stores/PreferencesStore";
 import { useToolStore } from "@/stores/ToolStore";
 import BaseButton from "@/components/BaseButton.vue";
-import { IconLogout, IconAlertTriangle, IconHelp } from "@tabler/icons-vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useComponentUtilsStore } from "@/stores/ComponentUtilsStore";

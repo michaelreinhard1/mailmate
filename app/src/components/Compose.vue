@@ -7,7 +7,7 @@ import { useToolStore } from "@/stores/ToolStore";
 import { useComponentUtilsStore } from "@/stores/ComponentUtilsStore";
 import { storeToRefs } from "pinia";
 import cheerio from "cheerio";
-import fileSVG from "../assets/drop-files.svg?url";
+import fileSVG from "@/assets/illustrations/drop-files.svg?url";
 
 import {
   useElementSize,
@@ -21,13 +21,9 @@ import {
   IconPaperclip,
   IconX,
   IconSend,
-  IconBulb,
   IconAlertTriangle,
-  IconSquareRoundedChevronRight,
-  IconTextSpellcheck,
   IconSparkles,
   IconPencil,
-  IconBold,
 } from "@tabler/icons-vue";
 import BaseButton from "@/components/BaseButton.vue";
 import Editor from "@/components/Editor.vue";
@@ -74,15 +70,11 @@ export default {
     IconX,
     BaseButton,
     IconSend,
-    IconBulb,
     UploadFile,
     IconPaperclip,
     IconAlertTriangle,
-    IconSquareRoundedChevronRight,
     IconPencil,
-    IconTextSpellcheck,
     IconSparkles,
-    IconBold,
     Editor,
     Dialog,
     SmartWriteModal,

@@ -2,9 +2,7 @@
 import {
   IconInbox,
   IconTrash,
-  IconUserCircle,
   IconMenu2,
-  IconLayoutSidebarRightCollapse,
   IconSettings,
   IconStar,
   IconSend,
@@ -36,9 +34,7 @@ export default {
   components: {
     IconInbox,
     IconTrash,
-    IconUserCircle,
     IconMenu2,
-    IconLayoutSidebarRightCollapse,
     IconSettings,
     IconStar,
     IconSend,

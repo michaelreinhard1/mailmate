@@ -154,7 +154,6 @@ import {
   IconAlphabetLatin,
 } from "@tabler/icons-vue";
 import TextStyle from "@tiptap/extension-text-style";
-import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import { storeToRefs } from "pinia";
 import { useToolStore } from "@/stores/ToolStore";

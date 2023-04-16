@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { api } from "./index";
 import { useToast } from "vue-toastification";
 import i18n from "../i18n";
-import { IconAlertTriangle, IconSend } from "@tabler/icons-vue";
+import { IconSend } from "@tabler/icons-vue";
 import { useLoginStore } from "./LoginStore";
 import { useStorage } from "@vueuse/core";
 import { DisplayError } from "@/core/DisplayError";

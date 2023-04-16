@@ -4,10 +4,9 @@ import { useLoginStore } from "@/stores/LoginStore";
 import { usePreferencesStore } from "@/stores/PreferencesStore";
 import AppLogoBlack from "@/assets/icons/mailmate_Logo_Black.svg?url";
 import AppLogoWhite from "@/assets/icons/mailmate_Logo_White.svg?url";
-import SecurityIllustration from "@/assets/icons/clip-online-security.svg?url";
+import SecurityIllustration from "@/assets/illustrations/clip-online-security.svg?url";
 import { storeToRefs } from "pinia";
 import GoogleIcon from "@/assets/icons/Google__G__Logo.svg?url";
-import { useHead } from "@vueuse/head";
 
 export default {
   setup() {

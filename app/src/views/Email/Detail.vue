@@ -22,6 +22,7 @@ import { usePreferencesStore } from "@/stores/PreferencesStore";
 import { format, isThisYear, isToday, formatDistanceToNow } from "date-fns";
 import { nl } from "date-fns/locale";
 import { useI18n } from "vue-i18n";
+import validUrl from "valid-url";
 
 export default {
   name: "Email",
@@ -196,8 +197,15 @@ export default {
         $("script").remove();
 
         const style = $("style").html();
-
         this.style = style;
+
+        // Sanitize URLs
+        $("a").each((i, el) => {
+          const url = $(el).attr("href");
+          if (!validUrl.isWebUri(url)) {
+            $(el).removeAttr("href");
+          }
+        });
 
         // remove any images with width or height greater equal to 1
 

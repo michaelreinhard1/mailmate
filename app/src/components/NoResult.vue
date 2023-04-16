@@ -5,7 +5,7 @@ import { storeToRefs } from "pinia";
 import BaseButton from "./BaseButton.vue";
 import { IconSettings } from "@tabler/icons-vue";
 import { computed } from "vue";
-import MailboxSVG from "@/assets/icons/urban-mailbox.svg?url";
+import MailboxSVG from "@/assets/illustrations/urban-mailbox.svg?url";
 
 const emailStore = useEmailStore();
 const componentUtilsStore = useComponentUtilsStore();

@@ -3,6 +3,7 @@ const User = db.user;
 const express = require("express");
 const app = express();
 const cheerio = require("cheerio");
+const sanitizeHtml = require("sanitize-html");
 
 const Imap = require("imap");
 inspect = require("util").inspect;
@@ -447,6 +448,114 @@ const getOneEmail = async (req, res) => {
   });
 
   imap.once("end", () => {
+    // Sanity check
+    if (message === {}) {
+      return res.status(404).json({ message: "Email not found" });
+    }
+
+    if (message.html) {
+      const clean = sanitizeHtml(message.html, {
+        allowedTags: [
+          "html",
+          "head",
+          "title",
+          "body",
+          "table",
+          "tr",
+          "td",
+          "th",
+          "tbody",
+          "thead",
+          "tfoot",
+          "a",
+          "div",
+          "img",
+          "ul",
+          "li",
+          "ol",
+          "p",
+          "br",
+          "span",
+          "b",
+          "i",
+          "u",
+          "strong",
+          "em",
+          "blockquote",
+          "q",
+          "cite",
+          "hr",
+          "sub",
+          "sup",
+          "center",
+          "font",
+          "head",
+          "header",
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6",
+          "style",
+        ],
+        allowVulnerableTags: ["style"],
+        allowedAttributes: {
+          "*": [
+            "style",
+            "class",
+            "alt",
+            "center",
+            "bgcolor",
+            "align",
+            "width",
+            "height",
+            "border",
+            "cellpadding",
+            "cellspacing",
+            "valign",
+            "colspan",
+            "rowspan",
+            "nowrap",
+            "role",
+            "data-*",
+          ],
+          a: ["href", "name", "target"],
+          img: ["src", "alt", "width", "height"],
+          table: ["bgcolor", "cellpadding", "cellspacing", "border"],
+          td: [
+            "valign",
+            "align",
+            "bgcolor",
+            "width",
+            "height",
+            "colspan",
+            "rowspan",
+            "nowrap",
+          ],
+          th: [
+            "valign",
+            "align",
+            "bgcolor",
+            "width",
+            "height",
+            "colspan",
+            "rowspan",
+            "nowrap",
+          ],
+          tr: ["valign", "align", "bgcolor", "height"],
+          font: ["color", "face", "size"],
+          b: [],
+          i: [],
+          u: [],
+          strong: [],
+          em: [],
+        },
+      });
+
+      message.html = clean;
+    }
+
     res.status(200).json({ message });
     console.log("Connection ended");
   });
